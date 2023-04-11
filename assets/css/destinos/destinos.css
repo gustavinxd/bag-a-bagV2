@@ -1,0 +1,17 @@
+#search {
+    margin-top: 5em;
+}
+
+.card-img-top {
+    width: 100% !important;
+    object-fit: contain !important;
+}
+
+.card {
+    padding: 0 !important;
+}
+
+.card:hover {
+    transition: all ease-in-out 200ms;
+    transform: scale(1.1);
+}
