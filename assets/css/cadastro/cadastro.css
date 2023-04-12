@@ -392,33 +392,57 @@ body {
   /*--------------------------------------------------------------
   # cadastro
   --------------------------------------------------------------*/
-input, label{
+  input, label .main-container{
     display: block;
-    width: 100%;
-}
-input:focus, label:focus{
-    outline: none
 }
 
 .main-container{
-    width: 1000vh;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #f1f1f1;
-    border-color: #000;
+    border: solid black 2px;
+    background-color: #F5F5F5; 
+    margin-bottom: 10%;
+    padding: 5%;
+    font-family: 'Poppins', sans-serif; 
+    width: 700px;
+    margin: auto;
+}
+.required:after {
+  content: "*"; 
+  color: red;
+}
+@media screen and (min-width: 320px) {
+  .main-container{
+      margin-top: 20%;
+      margin-bottom: 10%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-container{
+      margin-top: 15%;
+      margin-bottom: 10%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main-container{
+      margin-top: 0%;
+      margin-bottom: 10%;
+  }
 }
 form{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 .half-box{
     flex: 1 1 45%;
     position: relative;
+    margin: 2%;
 }
 .full-box{
     flex: 1 1 100%;
     position: relative;
+    text-align: center;
+    margin-top: 5%;
 }
   /*--------------------------------------------------------------
   # Footer
