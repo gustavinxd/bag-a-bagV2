@@ -24,6 +24,7 @@
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
   <!-- Template Main CSS File -->
   <link href="../assets/css/cadastro/cadastro.css" rel="stylesheet">
 
@@ -41,10 +42,11 @@
         if(telefone.value.length == 3)
             telefone.value = telefone.value + ') '; //quando o campo já tiver 3 caracteres (um parênteses e 2 números) o script irá inserir mais um parênteses, fechando assim o código de área.
 
-        if(telefone.value.length == 9)
+        if(telefone.value.length == 10)
             telefone.value = telefone.value + '-'; //quando o campo já tiver 8 caracteres, o script irá inserir um tracinho, para melhor visualização do telefone.
-}
-</script>
+    }
+    </script>
+  
 </head>
 
 <body>
@@ -125,12 +127,14 @@
         </div>
         <div class="row">
             <div class = "half-box">
-              <label for = "país" class="required">País</label>
-              <input type = "país" name = "país" id = "país" class="form-control required">
+              <div class = "col-4">
+                <label for = "number" class="required">DDD</label>
+                <input type = "number" maxlength="2" name = "ddd" id = "ddd" class="form-control required">
+              </div>
             </div>
             <div class = "half-box">
               <label for = "tel" class="required">Telefone</label>
-              <input type = "tel" name = "telefone" id = "telefone" placeholder = "(XX) XXXXX-XXXX" class="form-control required" onkeypress="mascara(this)">
+              <input type = "tel" name = "telefone" id = "telefone" placeholder = "(XX) XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="mascara(this)">
             </div>
          </div>
             <div class = "half-box">
