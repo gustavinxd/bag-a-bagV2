@@ -73,9 +73,9 @@ svg {
     height: 10px;
     background: red;
     border-radius: 50%;
-       bottom: 295px;
+    bottom: 295px;
     position: absolute;
-    z-index: 10;
+    z-index: -1;
     left: 20px;
     animation: light 800ms ease-in-out 0s infinite alternate;
   }
@@ -582,7 +582,7 @@ input, label .main-container{
     font-family: 'Poppins', sans-serif; 
     width: 900px;
     margin: auto;
-    position: ;
+    z-index: 10;
 }
 h1{
   text-align:center;
