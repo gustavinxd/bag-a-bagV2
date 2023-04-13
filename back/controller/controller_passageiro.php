@@ -1,0 +1,33 @@
+<!-- INCOMPLETO -->
+<?php
+session_start();
+include_once('../conexao.php');
+// include_once('../funcoes.php');
+
+$id_usuario = filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT);
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+$sobrenome = filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
+$cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_EMAIL);
+
+$data_nascimento = filter_input(INPUT_POST, 'data_nascimento');
+$ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
+$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRING);
+$tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
+
+// arrumar essa função de checar cpf
+// if(validarCPF($cpf)) {
+    // inserir telefone do passageiro
+    $query = "INSERT INTO telefone (CODIGO_PAIS, DDD, NUMERO, TIPO, MODIFICADO) VALUES (DEFAULT, $ddd, $numero, DEFAULT, DEFAULT)";
+    $consulta = mysqli_query($conn, $query);
+    
+    $query = "SELECT * FROM telefone ORDER BY ID_TELEFONE DESC LIMIT 1";
+    $consulta = mysqli_query($conn, $query);
+    $row_consulta = mysqli_fetch_assoc($consulta);
+
+    $id_telefone = $row_consulta['ID_TELEFONE'];
+
+    // inserir dados e referenciar o telefone
+    $query = "INSERT INTO passageiro (NOME_PASSAGEIRO, SOBRENOME_PASSAGEIRO, EMAIL, CPF_PASSAGEIRO, DATA_NASC_PASSAGEIRO, FK_TELEFONE, FK_USUARIO) VALUES ($nome, $sobrenome, $email, $cpf, $data_nascimento, $id_telefone, $id_usuario)";
+    $consulta = mysqli_query($conn, $query);
+// }
