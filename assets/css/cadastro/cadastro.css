@@ -400,10 +400,14 @@ body {
     border: solid black 2px;
     background-color: #F5F5F5; 
     margin-bottom: 10%;
-    padding: 5%;
+    padding: 4%;
     font-family: 'Poppins', sans-serif; 
     width: 700px;
     margin: auto;
+}
+h1{
+  margin-bottom: 5%;
+  margin-left: 33%;
 }
 .required:after {
   content: "*"; 
@@ -425,7 +429,7 @@ body {
 
 @media screen and (min-width: 1024px) {
   .main-container{
-      margin-top: 0%;
+      margin-top: -5%;
       margin-bottom: 10%;
   }
 }
