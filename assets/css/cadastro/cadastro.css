@@ -582,7 +582,7 @@ input, label .main-container{
     font-family: 'Poppins', sans-serif; 
     width: 900px;
     margin: auto;
-    z-index: 10;
+    z-index: 100;
 }
 h1{
   text-align:center;
