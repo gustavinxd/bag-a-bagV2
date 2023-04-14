@@ -20,15 +20,17 @@ if(validarCPF($cpf)) {
     $query = "INSERT INTO telefone (CODIGO_PAIS, DDD, NUMERO, TIPO, MODIFICADO) VALUES (DEFAULT, $ddd, $numero, DEFAULT, DEFAULT)";
     $consulta = mysqli_query($conn, $query);
     
-    $query = "SELECT * FROM telefone ORDER BY ID_TELEFONE DESC LIMIT 1";
-    $consulta = mysqli_query($conn, $query);
-    $row_consulta = mysqli_fetch_assoc($consulta);
-
-    $id_telefone = $row_consulta['ID_TELEFONE'];
-
-    // inserir dados e referenciar o telefone
-    $query = "INSERT INTO passageiro (NOME_PASSAGEIRO, SOBRENOME_PASSAGEIRO, EMAIL_PASSAGEIRO, CPF_PASSAGEIRO, DATA_NASC_PASSAGEIRO, FK_TELEFONE, FK_USUARIO) VALUES ('$nome', '$sobrenome', '$email', '$cpf', '$data_nascimento', $id_telefone, $id_usuario)";
-    $consulta = mysqli_query($conn, $query);
+    if (mysqli_insert_id($conn)) {
+        $id_telefone = mysqli_insert_id($conn);
+    
+        // inserir dados e referenciar o telefone
+        $query = "INSERT INTO passageiro (NOME_PASSAGEIRO, SOBRENOME_PASSAGEIRO, EMAIL_PASSAGEIRO, CPF_PASSAGEIRO, DATA_NASC_PASSAGEIRO, FK_TELEFONE, FK_USUARIO) VALUES ('$nome', '$sobrenome', '$email', '$cpf', '$data_nascimento', $id_telefone, $id_usuario)";
+        $consulta = mysqli_query($conn, $query);
+    }
+    else {
+        $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível realizar o cadastro. Tente novamente.</p>";
+        header("Location: test.php");
+    }
 }
 else {
     $_SESSION['msg'] = "<p style='color:red;'>Erro. O CPF informado é inválido.</p>";
