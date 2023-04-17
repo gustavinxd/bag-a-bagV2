@@ -14,7 +14,7 @@
 <body >
 
   
-    <form action="controller_codigo_cupom.php" method="post">
+    <form action="controller_codigo_telefone.php" method="post">
 
        
         
