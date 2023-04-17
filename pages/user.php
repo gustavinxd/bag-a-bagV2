@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  include_once('../back/conexao.php')
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
