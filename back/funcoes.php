@@ -6,22 +6,22 @@ function validarRG($rg) {
     
     // Verificar se o número de RG tem 9 dígitos
     if (strlen($rg) != 9) {
-      return false;
+        return false;
     }
     
     // Calcular o dígito verificador
     $soma = 0;
     for ($i = 0; $i < 8; $i++) {
-      $soma += ($rg[$i] * (9 - $i));
+        $soma += ($rg[$i] * (9 - $i));
     }
     $dv = ($soma % 11);
     if ($dv == 10) {
-      $dv = 'X';
+        $dv = 'X';
     }
     
     // Verificar se o dígito verificador é igual ao último dígito do número de RG
     if ($dv != $rg[8]) {
-      return false;
+        return false;
     }
     
     // RG válido
@@ -30,47 +30,48 @@ function validarRG($rg) {
 
 // VALIDAR CPF
 function validarCPF($cpf) {
+$a = 10;
+$c = 11;
+$calculo = 0;
+$calculo2 = 0;
 
-    // Remover pontos e traços do número de CPF
-    $cpf = preg_replace('/\D/', '', $cpf);
-    
-    // Verificar se o número de CPF tem 11 dígitos
-    if (strlen($cpf) != 11) {
-      return false;
+// VALIDAÇÃO DO PRIMEIRO NÚMERO
+for ($i = 0; $i < 9; $i++) {
+    $calculo = $calculo + ($cpf[$i] * ($a--));
+}
+$resultado = $calculo % 11;
+$primeiro_numero = 11 - $resultado;
+
+if ($primeiro_numero > 10) {
+    $primeiro_numero = 0;
+}
+
+
+if ($primeiro_numero != $cpf[9]) {
+    return false;
+} 
+// VALIDAÇÃO SEGUNDO NÚMERO
+else {
+    for ($b = 0; $b < 10; $b++) {
+        $calculo2 = $calculo2 + ($cpf[$b] * ($c--));
     }
-    
-    // Verificar se todos os dígitos são iguais
-    if (preg_match('/^(\d)\1*$/', $cpf)) {
-      return false;
+    $resultado2 = $calculo2 % 11;
+    $segundo_numero = 11 - $resultado2;
+
+
+    if ($segundo_numero > 10) {
+        $segundo_numero = 0;
     }
-    
-    // Calcular o primeiro dígito verificador
-    $soma = 0;
-    for ($i = 0; $i < 9; $i++) {
-      $soma += ($cpf[$i] * (10 - $i));
+
+    if ($segundo_numero != $cpf[10]) {
+        return false;
     }
-    $dv1 = ($soma % 11);
-    if ($dv1 == 10) {
-      $dv1 = 0;
+    else {
+        return true;
+
+        
     }
-    
-    // Calcular o segundo dígito verificador
-    $soma = 0;
-    for ($i = 0; $i < 10; $i++) {
-      $soma += ($cpf[$i] * (11 - $i));
-    }
-    $dv2 = ($soma % 11);
-    if ($dv2 == 10) {
-      $dv2 = 0;
-    }
-    
-    // Verificar se os dígitos verificadores são iguais aos últimos dois dígitos do CPF
-    if ($dv1 != $cpf[9] || $dv2 != $cpf[10]) {
-      return false;
-    }
-    
-    // CPF válido
-    return true;
+}
 }
 
 ?>
