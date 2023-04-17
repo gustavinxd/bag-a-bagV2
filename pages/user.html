@@ -15,6 +15,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -23,7 +24,8 @@
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  <!-- CSS files  -->
+  <link rel="stylesheet" href="../assets/css/user/user.css">
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
@@ -68,9 +70,39 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main" class="mt-5">
-    <section class="container" id="profile">
-        <img src="../assets/img/user/icone_perfil.png" alt="">
+  <main id="main" class="mt-5 container">
+    <section class="row d-flex align-items-center justify-content-center" id="profile">
+        <img src="../assets/img/user/icone_perfil.png" alt="" class="col-lg-2 col-sm-6">
+        <div class="col-lg-8 col-sm-6 mt-2">
+          <h1>Nome Usuario</h1>
+          <p>E-mail do Usuario</p>
+          <p>CPF do Usuario</p> 
+          <p>Telefone do Usuario</p>
+        </div>
+        <div class="col-lg-2">
+          <a href="">     
+            <button type="submit" style="min-width: 80px;"class="btn btn-outline-success text-center">
+              <i class="bi bi-gear"></i>
+              Editar
+            </button>
+          </a>
+        </div>
+    </section>
+
+    <section id="reservar" class="container">
+      <h2 class="text-center">Ultimas Reservas</h2>
+      <div class="card col-12 mt-5" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">ID da Reserva</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Origem : </h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Destino : </h6>
+          <p class="card-text mt-2">Tipo da passagem: </p>
+          <p class="card-text mt-2">Numero do avião: </p>
+          <p class="card-text mt-2">Numero do avião 2: </p>
+          <p class="card-text mt-2">Preço: </p>
+          <h5 class="card-title">Detalhes do(s) passageiro(s)</h5>
+        </div>
+      </div>
     </section>
   </main>
 
