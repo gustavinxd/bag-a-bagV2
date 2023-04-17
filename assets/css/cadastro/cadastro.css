@@ -496,10 +496,7 @@ h1{
       margin-bottom: 10%;
   }
 }
-form{
-    display: flex;
-    flex-wrap: wrap;
-}
+
 .half-box{
     flex: 1 1 45%;
     position: relative;
