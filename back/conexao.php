@@ -1,5 +1,5 @@
 <?php
-    $servidor = "localhost";    // $servidor = $_SERVER["SERVER_NAME"];
+    $servidor = "localhost:3307";    // $servidor = $_SERVER["SERVER_NAME"];
     $usuario = "root";          
     $senha = "";
     $dbname = "bag_a_bag";
