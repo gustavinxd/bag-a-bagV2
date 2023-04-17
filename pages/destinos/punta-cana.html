@@ -15,6 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Main Poppins -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Main Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> <!-- Main Poppins -->
 
   <!-- Vendor CSS Files -->
   <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -92,11 +95,106 @@
 
   <main id="main" class="container-fluid">
     <div class="row">
+      <!-- =============== Area de Filtros ============== -->
       <div style="border: solid 3px red;" class="col-2">
-        <div class="container mt-3" id="form-filtros">
-          <h1 class="mb-2">Filtros</h1>
-          <div class="" style="border:solid 1px black;">
-            <h3> Paradas</h3>
+
+        <!-- ============== Div Master ================ -->
+        <div class="container mt-3 shadow" id="form-filtros">
+          <h1 class="mb-5 mt-3 text-center">Filtros</h1>
+
+          <!-- ============= Div Child ================ -->
+          <div class="mb-2 filtros-caixa-2 shadow-sm container" >
+            <h5 class="mt-1">Paradas</h5>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="paradas" id="um" value="" checked>
+              <label class="form-check-label" for="um">
+                Todas as Paradas
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="paradas" id="dois" value="">
+              <label class="form-check-label" for="dois">
+                Direto
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="paradas" id="tres" value="">
+              <label class="form-check-label" for="tres">
+                Um ou Mais
+              </label>
+            </div>
+
+          
+            
+
+          </div>
+
+          <div class="mb-2 filtros-caixa-2 shadow-sm container" >
+            <h5 class="mt-1">Companhia</h5>
+            
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="companhia" id="um" value="" checked>
+              <label class="form-check-label" for="um">
+                Todas as Companhias
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="companhia" id="dois" value="">
+              <label class="form-check-label" for="dois">
+                Tam
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="companhia" id="tres" value="">
+              <label class="form-check-label" for="tres">
+                Gol
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="companhia" id="quatro" value="">
+              <label class="form-check-label" for="quatri">
+                Azul
+              </label>
+            </div>
+
+          </div>
+
+          <div class="mb-2 filtros-caixa-2 shadow-sm container" >
+            <h5 class="mt-1">Preço por Adulto</h5>
+            <br>
+            <br>
+            <h5 class="mt-1">Classe</h5>
+            
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="classe" id="um" value="" checked>
+              <label class="form-check-label" for="um">
+                Econômica
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="classe" id="dois" value="">
+              <label class="form-check-label" for="dois">
+                Primeira Classe
+              </label>
+            </div>
+
+          </div>
+
+          <div class="mb-2 filtros-caixa-2 shadow-sm container" >
+            <h5 class="mt-1">Horário</h5>
+            <br>
+
+          </div>
+
+          <div class="mb-2 filtros-caixa-2 shadow-sm container" >
+            <h5 class="mt=1">Duração</h5>
             <br>
 
           </div>
@@ -109,6 +207,8 @@
         <br>
         <br>
       </div>
+
+      <!-- ================= Area de Passagens ================= -->
       <div style="border: solid 3px blue;" class="col-10">
         <h1 class="">Passagens</h1>
         <br>

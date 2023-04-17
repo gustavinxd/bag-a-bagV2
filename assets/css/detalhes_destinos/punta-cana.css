@@ -1,4 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+main{
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Style Filtros */
 #form-filtros{
   border: solid 2px gray;
   
 }
+.filtros-caixa-2{
+  border:solid 1px black;   
+}
+
