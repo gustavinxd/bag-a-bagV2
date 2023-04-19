@@ -13,3 +13,21 @@ main{
   border:solid 1px black;   
 }
 
+#card-voo-left{
+  padding-top:16px;
+  padding-bottom:8px; 
+  padding-left: 32px;
+}
+#card-voo-right{
+  color: white;
+  border: 1px solid #3A5C1D;
+  margin-left: -12px; 
+  border-radius: 0% 2% 2% 0%;
+  background-color: #3A5C1D;
+  
+}
+#cards-bab:hover{
+  transition: ease-in-out 200ms;
+  scale: 1.01;
+  
+}
