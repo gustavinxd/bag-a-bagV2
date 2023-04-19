@@ -5,29 +5,29 @@
     include_once("../funcoes.php");
 
     //pegando dados
-    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
-    $senha = filter_input(INPUT_POST, "senha");
-    $cep = filter_input(INPUT_POST, "cep", FILTER_SANITIZE_STRING);
-    $rua = filter_input(INPUT_POST, "rua", FILTER_SANITIZE_STRING);
-    $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_STRING);
-    $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
-    $cidade = filter_input(INPUT_POST, "cidade", FILTER_SANITIZE_STRING);
-    $uf = filter_input(INPUT_POST, "uf", FILTER_SANITIZE_STRING);
-    $complemento = filter_input(INPUT_POST, "complemento", FILTER_SANITIZE_STRING);
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_STRING);
-    $nome_meio = filter_input(INPUT_POST, "nome_meio", FILTER_SANITIZE_STRING);
+    $nome = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
     $sobrenome = filter_input(INPUT_POST, "sobrenome", FILTER_SANITIZE_STRING);
+    $nome_meio = filter_input(INPUT_POST, "ultname", FILTER_SANITIZE_STRING);
 
     $cpf = filter_input(INPUT_POST, "cpf" );
     $cpf = trim($cpf);
     $cpf = str_replace(".","",$cpf);
     $cpf = str_replace("-","",$cpf);
-
     $rg = filter_input(INPUT_POST, "rg" );
     $data_emissao = filter_input(INPUT_POST, "data_emissao");
     $data_nascimento = filter_input(INPUT_POST, "data_nasc");
     $ddd = filter_input(INPUT_POST, "ddd", FILTER_SANITIZE_STRING);
     $numero = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
+    $cep = filter_input(INPUT_POST, "cep", FILTER_SANITIZE_STRING);
+    $cidade = filter_input(INPUT_POST, "cidade", FILTER_SANITIZE_STRING);
+    $uf = filter_input(INPUT_POST, "estado", FILTER_SANITIZE_STRING);
+    $rua = filter_input(INPUT_POST, "endereco", FILTER_SANITIZE_STRING);
+    $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_STRING);
+    // $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
+    $complemento = filter_input(INPUT_POST, "complemento", FILTER_SANITIZE_STRING);
+    $senha = filter_input(INPUT_POST, "senha");
+
 
     $cpf_valida = false;
     $rg_valida = false;
