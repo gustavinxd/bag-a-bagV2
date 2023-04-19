@@ -23,6 +23,7 @@ function validarRG($rg) {
     // Verificar se o dígito verificador é igual ao último dígito do número de RG
     if ($dv != $rg[8]) {
         return false;
+        //$_SESSION["rg"] = "<p style='color: red;'>RG inválido</p>";
     }
     
     // RG válido
@@ -66,6 +67,7 @@ else {
 
     if ($segundo_numero != $cpf[10]) {
         return false;
+        //$_SESSION["cpf"] = "<p style='color: red;'>CPF inválido</p>";
     }
     else {
         return true;
@@ -76,18 +78,15 @@ else {
 }
 
 function validarDataRg($data_emissao){
-    $data_inicial = strtotime($data_emissao); 
-    $data_final = time(); 
-
-    $diff = abs($data_final - $data_inicial); 
-  
-    $anos = floor($diff / (365*60*60*24));
-
-    if ($anos >= 10) {
+    $data_atual = date("Y-m-d");
+    $diff = date_diff(date_create($data_emissao), date_create($data_atual));
+    $idade = $diff->format('%y');
+    
+    if ($idade < 10 && $data_atual > $data_emissao){
+        return true;
+    } else {
         return false;
-    }
-    else {
-        return true; 
+        //$_SESSION["data_rg"] = "<p style='color: red;'>Data de emissão inválida</p>"; 
     }
 }
 
