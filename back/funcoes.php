@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 // VALIDAR RG
 function validarRG($rg) {
     // Remover pontos e traços do número de RG
@@ -72,6 +73,22 @@ else {
         
     }
 }
+}
+
+function validarDataRg($data_emissao){
+    $data_inicial = strtotime($data_emissao); 
+    $data_final = time(); 
+
+    $diff = abs($data_final - $data_inicial); 
+  
+    $anos = floor($diff / (365*60*60*24));
+
+    if ($anos >= 10) {
+        return false;
+    }
+    else {
+        return true; 
+    }
 }
 
 ?>

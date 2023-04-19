@@ -14,8 +14,8 @@
     $cpf = str_replace(".","",$cpf);
     $cpf = str_replace("-","",$cpf);
     $rg = filter_input(INPUT_POST, "rg" );
-    
-    $data_nascimento = filter_input(INPUT_POST, "datanascimento", FILTER_SANITIZE_STRING);
+    $data_emissao = filter_input(INPUT_POST, "data_emissao");
+    $data_nascimento = filter_input(INPUT_POST, "data_nasc");
     $ddd = filter_input(INPUT_POST, "ddd", FILTER_SANITIZE_STRING);
     $numero = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
@@ -31,6 +31,7 @@
 
     $cpf_valida = false;
     $rg_valida = false;
+    $data_rg_valida = false;
 
     if (validarCPF($cpf)){
         $cpf_valida = true;
@@ -43,13 +44,19 @@
         echo "rg valido";
     }
 
-    if ($cpf_valida && $rg_valida){
+    if (validarDataRg($data_emissao)){
+        $data_rg_valida = true;
+        echo "<br>";
+        echo "data de emissao do rg valido";
+    }
+
+    if ($cpf_valida && $rg_valida && $data_rg_valida){
 
         //inserindo os dados no tabela cadastro
         $result_cadastro = "INSERT INTO cadastro (email, senha, data_cadastro) VALUES ('$email','" . md5($senha) . "', NOW())";
         $result_endereco = "INSERT INTO endereco (cep, rua, numero, bairro, cidade, uf, complemento) VALUES ('$cep','$rua','$numero','$bairro','$cidade','$uf','$complemento')";
         $result_telefone = "INSERT INTO telefone (codigo_pais, ddd, numero, tipo) VALUES (DEFAULT,'$ddd','$numero',DEFAULT)";
-        $result_rg = "INSERT INTO rg (numero_rg) VALUES ('$rg')";
+        $result_rg = "INSERT INTO rg (numero_rg, data_emissao) VALUES ('$rg', '$data_emissao')";
         $result_usuario = "INSERT INTO usuario (nome, nome_meio, sobrenome, cpf, data_nascimento, criado) VALUES ('$nome','$nome_meio', '$sobrenome', '$cpf', '$data_nascimento', NOW())";
     
 
