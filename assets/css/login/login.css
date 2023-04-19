@@ -11,7 +11,8 @@
     min-height: 40px;
 }
 #caixa-text{
-    background-color: white; border: solid 1px gray;
+    background-color: white; 
+    border: solid 1px gray;
 }
 textarea:focus, input:focus, i:focus {
     box-shadow: 0 0 0 0;
