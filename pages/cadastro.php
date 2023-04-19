@@ -94,18 +94,18 @@
           <div class="half-box">
             <div class="col">
               <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
-              <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+              <input type = "text" name="name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
             </div>
           </div>
           <div class = "half-box">
-              <label for = "lastname" class="required" style = "color: #5c9f24">Sobrenome</label>
-              <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+              <label for = "lastname" style = "color: #5c9f24">Nome do meio (opcional)</label>
+              <input type = "text" name="middlename" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
           </div>
         </div>
         <div class = "half-box" style = "width: 88%;">
           <div class="col-6">
-            <label for = "ultname" style = "color: #5c9f24">Último nome (opcional)</label>
-            <input type = "ultname"  class="form-control required" style = "background-color: #FFF; border-color: black" name = "ultname" id = "ultname">
+            <label for = "ultname" class="required" style = "color: #5c9f24">Sobrenome</label>
+            <input type="text" name="ultname"  class="form-control required" style = "background-color: #FFF; border-color: black" name = "ultname" id = "ultname">
           </div>
         </div>
         <div class="row">
@@ -115,24 +115,24 @@
           </div>
           <div class = "half-box">
             <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
-            <input type = "rg" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
+            <input type = "number" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
           </div>
         </div>
         <div class="row">
           <div class = "half-box">
-            <label for = "date" class = "required" style = "color: #5c9f24">Data de expedição (RG)</label>
-            <input type = "date" name = "dataexpedicao" id = "dataexpedicao" class="form-control" style = "background-color: #FFF; border-color: black">
+            <label for = "date" class = "required" style = "color: #5c9f24">Data emissão (RG)</label>
+            <input type = "date" name = "data_emissao" id = "data_emissao" class="form-control" style = "background-color: #FFF; border-color: black">
           </div>
           <div class = "half-box">
               <label for = "date" class="required" style = "color: #5c9f24">Data de Nascimento</label>
-              <input type = "date" name = "datanascimento" id = "datanascimento" class="form-control" style = "background-color: #FFF; border-color: black">
+              <input type = "date" name = "data_nasc" id = "data_nasc" class="form-control" style = "background-color: #FFF; border-color: black">
           </div>
         </div>
         <div class="row">
             <div class = "half-box">
               <div class = "col-4">
                 <label for = "number" class="required" style = "color: #5c9f24">DDD</label>
-                <input type = "number" maxlength="2" name = "DDD" placeholder = "(XX)" id = "DDD" class="form-control required"style = "background-color: #FFF; border-color: black">
+                <input type = "number" maxlength="2" name = "ddd" placeholder = "(XX)" id = "ddd" class="form-control required"style = "background-color: #FFF; border-color: black">
               </div>
             </div>
             <div class = "half-box">
@@ -185,7 +185,7 @@
             </div>
           </div>
             <div class="full-box">
-              <button type="button" id = "cadastrar" class="btn btn-success" a href="#">Cadastrar</button>
+              <button type="submit" id = "cadastrar" class="btn btn-success">Cadastrar</button>
             </div>
       </form>
     </main>
