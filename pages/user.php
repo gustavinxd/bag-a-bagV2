@@ -4,7 +4,10 @@
 
   $id = $_GET["id"];
 
-  $query = "SELECT * FROM usuario INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE WHERE ID_USUARIO='$id'";
+  $query = "SELECT * FROM usuario 
+    INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+    INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+    WHERE ID_USUARIO='$id'";
   $query = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($query);
 
@@ -90,7 +93,7 @@
         <img src="../assets/img/user/icone_perfil.png" alt="" class="col-lg-2 col-sm-6">
         <div class="col-lg-8 col-sm-6 mt-2">
           <h1><?php echo ucfirst($row['NOME']) . ' ' . ucfirst($row['NOME_MEIO']). ' ' . ucfirst($row['SOBRENOME']) ?></h1>
-          <p>E-mail: <?php echo $row['FK_CADASTRO'] ?></p>
+          <p>E-mail: <?php echo $row['EMAIL'] ?></p>
           <p>CPF: <?php echo $row['CPF'] ?></p> 
           <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO']?></p>
         </div>
