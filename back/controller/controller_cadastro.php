@@ -23,9 +23,9 @@
     $data_nascimento = filter_input(INPUT_POST, "data_nasc");
     $ddd = filter_input(INPUT_POST, "ddd", FILTER_SANITIZE_STRING);
 
-    $numero = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_STRING);
-    $numero = trim($numero);
-    $numero = str_replace("-","",$numero);
+    $telefone = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_STRING);
+    $telefone = trim($telefone);
+    $telefone = str_replace("-","",$telefone);
 
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
 
@@ -123,7 +123,7 @@
         //inserindo os dados no tabela cadastro
         $result_cadastro = "INSERT INTO cadastro (email, senha, data_cadastro) VALUES ('$email','" . md5($senha) . "', NOW())";
         $result_endereco = "INSERT INTO endereco (cep, rua, numero, bairro, cidade, uf, complemento) VALUES ('$cep','$rua','$numero','$bairro','$cidade','$uf','$complemento')";
-        $result_telefone = "INSERT INTO telefone (ddd, numero) VALUES ('$ddd','$numero')";
+        $result_telefone = "INSERT INTO telefone (ddd, numero) VALUES ('$ddd','$telefone')";
         $result_rg = "INSERT INTO rg (numero_rg, data_emissao) VALUES ('$rg', '$data_emissao')";
         $result_usuario = "INSERT INTO usuario (nome, nome_meio, sobrenome, cpf, data_nascimento, criado) VALUES ('$nome','$nome_meio', '$sobrenome', '$cpf', '$data_nascimento', NOW())";
     
@@ -143,19 +143,23 @@
 
         $result_usuario = "INSERT INTO usuario (nome, nome_meio, sobrenome, cpf, data_nascimento, fk_cadastro, fk_rg, fk_telefone, fk_endereco, criado) VALUES ('$nome','$nome_meio', '$sobrenome', '$cpf', '$data_nascimento', '$id_cadastro', '$id_rg', '$id_telefone', '$id_endereco', NOW())";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
+
+
     
+
+        
 
 
         if (mysqli_insert_id($conn)) {
-            //$_SESSION["msg"] = "<p style='color: blue;'>Cadastrado realizado com sucesso</p>";
-            //header("Location: ../cadastro_cliente.php");
+            $_SESSION["msg"] = "<p style='color: blue;'>Cadastrado realizado com sucesso</p>";
+            header("Location: ../../index.html");
         } else {
-            $_SESSION["msg"] = "<p style='color: blue;'>Cadastro não foi realizado com sucesso</p>";
-            //header("Location: ../cadastro_cliente.php");
+            $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso</p>";
+            header("Location: ../../pages/cadastro.php");
         }
     } else{
         $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso.</p>";
-        //header("Location: ../../pages/cadastro.php");
+        header("Location: ../../pages/cadastro.php");
     }  
 ?>
 
