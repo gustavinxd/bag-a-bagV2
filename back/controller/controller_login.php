@@ -17,9 +17,9 @@ $senha_banco = $row_usuario['SENHA'];
 //Fazendo a validação da senha fornecida pelo usuário, e a cadastrada no db
 if ($senha_md5 == $senha_banco){
     
-    header("Location: ../apos_login.php?id_cadastro={$row_usuario['ID_CADASTRO']}");
+    header("Location:../../pages/user.php?id={$row_usuario['ID_CADASTRO']}");
 } else{
-    $_SESSION["msg"] = "<p style='color: red;'>Usuário inexistente / Login não realizado.</p>";
+    $_SESSION["msg"] = "<p style='color: red;'>Nome de usuário ou senha incorretos.</p>";
     header("Location: ../../pages/login.html");
 }
 ?>
