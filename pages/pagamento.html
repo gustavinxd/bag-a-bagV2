@@ -31,7 +31,7 @@
   <link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- CSS Bag-a-Bag -->
-  <link rel="stylesheet" href="../assets/css/login/login.css">
+  <link rel="stylesheet" href="../assets/css/pagamento/pagamento.css">
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -76,34 +76,98 @@
   </header><!-- End Header -->
 
     <main class="container">
+        <div class="row">
+            <h3 class="h-faturamento">Detalhes do faturamento</h3>
+            <div id="caixa-detalhes" class="col-8 offset-2 shadow">
+                <div class="row">
+                    <div class="half-box">
+                      <div class="col">
+                        <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
+                        <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+                      </div>
+                    </div>
+                    <div class = "half-box">
+                        <label for = "lastname" class="required" style = "color: #5c9f24">Sobrenome</label>
+                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class = "half-box">
+                      <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
+                      <input type = "text" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
+                    </div>
+                    <div class = "half-box">
+                      <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
+                      <input type = "text" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <br>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class = "half-box">
+                        <label for = "email" class="required" style = "color: #5c9f24">E-mail</label>
+                        <input type = "email" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                      </div>
+                      <div class = "half-box">
+                        <label for = "tel" class="required" style = "color: #5c9f24">Telefone</label>
+                        <input type = "tel" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black">
+                      </div>
+                   </div>
+            </div>
+        </div>
+
 
         <div class="row">
-            <div id="caixa-form" class="col-8 offset-2 shadow">
+            <h3 class="h-forma">Formas de pagamento</h3>
+            <div id="caixa-pagamento" class="col-8 offset-2 shadow">
+                <input type="radio" value=""> Cartão de crédito 
+                <br>
+                <br>
+                <div class="row">
+                    <div class="half-box">
+                      <div class="col">
+                        <label for = "name" class="required" style = "color: #5c9f24">Nome impresso no cartão</label>
+                        <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
 
-                <form action="../back/controller/controller_login.php" method="post">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</div>
+                      </div>
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" style="color: #5C9F24;" class="form-label">Senha</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
-                      <span class="input-group-btn">
-                        <button class="btn" type="button"><i class="bi bi-eye"></i></button>
-                      </span>
+
+                    <div class = "half-box">
+                        <label for = "lastname" class="required" style = "color: #5c9f24">Número do cartão</label>
+                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <br>
                     </div>
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input " id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Lembre de mim</label>
+                  </div>
+
+                  <div class="row">
+                    <div class = "half-box">
+                      <label for = "cpf" class="required" style = "color: #5c9f24" >Bandeira do cartão</label>
+                      <input type = "text" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
                     </div>
-                    <div class="row offset-4 col-4 align-items-center">
-                        <button type="submit" id="btn-submit" style="min-width: 80px;"class="btn btn-primary">Login</button>
+
+                    <div class = "half-box">
+                      <label for = "rg" class="required" style = "color: #5c9f24">Validade</label>
+                      <input type = "text" name = "rg" id = "rg" placeholder="MM/AA" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <br>
                     </div>
-                </form>
+                  </div>
+
+                  <div class="row">
+                      <div class = "half-box">
+                        <label for = "email" class="required" style = "color: #5c9f24">Código de segurança</label>
+                        <input type = "email" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                      </div>
+                 </div>
+                 <br>
+                <hr class="linha">
+                <input type="radio" value=""> Pagar com pix 
+                <hr class="linha">
+                <input type="radio" value=""> Boleto 
+                <i class="bi bi-upc-scan"></i>
             </div>
-    
         </div>
+        
+
         
     </main>  
 
@@ -135,11 +199,11 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Contato</a></li>
             </ul>
           </div>
 
@@ -147,7 +211,7 @@
             <h4>Conta</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Cadastre-se</a></li>
               <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
