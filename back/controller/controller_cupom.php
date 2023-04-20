@@ -1,6 +1,6 @@
 <?php
     session_start(); //iniciando sessão
-    include_once("conexao.php"); //incluindo conexão
+    include_once("../conexao.php"); //incluindo conexão
 
     //pegando dados
     
@@ -20,9 +20,8 @@
     if (preg_match($rgx, $cupom) == 1) {
         
         if(!empty($row_cupom)){
-            $_SESSION["msg"] = "<p style='color: blue;'> Não foi possível cadastrar com sucesso</p>";
-            echo "NÃO !";
-            header("Location:cupom_desconto.php");
+            $_SESSION["msg"] = "<p style='color: red;'> Não foi possível cadastrar com sucesso</p>";
+            header("Location:../cupom_desconto.php");
         }else  {
              //inserindo no banco
             $result_usuario = "INSERT INTO desconto (codigo_desconto, valor_desconto) VALUES ('$cupom','$valor')";
@@ -30,7 +29,8 @@
         }
 
     }else{
-        echo "<p id=estilo>código não cadastrado!";
+        $_SESSION["msg"] = "<p style='color: red;'> Não foi possível cadastrar com sucesso</p>";
+        header("Location:../cupom_desconto.php");
     }
     
 

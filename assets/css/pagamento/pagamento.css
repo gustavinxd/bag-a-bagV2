@@ -1,0 +1,36 @@
+.h-faturamento{
+    margin-top: 100px;
+    margin-left: 4.7cm;
+}
+
+.half-box{
+    width: 345px;
+    width: 55;
+}
+
+#caixa-detalhes{
+    width: 800px;
+    height: 380px;
+    border: solid black 1px;
+    border-radius: 10px;
+    background-color: #FFF; 
+    margin-bottom: 8%;
+    padding: 5%;
+    font-family: 'Poppins', sans-serif; 
+
+}
+
+.h-forma{
+    margin-left: 4.7cm;
+}
+
+#caixa-pagamento{
+    width: 800px;
+    height: 500px;
+    border: solid black 1px;
+    border-radius: 10px;
+    background-color: #FFF; 
+    margin-bottom: 8%;
+    padding: 5%;
+    font-family: 'Poppins', sans-serif; 
+}

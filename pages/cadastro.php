@@ -36,17 +36,53 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
+  
 </script>
+<!-- //quando o campo já tiver 8 caracteres, o script irá inserir um tracinho, para melhor visualização do telefone. -->
     <script type="text/javascript">
       function tel(telefone){
       if(telefone.value.length == 5)
-            telefone.value = telefone.value + '-'; //quando o campo já tiver 8 caracteres, o script irá inserir um tracinho, para melhor visualização do telefone.
+            telefone.value = telefone.value + '-'; 
     }
     </script>
 
 </head>
 
 <body>
+
+  <!-- ======= Header ======= -->
+<main class="header">
+    <header id="header" class="fixed-top d-flex align-items-center">
+      <div class="container d-flex align-items-center justify-content-between">
+
+        <h1 class="logo"><a href="index.html">BAG-A-BAGₑ</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">HOME</a></li>
+            <li><a class="nav-link scrollto" href="#">SOBRE</a></li>
+            <li><a class="nav-link scrollto" href="#">DESTINOS</a></li>
+            <li><a class="nav-link scrollto " href="#">OFERTAS</a></li>
+            <li><a class="nav-link scrollto" href="#">CONTATO</a></li>
+            <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li><a href="#">Drop Down 2</a></li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+              </ul> -->
+            </li>
+            <li><a class="nav-link scrollto" href="#contact" style = "margin-left: 80px;">LOGIN</a></li>
+            <li><a class="getstarted scrollto" href="#about">CADASTRE-SE</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+</main><!-- End Header -->
+<main class="airplane">
   <div class="frame">
     <div class="cloud2 cloud1">
         <div class="light"></div>
@@ -78,7 +114,7 @@
             </ul> -->
           </li>
           <li><a class="nav-link scrollto" href="./login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="./cadastro.html">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -187,12 +223,13 @@
             <div class="full-box">
               <button type="submit" id = "cadastrar" class="btn btn-success">Cadastrar</button>
             </div>
+        </div>
       </form>
     </main>
     <!---Fim do cadastro -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+      <!-- ======= Footer ======= -->
+      <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -219,24 +256,28 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Contato</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
             </ul>
           </div>
 
         <div class="col-lg-3 col-md-6 footer-links">
             <h4>Conta</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Cadastre-se</a></li>
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Inscreva-se para receber ofertas exclusivas</h4>
+            <!-- <p>Inscreva-se para receber ofertas exclusivas</p> -->
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Quero recebê-las!">
             </form>
@@ -251,10 +292,14 @@
         &copy; Copyright <strong><span>Groovin</span></strong>. All rights Reserved.
       </div>
       <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
         Designed by  <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer>
+  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
