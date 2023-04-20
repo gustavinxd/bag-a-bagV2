@@ -140,8 +140,15 @@
             autofocus required
         ><br><br>
 
+        <label>Data de Emissão (RG): </label>
+        <input
+            type="date"
+            name="data_emissao"
+            id="data_emissao"
+            placeholder="Digite a data de emissão"
+            autofocus required
+        ><br><br>
 
-        
         <label>Data de Nascimento: </label>
         <input
             type="date"
@@ -179,6 +186,7 @@
             id="telefone"
             placeholder="XXXXXXXXX"
             maxlength="9"
+            minlength="9"
             autofocus required
         ><br><br>
 

@@ -1,7 +1,16 @@
 <?php 
   session_start();
-  include_once('../back/conexao.php')
+  include_once('../back/conexao.php');
 
+  $id = $_GET["id"];
+
+  $query = "SELECT * FROM usuario INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE WHERE ID_USUARIO='$id'";
+  $query = mysqli_query($conn, $query);
+  $row = mysqli_fetch_assoc($query);
+
+  if(empty($row)) {
+    header('Location: ../index.html');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -80,10 +89,10 @@
     <section class="row d-flex align-items-center justify-content-center" id="profile">
         <img src="../assets/img/user/icone_perfil.png" alt="" class="col-lg-2 col-sm-6">
         <div class="col-lg-8 col-sm-6 mt-2">
-          <h1>Nome Usuario</h1>
-          <p>E-mail do Usuario</p>
-          <p>CPF do Usuario</p> 
-          <p>Telefone do Usuario</p>
+          <h1><?php echo ucfirst($row['NOME']) . ' ' . ucfirst($row['NOME_MEIO']). ' ' . ucfirst($row['SOBRENOME']) ?></h1>
+          <p>E-mail: <?php echo $row['FK_CADASTRO'] ?></p>
+          <p>CPF: <?php echo $row['CPF'] ?></p> 
+          <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO']?></p>
         </div>
         <div class="col-lg-2">
           <a href="">     
