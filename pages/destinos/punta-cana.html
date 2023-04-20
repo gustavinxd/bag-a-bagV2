@@ -95,10 +95,171 @@
 
   <main id="main" class="container-fluid">
     
+    <!-- ====================== Teste com Modal =========================-->
+    <div id="meuModal" class="modal fade" role="dialog" style="z-index: 99991;">
+    
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+    
+        <div class="modal-content">
+          
+          <form action="" method="POST">
+            <div class="container">
+              <div class="row">
+                <!-- ======= Div Master Modal  ====== -->
+                <div class="p-3" style="border: solid 0px red">
+                  <div class="modal-header"> <!-- Header do Modal -->
+                    <h4 class="modal-title">Filtre ou Ordene</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div> <!-- Fim do Header do Modal-->
+
+                  <!-- ======== Div Child Modal 1 ======== -->
+                  <div class="modal-body filtros-caixa2 mb-2" id="filtros-caixa-2" style="border: solid 0px blue">
+                    <!-- ==================== Área Referentes às Paradas =================== -->
+                    <h5>Paradas</h5>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="paradas" id="um" value="" checked>
+                      <label class="form-check-label" for="um">
+                        Todas as Paradas
+                      </label>
+                    </div>
+        
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="paradas" id="dois" value="">
+                      <label class="form-check-label" for="dois">
+                        Direto
+                      </label>
+                    </div>
+        
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="paradas" id="tres" value="">
+                      <label class="form-check-label" for="tres">
+                        Um ou Mais
+                      </label>
+                    </div>
+                    <!--  ================ Área Referente a Companhia Aérea ============== -->
+                    <h5 class="mt-4">Companhia</h5>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="companhia" id="um" value="" checked>
+                      <label class="form-check-label" for="um">
+                        Todas as Companhias
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="companhia" id="dois" value="">
+                      <label class="form-check-label" for="dois">
+                        Tam
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="companhia" id="tres" value="">
+                      <label class="form-check-label" for="tres">
+                        Gol
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="companhia" id="quatro" value="">
+                      <label class="form-check-label" for="quatri">
+                        Azul
+                      </label>
+                    </div>
+                    <!--  ================ Área Referente ao Preço ============== -->
+                    
+
+                    <!--  ================ Área Referente a Classe do Vôo ============== -->
+                    <h5 class="mt-4">Classe</h5>
+                    
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="classe" id="um" value="" checked>
+                      <label class="form-check-label" for="um">
+                        Econômica
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="classe" id="dois" value="">
+                      <label class="form-check-label" for="dois">
+                        Primeira Classe
+                      </label>
+                    </div>
+                    <!--  ================ Área Referente ao Horário de Chegada Vôo  ============== -->
+                    <h5 class="mt-4">Horário de Chegada</h5>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="um" value="" checked>
+                      <label class="form-check-label" for="um">
+                        Manhã / 00:00 - 12:00
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="dois" value="">
+                      <label class="form-check-label" for="dois">
+                        Tarde / 12:00 - 18:00
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="tres" value="">
+                      <label class="form-check-label" for="tres">
+                        Noite / 18:00 - 18:00
+                      </label>
+                    </div>
+                    <!--  ================ Área Referente ao Horário de Saída ============== -->  
+                    <h5 class="mt-4">Horário de Saída</h5>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="um" value="" checked>
+                      <label class="form-check-label" for="um">
+                        Manhã / 00:00 - 12:00
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="dois" value="">
+                      <label class="form-check-label" for="dois">
+                        Tarde / 12:00 - 18:00
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="horario" id="tres" value="">
+                      <label class="form-check-label" for="tres">
+                        Noite / 18:00 - 18:00
+                      </label>
+                    </div>
+                    <!--- ================ Botões de Submit ========================-->
+                    <div class="modal-footer mt-3">
+                      <button type="button" class="btn btn-outline-danger">
+                        Limpar Campos
+                      </button>
+                      <button type="button" class="btn btn-outline-success">
+                        Aplicar
+                      </button>
+                    </div>
+    
+                  </div>
+                  <!-- ========= Fim Div Child 1 Modal ========= -->
+    
+                </div>  <!-- ==== Fim Div Master =====-->
+    
+              </div> <!-- === Fim Div Row ===-->
+    
+            </div> <!-- === Fim Container ===-->
+          </form>
+    
+        </div>
+        
+          
+      </div>
+    </div>
+    <!-- ================================================================= -->
       
 
     <!-- ================== Div Master ================= -->
-    <div style="border: solid 0px blue; min-width: 768px;" class="">
+    <div style="border: solid 0px blue;" class="">
       
       <!-- ================= Area de Passagens ================= -->
         <div class="mb-2 container mt-3 shadow" id="form-filtros">
@@ -109,64 +270,9 @@
             <button type="button" id="botao-modal" class="btn btn-outline-success mb-5" data-bs-toggle="modal" data-bs-target="#meuModal">
               Filtrar e Ordenar
             </button>
-            <!-- ====================== Teste com Modal =========================-->
-            <div id="meuModal" class="modal fade" role="dialog" style="z-index: 99991;">
-  
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
-  
-                <div class="modal-content">
-                  
-                  <form action="">
-                    <div class="container">
-                      <div class="row">
-                        <!-- ======= Div Master ====== -->
-                        <div class="p-3" style="border: solid 3px red">
-                          <h4 class="mb-5 mt-3">Filtre ou Ordene</h5>
-                          
-                          <div class="container filtros-caixa2 shadow-sm mb-2 align-content-start" style="border: solid 3px blue">
-                            <h5>Paradas</h5>
-
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" name="paradas" id="um" value="" checked>
-                              <label class="form-check-label" for="um">
-                                Todas as Paradas
-                              </label>
-                            </div>
-                
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" name="paradas" id="dois" value="">
-                              <label class="form-check-label" for="dois">
-                                Direto
-                              </label>
-                            </div>
-                
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" name="paradas" id="tres" value="">
-                              <label class="form-check-label" for="tres">
-                                Um ou Mais
-                              </label>
-                            </div>
-
-                          </div>
-                            
-
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </form>
-    
-                </div>
-                
-                  
-              </div>
-            </div>
-            <!-- ================================================================= -->
           </div>
-
-
-  
+        
+          
           <!-- Card 01 -->
           <div class="card mb-3 shadow" id="cards-bab" style="width: 90%; margin: 0 auto;">
             <div class="card-body" style="padding: 0;">

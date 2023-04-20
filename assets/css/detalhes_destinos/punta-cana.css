@@ -9,8 +9,9 @@ main{
   border: solid 2px gray;
   
 }
-.filtros-caixa-2{
-  border:solid 1px black;   
+
+#filtros-caixa-2{
+  border:solid 3px black;   
 }
 
 #card-voo-left{
