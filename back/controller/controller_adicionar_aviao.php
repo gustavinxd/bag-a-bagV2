@@ -25,7 +25,7 @@ if (mysqli_insert_id($conn)) {
     
     $consulta = mysqli_query($conn, $query_assentos_primeira_classe);
 
-    // adiciona 200 assentos de classe economica do aviao
+    // adiciona 150 assentos de classe economica do aviao
     $query_assentos_classe_economica = "INSERT INTO assentos_codaviao (NUMERO_ASSENTO, CLASSE, FK_AVIAO)
     SELECT 
         LPAD((ROW_NUMBER() OVER (ORDER BY (SELECT NULL))) + 50, 3, '0') AS NUMERO_ASSENTO,
