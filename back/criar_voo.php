@@ -3,35 +3,39 @@
 session_start();
 include_once('conexao.php');
 
-// pegar as aeronaves disponíveis
-
+// PEGAR AS AERONAVES
+$options_avioes_id_codaviao = "";
 $options_avioes_codigo_aviao = "";
 $options_avioes_empresa = "";
-$options_avioes_assentos = "";
+$options_avioes_total_assentos = "";
 
 $query = "SELECT * FROM aviao_codaviao";
 $consulta = mysqli_query($conn, $query);
 
-while($row_avioes = mysqli_fetch_assoc($consulta)) {
-    $options_avioes_codigo_aviao = $options_avioes_codigo_aviao . "<option value='" . $row_avioes['ID_CODAVIAO'] . "'>" . $row_avioes['CODIGO_AVIAO'] . "</option>";
-    $options_avioes_empresa = $options_avioes_empresa . "<option>" . $row_avioes['EMPRESA'] . "</option>";
-    $options_avioes_assentos = $options_avioes_assentos . "<option>" . $row_avioes['TOTAL_ASSENTO'] . "</option>";
+while($row_aviao = mysqli_fetch_assoc($consulta)) {
+    $options_avioes_id_codaviao = $options_avioes_id_codaviao . "<option value='" . $row_aviao['ID_CODAVIAO'] . "'>" . $row_aviao['ID_CODAVIAO'] . "</option>";
+    $options_avioes_codigo_aviao = $options_avioes_codigo_aviao . "<option>" . $row_aviao['CODIGO_AVIAO'] . "</option>";
+    $options_avioes_empresa = $options_avioes_empresa . "<option>" . $row_aviao['EMPRESA'] . "</option>";
+    $options_avioes_total_assentos = $options_avioes_total_assentos . "<option>" . $row_aviao['TOTAL_ASSENTO'] . "</option>";
 }
 
 
-// pegar as origens dos voos
-
-$options_siglas_aeroportos = "";
-$options_nome_aeroportos = "";
-$options_pais_aeroportos = "";
+// PEGAR OS AEROPORTOS
+$options_aeroportos_id_aeroporto = "";
+$options_aeroportos_nome_aeroporto = "";
+$options_aeroportos_sigla = "";
+$options_aeroportos_pais = "";
+$options_aeroportos_cidade = "";
 
 $query = "SELECT * FROM aeroporto";
 $consulta = mysqli_query($conn, $query);
 
-while($row_origens = mysqli_fetch_assoc($consulta)) {
-    $options_avioes_codigo_aviao = $options_avioes_codigo_aviao . "<option value='" . $row_origens['ID_AEROPORTO'] . "'>" . $row_origens['SIGLA'] . "</option>";
-    $options_avioes_empresa = $options_avioes_empresa . "<option>" . $row_origens['SIGLA'] . "</option>";
-    $options_avioes_assentos = $options_avioes_assentos . "<option>" . $row_origens['NOME_AEROPORTO'] . "</option>";
+while($row_origem = mysqli_fetch_assoc($consulta)) {
+    $options_aeroportos_id_aeroporto = $options_aeroportos_id_aeroporto . "<option value='" . $row_origem['ID_AEROPORTO'] . "'>" . $row_origem['ID_AEROPORTO'] . "</option>";
+    $options_aeroportos_nome_aeroporto = $options_aeroportos_nome_aeroporto . "<option>" . $row_origem['NOME_AEROPORTO'] . "</option>";
+    $options_aeroportos_sigla = $options_aeroportos_sigla . "<option>" . $row_origem['SIGLA'] . "</option>";
+    $options_aeroportos_pais = $options_aeroportos_pais . "<option>" . $row_origem['PAIS'] . "</option>";
+    $options_aeroportos_cidade = $options_aeroportos_cidade . "<option>" . $row_origem['CIDADE'] . "</option>";
 }
 
 ?>
@@ -55,57 +59,203 @@ while($row_origens = mysqli_fetch_assoc($consulta)) {
         }
     ?>
     
-    <form name="aeronave" action="controller/controller_adicionar_voo.php" method="post">
-        <label>Codigo da Aeronave: </label>
-        <select name="codigo_aviao" onchange="mudaSelects()">
-            <option value="0">--</option>
-            <?php
-                echo "$options_avioes_codigo_aviao";
-            ?>
-        </select>
+    <form name="voo" action="controller/controller_adicionar_voo.php" method="post">
+        <!-- ESCOLHA DE AERONAVE -->
+        <div>
+            <h3>Aeronave</h3>
+            <select name="fk_aviao" style="display: none">
+                <option value="">--</option>
+                <?php
+                    echo "$options_avioes_id_codaviao";
+                ?>
+            </select>
+            <label>Codigo da Aeronave: </label>
+            <select name="codigo_aviao" onchange="mudaSelectsAeronave()">
+                <option value="">--</option>
+                <?php
+                    echo "$options_avioes_codigo_aviao";
+                ?>
+            </select>
+            <label>Empresa: </label>
+            <select name="empresa" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_avioes_empresa";
+                ?>
+            </select>
+            <label>Assentos: </label>
+            <select name="assentos" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_avioes_total_assentos";
+                ?>
+            </select>
+        </div>
 
-        <label>Empresa: </label>
-        <select name="empresa" disabled>
-            <option value="0">--</option>
-            <?php
-                echo "$options_avioes_empresa";
-            ?>
-        </select>
+        <br>
 
-        <label>Assentos: </label>
-        <select name="assentos" disabled>
-            <option value="0">--</option>
-            <?php
-                echo "$options_avioes_assentos";
-            ?>
-        </select>
+        <!-- ESCOLHA DE AEROPORTO DE ORIGEM -->
+        <div>
+            <h3>Aeroporto de Origem</h3>
+
+            <select name="fk_origem_aero" style="display: none">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_id_aeroporto";
+                ?>
+            </select>
+
+            <label>Origem: </label>
+            <select name="origem_nome_aeroporto" onchange="mudaSelectsOrigem()">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_nome_aeroporto";
+                ?>
+            </select>
+
+            <label>Sigla: </label>
+            <select name="origem_sigla" disabled>
+                <option value="0">--</option>
+                <?php
+                    echo "$options_aeroportos_sigla";
+                ?>
+            </select>
+
+            <label>País: </label>
+            <select name="origem_pais" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_pais";
+                ?>
+            </select>
+
+            <label>Cidade: </label>
+            <select name="origem_cidade" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_cidade";
+                ?>
+            </select>
+        </div>
         
-        
+        <br>
 
+        <!-- ESCOLHA DE AEROPORTO DE DESTINO -->
+        <div>
+            <h3>Aeroporto de Destino</h3>
+
+            <select name="fk_destino_aero" style="display: none">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_id_aeroporto";
+                ?>
+            </select>
+
+            <label>Destino: </label>
+            <select name="destino_nome_aeroporto" onchange="mudaSelectsDestino()">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_nome_aeroporto";
+                ?>
+            </select>
+
+            <label>Sigla: </label>
+            <select name="destino_sigla" disabled>
+                <option value="0">--</option>
+                <?php
+                    echo "$options_aeroportos_sigla";
+                ?>
+            </select>
+
+            <label>País: </label>
+            <select name="destino_pais" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_pais";
+                ?>
+            </select>
+
+            <label>Cidade: </label>
+            <select name="destino_cidade" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_cidade";
+                ?>
+            </select>
+        </div>
+        
+        <br>
+        
+        <!-- ESCOLHA DE DATA E HORARIO DE PARTIDA-->
+        <div>
+            <h3>Decolagem</h3>
+            <input type="datetime-local" name="horario_partida">
+        </div>
+
+        <br>
+        
+        <!-- ESCOLHA DE DATA E HORARIO DE CHEGADA-->
+        <div>
+            <h3>Pouso</h3>
+            <input type="datetime-local" name="horario_chegada">
+        </div>
+
+        <br>
+
+        <!-- ESCOLHA DE ESCALA -->
         <input type="submit" value="Salvar">
     </form>
     
-    <br>
     <script>
-        function mudaSelectsAeronave() {
-    
-        let optionCodaviao = document.forms['aeronave'].codigo_aviao.options;
-        let optionEmpresa = document.forms['aeronave'].empresa.options;
-        let optionAssento = document.forms['aeronave'].assentos.options;
-        
-        let num = optionCodaviao.selectedIndex;
+        let form = document.forms['voo'];
 
-        optionEmpresa.selectedIndex = num;
-        optionAssento.selectedIndex = num
-        
+        function mudaSelectsAeronave() {
+            let selectID = form.fk_aviao.options;
+            let selectCodaviao = form.codigo_aviao.options;
+            let selectEmpresa = form.empresa.options;
+            let selectAssento = form.assentos.options;
+            
+            let opcao = selectCodaviao.selectedIndex;
+
+            selectID.selectedIndex = opcao;
+            selectEmpresa.selectedIndex = opcao;
+            selectAssento.selectedIndex = opcao;
+        }
+
+        function mudaSelectsOrigem() {
+            let selectID = form.fk_origem_aero.options;
+            let selectNome = form.origem_nome_aeroporto.options;
+            let selectSigla = form.origem_sigla.options;
+            let selectPais = form.origem_pais.options;
+            let selectCidade = form.origem_cidade.options;
+            
+            let opcao = selectNome.selectedIndex;
+
+            selectID.selectedIndex =  opcao;
+            selectNome.selectedIndex = opcao;
+            selectSigla.selectedIndex = opcao;
+            selectPais.selectedIndex = opcao;
+            selectCidade.selectedIndex =  opcao;
         }
 
         function mudaSelectsDestino() {
+            let selectID = form.fk_destino_aero.options;
+            let selectNome = form.destino_nome_aeroporto.options;
+            let selectSigla = form.destino_sigla.options;
+            let selectPais = form.destino_pais.options;
+            let selectCidade = form.destino_cidade.options;
             
+            let opcao = selectNome.selectedIndex;
+
+            selectID.selectedIndex =  opcao;
+            selectNome.selectedIndex = opcao;
+            selectSigla.selectedIndex = opcao;
+            selectPais.selectedIndex = opcao;
+            selectCidade.selectedIndex =  opcao;
         }
 
         function mudaSelectAlternado() {
-        // criar uma função que altere a option do destino se a da origem for a mesma
+        // criar uma função que altere a option do destino se a da origem for a mesma (ou fazer no back end)
         }
     </script>
 </body>
