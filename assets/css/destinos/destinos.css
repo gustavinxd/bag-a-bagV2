@@ -19,7 +19,7 @@
 
 .card:hover {
     transition: all ease-in-out 200ms;
-    scale: 1.01;
+    scale: 1.03;
     z-index: 1000;
 }
 
