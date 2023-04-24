@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Groovin Bootstrap Template - Index</title>
+  <title>Bag-a-Bagₑ - Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/airplane_favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -32,6 +32,7 @@
 
   <!-- CSS Bag-a-Bag -->
   <link rel="stylesheet" href="../assets/css/login/login.css">
+
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -79,35 +80,40 @@
 
         <div class="row">
             <div id="caixa-form" class="col-8 offset-2 shadow">
+              
+                  <form class="" action="" method="">
+                    <h4 class="text-center mb-3" style="color: #5C9F24">Login</h5>
 
-                <form action="../back/controller/controller_login.php" method="post">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</div>
+                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
+                    <div id="caixa-text" class=" mb-5">
+                      <input type="email" class="inputs col-12" id="email" required>
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" style="color: #5C9F24;" class="form-label">Senha</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
-                      <span class="input-group-btn">
-                        <button class="btn" type="button"><i class="bi bi-eye"></i></button>
+                    <!-- <p id="" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</p> -->
+
+                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Senha</label>
+                    <div id="caixa-text" class="mb-3">
+                      <input type="password" class="inputs col-xl-11 col-lg-11 col-md-11 col-lg-11 col-xs-11" id="senha" required>
+                      <span class="input-group-btn col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <button class="btn" class="" onclick="showpass()" type="button" id="imgeye"><i class="bi bi-eye"></i></button>
                       </span>
                     </div>
+
                     <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input " id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Lembre de mim</label>
+                      <input type="checkbox" class="form-check-input" id="check">
+                      <label class="form-check-label form-tex mb-3" for="check">Lembre de mim</label>
                     </div>
+
                     <div class="row offset-4 col-4 align-items-center">
-                        <button type="submit" id="btn-submit" style="min-width: 80px;"class="btn btn-primary">Login</button>
+                      <button type="submit" id="" style="min-width: 80px;"class="btn btn-outline-success">Login</button>
                     </div>
-                </form>
+                  </form>
             </div>
     
         </div>
         
     </main>  
 
-    <!-- ======= Footer ======= -->
+  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -180,6 +186,7 @@
     </div>
   </footer><!-- End Footer -->
 
+
     <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -190,4 +197,5 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/login.js"></script>
 </body>
