@@ -203,6 +203,56 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
         <br>
 
         <!-- ESCOLHA DE ESCALA -->
+        <hr>
+        <div>
+            <h3>Escala</h3>
+            <select name="fk_aeroporto_escala" style="display: none">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_id_aeroporto";
+                ?>
+            </select>
+
+            <select name="escala_nome_aeroporto" onchange="mudaSelectsEscala()">
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_nome_aeroporto";
+                ?>
+            </select>
+
+            <label>Sigla: </label>
+            <select name="escala_sigla" disabled>
+                <option value="0">--</option>
+                <?php
+                    echo "$options_aeroportos_sigla";
+                ?>
+            </select>
+
+            <label>País: </label>
+            <select name="escala_pais" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_pais";
+                ?>
+            </select>
+
+            <label>Cidade: </label>
+            <select name="escala_cidade" disabled>
+                <option value="">--</option>
+                <?php
+                    echo "$options_aeroportos_cidade";
+                ?>
+            </select>
+
+            <h3>Pouso</h3>
+            <input type="datetime-local" name="horario_chegada_escala">
+
+            <h3>Duração da Escala</h3>
+            <input type="time" name="tempo_escala" step="1">
+        </div>
+        
+        <br>
+
         <input type="submit" value="Salvar">
     </form>
     
@@ -237,7 +287,7 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
             selectPais.selectedIndex = opcao;
             selectCidade.selectedIndex =  opcao;
         }
-
+    
         function mudaSelectsDestino() {
             let selectID = form.fk_destino_aero.options;
             let selectNome = form.destino_nome_aeroporto.options;
@@ -253,6 +303,23 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
             selectPais.selectedIndex = opcao;
             selectCidade.selectedIndex =  opcao;
         }
+
+        function mudaSelectsEscala() {
+            let selectEscalaAeroID = form.fk_aeroporto_escala.options;
+            let selectEscalaNomeAero = form.escala_nome_aeroporto.options;
+            let selectEscalaSigla = form.escala_sigla.options;
+            let selectEscalaPais = form.escala_pais.options;
+            let selectEscalaCidade = form.escala_cidade.options;
+            
+            let opcao = selectEscalaNomeAero.selectedIndex;
+
+            selectEscalaAeroID.selectedIndex =opcao;
+            selectEscalaSigla.selectedIndex = opcao;
+            selectEscalaPais.selectedIndex = opcao;
+            selectEscalaCidade.selectedIndex =  opcao;
+        }
+
+        
 
         function mudaSelectAlternado() {
         // criar uma função que altere a option do destino se a da origem for a mesma (ou fazer no back end)
