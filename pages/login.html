@@ -81,18 +81,18 @@
         <div class="row">
             <div id="caixa-form" class="col-8 offset-2 shadow">
               
-                <form class="" action="POST">
-                  <h4 class="text-center mb-3" style="color: #5C9F24">Login</h5>
+                  <form class="" action="" method="">
+                    <h4 class="text-center mb-3" style="color: #5C9F24">Login</h5>
 
-                  <label for="exampleInputEmail1" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
+                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
                     <div id="caixa-text" class=" mb-5">
-                      <input type="email" class="inputs col-12" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <input type="email" class="inputs col-12" id="email" required>
                     </div>
                     <!-- <p id="" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</p> -->
 
                     <label for="caixa-text" style="color: #5C9F24;" class="form-label">Senha</label>
                     <div id="caixa-text" class="mb-3">
-                      <input type="password" class="inputs col-xl-11 col-lg-11 col-md-11 col-lg-11 col-xs-11" id="senha">
+                      <input type="password" class="inputs col-xl-11 col-lg-11 col-md-11 col-lg-11 col-xs-11" id="senha" required>
                       <span class="input-group-btn col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
                         <button class="btn" class="" onclick="showpass()" type="button" id="imgeye"><i class="bi bi-eye"></i></button>
                       </span>
@@ -104,10 +104,9 @@
                     </div>
 
                     <div class="row offset-4 col-4 align-items-center">
-                        <button type="submit" id="" style="min-width: 80px;"class="btn btn-outline-success">Login</button>
+                      <button type="submit" id="" style="min-width: 80px;"class="btn btn-outline-success">Login</button>
                     </div>
-
-                </form>
+                  </form>
             </div>
     
         </div>
