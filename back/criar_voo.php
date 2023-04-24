@@ -250,13 +250,31 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
             <h3>Duração da Escala</h3>
             <input type="time" name="tempo_escala" step="1">
         </div>
-        
+
+        <!-- DEFINIR VALOR DAS PASSAGENS PARA ADULTOS -->
+        <div>
+            <h3>Valor da Passagem</h3>
+            <input type="text" name="valor_passagem" id="valor_passagem" oninput="formatarValor()">
+            
+        </div>
+
+
         <br>
 
         <input type="submit" value="Salvar">
     </form>
     
     <script>
+        function formatarValor() {
+            var inputValor = document.getElementById('valor_passagem');
+            var valor = inputValor.value.replace(/\D+/g, ''); // Remove caracteres não numéricos
+            var valorFormatado = (Number(valor) / 100).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            inputValor.value = valorFormatado;
+        }
+
         let form = document.forms['voo'];
 
         function mudaSelectsAeronave() {

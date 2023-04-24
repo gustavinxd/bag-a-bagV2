@@ -5,6 +5,14 @@ include_once('../conexao.php');
 // OBTER DADOS
 $horario_partida = filter_input(INPUT_POST, 'horario_partida');
 $horario_chegada = filter_input(INPUT_POST, 'horario_chegada');
+$valor_passagem = filter_input(INPUT_POST, 'valor_passagem');
+$valor_passagem = substr($valor_passagem, 4);
+echo var_dump($valor_passagem);
+str_replace($valor_passagem, '.', ','); 
+
+// SUBSTITUIR A POSIÇÃO ANTEPENÚLTIMA DA STRING DO PREÇO, QUE SEMPRE SERÁ UMA VÍRGULA E SÓ DEPOIS ! (1,00)
+$valor_passagem = (float) $valor_passagem;
+echo var_dump($valor_passagem);
 $fk_origem_aero = filter_input(INPUT_POST, 'fk_origem_aero', FILTER_SANITIZE_NUMBER_INT);
 $fk_destino_aero = filter_input(INPUT_POST, 'fk_destino_aero', FILTER_SANITIZE_NUMBER_INT);
 $fk_aviao = filter_input(INPUT_POST, 'fk_aviao', FILTER_SANITIZE_NUMBER_INT);
