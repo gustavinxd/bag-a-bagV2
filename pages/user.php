@@ -4,7 +4,10 @@
 
   $id = $_GET["id"];
 
-  $query = "SELECT * FROM usuario INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE WHERE ID_USUARIO='$id'";
+  $query = "SELECT * FROM usuario 
+    INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+    INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+    WHERE ID_USUARIO='$id'";
   $query = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($query);
 
@@ -63,11 +66,11 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">HOME</a></li>
-          <li><a class="nav-link scrollto" href="#">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="#">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="#">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="#">CONTATO</a></li>
+          <li><a class="nav-link scrollto active" href="../index.html">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../index.html#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="destinos.html">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -76,8 +79,8 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="nav-link scrollto" href="#contact" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="#about">CADASTRE-SE</a></li>
+          <li><a class="nav-link scrollto" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
+          <li><a class="getstarted scrollto" href="cadastro.php">CADASTRE-SE</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -90,7 +93,7 @@
         <img src="../assets/img/user/icone_perfil.png" alt="" class="col-lg-2 col-sm-6">
         <div class="col-lg-8 col-sm-6 mt-2">
           <h1><?php echo ucfirst($row['NOME']) . ' ' . ucfirst($row['NOME_MEIO']). ' ' . ucfirst($row['SOBRENOME']) ?></h1>
-          <p>E-mail: <?php echo $row['FK_CADASTRO'] ?></p>
+          <p>E-mail: <?php echo $row['EMAIL'] ?></p>
           <p>CPF: <?php echo $row['CPF'] ?></p> 
           <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO']?></p>
         </div>
@@ -150,19 +153,19 @@
             <div class="col-lg-2 col-md-6 footer-links">
               <h4>BAG-A-BAGₑ</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Ofertas</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Contato</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
               </ul>
             </div>
   
           <div class="col-lg-3 col-md-6 footer-links">
               <h4>Conta</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Cadastre-se</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
                 <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->

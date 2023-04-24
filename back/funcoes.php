@@ -1,4 +1,5 @@
 <?php
+include_once("conexao.php");
 date_default_timezone_set('America/Sao_Paulo');
 // VALIDAR RG
 function validarRG($rg) {
@@ -89,5 +90,6 @@ function validarDataRg($data_emissao){
         //$_SESSION["data_rg"] = "<p style='color: red;'>Data de emissão inválida</p>"; 
     }
 }
+
 
 ?>

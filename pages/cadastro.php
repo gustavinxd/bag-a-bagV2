@@ -122,7 +122,7 @@
     </div>
   </header><!-- End Header -->
 
-    <main class = "main-container">
+    <main class = "main-container mb-4">
       <h1>Cadastro</h1>
       <!-- ======= Cadastro ======= -->
       <form action ="../back/controller/controller_cadastro.php" method="post">
@@ -230,7 +230,7 @@
 
       <!-- ======= Footer ======= -->
       <footer id="footer">
-    <div class="footer-top">
+    <div class="footer-top" style="margin-top: 4em;">
       <div class="container">
         <div class="row">
 
