@@ -619,7 +619,7 @@ section {
 }
 
 .about{
-  background: red;
+  background: #d2d2d2;
 }
 
 @media (max-width: 991px) {
