@@ -310,6 +310,7 @@ h6 {
 
 .navbar-mobile a,
 .navbar-mobile a:focus {
+
   padding: 10px 20px;
   font-size: 15px;
   color: #2a2a2a;
@@ -619,7 +620,7 @@ section {
 }
 
 .about{
-  background: #d2d2d2;
+  background: #fff;
 }
 
 @media (max-width: 991px) {
@@ -690,7 +691,7 @@ section {
 }
 
 .counts{
-  background: #d2d2d2;
+  background: #fff;
 }
 
 
@@ -732,6 +733,7 @@ section {
   padding: 50px 30px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   transition: all ease-in-out 0.3s;
+  border: 1px solid rgb(197, 197, 197);
 }
 
 .why-us .box span {
@@ -750,7 +752,7 @@ section {
 }
 
 .why-us .box p {
-  color: #fff;
+  color: #000;
   font-size: 15px;
   margin: 0;
   padding: 0;
@@ -760,6 +762,8 @@ section {
   background: #5c9f24;
   padding: 30px 30px 70px 30px;
   box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
+  border: 1px solid green;
+
 }
 
 .why-us .box:hover span,
@@ -806,7 +810,8 @@ section {
 
 
 .why-us{
-  background: #d2d2d2;
+  background: #fff;
+
 }
 
 
@@ -822,6 +827,7 @@ section {
   border-radius: 8px;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgb(197, 197, 197);
 }
 
 .pricing .box h3 {
@@ -1062,7 +1068,7 @@ section {
 }
 
 .contact{
-  background: #d2d2d2;
+  background: #fff;
 }
 
 /*--------------------------------------------------------------
