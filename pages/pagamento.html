@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ - Login</title>
+  <title>Pagamento</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/airplane_favicon.png" rel="icon">
+  <link href="../assets/img/favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -31,8 +31,7 @@
   <link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- CSS Bag-a-Bag -->
-  <link rel="stylesheet" href="../assets/css/login/login.css">
-
+  <link rel="stylesheet" href="../assets/css/pagamento/pagamento.css">
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -68,7 +67,7 @@
             </ul> -->
           </li>
           <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="./cadastro.html">CADASTRE-SE</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,43 +76,112 @@
   </header><!-- End Header -->
 
     <main class="container">
-
-        <div class="row">
-            <div id="caixa-form" class="col-8 offset-2 shadow">
-              
-                  <form class="" action="" method="">
-                    <h4 class="text-center mb-3" style="color: #5C9F24">Login</h5>
-
-                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
-                    <div id="caixa-text" class=" mb-5">
-                      <input type="email" class="inputs col-12" id="email" required>
+        <form action="" method="post">
+            <div class="row">
+                <h3 class="h-faturamento">Detalhes do faturamento</h3>
+                <div id="caixa-detalhes" class="col-8 offset-2 shadow">
+                <div class="row">
+                    <div class="half-box">
+                        <div class="col">
+                        <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
+                        <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+                      </div>
                     </div>
-                    <!-- <p id="" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</p> -->
-
-                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Senha</label>
-                    <div id="caixa-text" class="mb-3">
-                      <input type="password" class="inputs col-xl-11 col-lg-11 col-md-11 col-lg-11 col-xs-11" id="senha" required>
-                      <span class="input-group-btn col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                        <button class="btn" class="" onclick="showpass()" type="button" id="imgeye"><i class="bi bi-eye"></i></button>
-                      </span>
+                    <div class = "half-box">
+                        <label for = "lastname" class="required" style = "color: #5c9f24">Sobrenome</label>
+                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <br>
                     </div>
-
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="check">
-                      <label class="form-check-label form-tex mb-3" for="check">Lembre de mim</label>
+                </div>
+                <div class="row">
+                      <div class = "half-box">
+                      <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
+                      <input type = "text" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
                     </div>
-
-                    <div class="row offset-4 col-4 align-items-center">
-                      <button type="submit" id="" style="min-width: 80px;"class="btn btn-outline-success">Login</button>
+                    <div class = "half-box">
+                      <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
+                      <input type = "text" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <br>
                     </div>
-                  </form>
+                </div>
+                  <div class="row">
+                      <div class = "half-box">
+                          <label for = "email" class="required" style = "color: #5c9f24">E-mail</label>
+                          <input type = "email" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                        </div>
+                        <div class = "half-box">
+                        <label for = "tel" class="required" style = "color: #5c9f24">Telefone</label>
+                        <input type = "tel" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black">
+                    </div>
+                    <a href="" class="btn-get-started animate__animated animate__fadeInUp scrollto">Enviar </a>
+
+                </div>
             </div>
-    
-        </div>
+         </div>
+     </form>
+
+        
+        <form action="" method="post">
+          <div class="row">
+            <h3 class="h-forma">Formas de pagamento</h3>
+            <div id="caixa-pagamento" class="col-8 offset-2 shadow">
+                <input type="radio" value=""> Cartão de crédito 
+                <br>
+                <br>
+                <div class="row">
+                    <div class="half-box">
+                      <div class="col">
+                        <label for = "name" class="required" style = "color: #5c9f24">Nome impresso no cartão</label>
+                        <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+
+                      </div>
+                    </div>
+
+                    <div class = "half-box">
+                        <label for = "lastname" class="required" style = "color: #5c9f24">Número do cartão</label>
+                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <br>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class = "half-box">
+                      <label for = "cpf" class="required" style = "color: #5c9f24" >Bandeira do cartão</label>
+                      <input type = "text" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
+                    </div>
+
+                    <div class = "half-box">
+                      <label for = "rg" class="required" style = "color: #5c9f24">Validade</label>
+                      <input type = "text" name = "rg" id = "rg" placeholder="MM/AA" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <br>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                      <div class = "half-box">
+                        <label for = "email" class="required" style = "color: #5c9f24">Código de segurança</label>
+                        <input type = "email" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                      </div>
+                    </div>
+
+                    <br>
+                    <hr class="linha">
+                    <input type="radio" value=""> Pagar com pix 
+                    <hr class="linha">
+                    <input type="radio" value=""> Boleto 
+                    <i class="bi bi-upc-scan"></i>
+                    <br>
+                    <a href="" class="btn-get-started2 animate__animated animate__fadeInUp scrollto">Enviar pagamento</a>
+                    
+                  </div>
+          </div>
+                
+        </form>
+
         
     </main>  
 
-  <!-- ======= Footer ======= -->
+    <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -141,11 +209,11 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Contato</a></li>
             </ul>
           </div>
 
@@ -153,7 +221,7 @@
             <h4>Conta</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Cadastre-se</a></li>
               <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
@@ -186,7 +254,6 @@
     </div>
   </footer><!-- End Footer -->
 
-
     <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -197,5 +264,4 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/login.js"></script>
 </body>

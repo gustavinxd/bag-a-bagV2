@@ -43,7 +43,7 @@ body {
   
   html,
 body {
-  background-color: #D6EAF8;
+  background-color: #FFF;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -444,89 +444,49 @@ svg {
   }
 
   /*--------------------------------------------------------------
-  # cadastro
+  # alteracoes
   --------------------------------------------------------------*/
-input, label .main-container{
-    display: block;
-    border-color: #5c9f24;
-    color:#5c9f24;
-}
-
-label .main-container{
-    color:#5c9f24;
-}
-
-.main-container{
-    border: solid black 1px;
-    background-color: #FFF; 
-    margin-bottom: 10%;
-    padding: 4%;
-    font-family: 'Poppins', sans-serif; 
-    width: 900px;
+.main-alteracoes {
+    width: 70%;
     margin: auto;
-    z-index: 100;
-    border-radius: 10px;
-    margin-top: 10%;
-}
-h1{
-  text-align:center;
-  margin-top: -5%;
-  margin-bottom: 5%;
-}
-.required:after {
-  content: "*"; 
-  color: red;
 }
 
-@media screen and (max-width: 1034px){
-  .main-container{
-    width: 70%;
-    margin-top: 30%;
-    margin-bottom: 30%;
-  }
+#nomepng{
+    margin: auto;
+    width: 50px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
-@media screen and (max-width: 768px){
-  .main-container{
-    width: 70%;
-    margin-top: 30%;
-    margin-bottom: 30%;
-  }
-  .row{
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-  .header{
-    position: absolute;
-  }
+h5{
+  text-align: center;
+  padding-bottom: 20px;
 }
-@media screen and (max-width: 320px){
-  .main-container{
-    width: 70%;
-    margin-bottom: 30%;
-    margin-top:30%;
-  }
-  .row{
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-  #ultname{
-    width: 210px;
+
+.main-alteracoes card h-100{
+    border-color: #5c9f24 2px;
+}
+
+@media screen and (min-width: 320px) {
+    .main-alteracoes {
+      margin-top: 20%;
+      margin-bottom: 10%;
   }
 }
 
-.half-box{
-    flex: 1 1 45%;
-    position: relative;
-    margin: 2%;
-}
-.full-box{
-    flex: 1 1 100%;
-    position: relative;
-    text-align: center;
-    margin-top: 5%;
+@media screen and (min-width: 768px) {
+    .main-alteracoes {
+        margin-top: 15%;
+        margin-bottom: 10%;
+  }
 }
 
+@media screen and (min-width: 1024px) {
+    .main-alteracoes {
+        margin-top: 10%;
+        margin-bottom: 10%;
+  }
+}
   /*--------------------------------------------------------------
   # Footer
   --------------------------------------------------------------*/
