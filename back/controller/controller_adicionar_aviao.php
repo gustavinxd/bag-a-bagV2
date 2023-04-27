@@ -13,31 +13,17 @@ if (mysqli_insert_id($conn)) {
     $id_aviao = mysqli_insert_id($conn);
 
     // adiciona 50 assentos de primeira classe do aviao
-    $query_assentos_primeira_classe = "INSERT INTO assentos_codaviao (NUMERO_ASSENTO, CLASSE, FK_AVIAO)
-    SELECT 
-        LPAD(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)), 3, '0') AS NUMERO_ASSENTO,
-        'Primeira' AS CLASSE,
-        $id_aviao AS FK_AVIAO
-    FROM
-        information_schema.tables t1
-        CROSS JOIN information_schema.tables t2
-    LIMIT 50";
-    
-    $consulta = mysqli_query($conn, $query_assentos_primeira_classe);
+    for ($i=1; $i <= 50; $i++) {
+        $query_assentos_primeira_classe = "INSERT INTO assentos_codaviao (ID_ASSENTO_CODAVIAO, NUMERO_ASSENTO, CLASSE, FK_AVIAO) VALUES (($i+(200*($id_aviao-1))), $i, 'Primeira', '$id_aviao')";
+        $consulta = mysqli_query($conn, $query_assentos_primeira_classe);
+    }
 
     // adiciona 150 assentos de classe economica do aviao
-    $query_assentos_classe_economica = "INSERT INTO assentos_codaviao (NUMERO_ASSENTO, CLASSE, FK_AVIAO)
-    SELECT 
-        LPAD((ROW_NUMBER() OVER (ORDER BY (SELECT NULL))) + 50, 3, '0') AS NUMERO_ASSENTO,
-        'Econômica' AS CLASSE,
-        $id_aviao AS FK_AVIAO
-    FROM
-        information_schema.tables t1
-        CROSS JOIN information_schema.tables t2
-    LIMIT 150";
-    
-    $consulta = mysqli_query($conn, $query_assentos_classe_economica);
-    
+    for ($i=51; $i <= 200; $i++) {
+        $query_assentos_primeira_classe = "INSERT INTO assentos_codaviao (ID_ASSENTO_CODAVIAO, NUMERO_ASSENTO, CLASSE, FK_AVIAO) VALUES (($i+(200*($id_aviao-1))), $i, 'Econômica', '$id_aviao')";
+        $consulta = mysqli_query($conn, $query_assentos_primeira_classe);
+    }
+
 }
 else {
     $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível inserir o avião ao banco de dados. Tente novamente</p>";
