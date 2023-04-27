@@ -20,6 +20,11 @@
     margin-top: 4%;
     margin-left: 16%;
   }
+
+  /* imagem codigo de barra boleto */
+  #boleto{
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -69,6 +74,7 @@
     margin-left: 210px;
     margin-top: 3%;
   }
+
 }
 
 
@@ -102,6 +108,13 @@
 #termoConteudo2 {
   display:none;
 }
+/* imagem do qrCode */
+#pix{
+  margin-top: 1%;
+  margin: auto;
+  display: flex;
+}
+
 
 /* radio boleto */
 #termos3:checked ~ #termoConteudo3{
@@ -109,4 +122,10 @@
 }
 #termoConteudo3 {
   display:none;
+}
+/* imagem codigo do boleto */
+#boleto{
+  margin-top: 1%;
+  margin: auto;
+  display: flex;
 }
