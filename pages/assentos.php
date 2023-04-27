@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include_once('../back/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -91,17 +96,35 @@
     <!-- ===== Div Master ===== -->
     <div class="container" style="border: solid 1px black"> 
       <h3 class="text-center">Assentos</h3>
+
+    <?php 
+    $comando = 
+    "SELECT NUMERO_ASSENTO FROM assentos_codaviao
+    INNER JOIN aviao_codaviao ON ID_CODAVIAO = assentos_codaviao.FK_AVIAO
+    INNER JOIN voo ON ID_VOO = voo.FK_AVIAO WHERE ID_VOO = '1'
+     ";
+    $query = mysqli_query($conn,$comando);
+    $row_resultado = mysqli_fetch_assoc($query);
+
+    // for ($x = 0; $x < $row_resultado; $x++){
+    //   echo $x;
+    // }
+    
+
+    ?>
+
+
       <!-- ===== Linha 01 ===== -->
       <hr class="m-1">
       <div class="row">
         <!-- ======== Lado Esquerdo ======= -->
         <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
           <!-- === Botao === -->
-          <button type="button" class="btn" value="30">
-            <img src="../assets/img/poltrona_verde-sembg.png"  data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
+          <button type="button" class="btn">
+            <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
           </button>
           <!-- === Botao === -->
-          <button type="button" class="btn">
+          <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
             <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
         </div> <!-- === Fim Lado Esquerdo === -->
