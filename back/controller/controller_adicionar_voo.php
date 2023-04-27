@@ -21,15 +21,22 @@ $fk_aeroporto_escala = filter_input(INPUT_POST, 'fk_aeroporto_escala', FILTER_SA
 $horario_chegada_escala = filter_input(INPUT_POST, 'horario_chegada_escala');
 $tempo_escala = filter_input(INPUT_POST, 'tempo_escala');
 
+// Verifica se escolheu escala
+if(!empty($fk_aeroporto_escala)){
+	
+	$query = "INSERT INTO escala (HORARIO_CHEGADA_ESCALA, TEMPO_ESCALA, FK_AEROPORTO_ESCALA) VALUES ('$horario_chegada_escala', '$tempo_escala', '$fk_aeroporto_escala')";
+	mysqli_query($conn, $query);
+}
 // INSERIR DADOS NA TABELA DE ESCALA
-$query = "INSERT INTO escala (HORARIO_CHEGADA_ESCALA, TEMPO_ESCALA, FK_AEROPORTO_ESCALA) VALUES ('$horario_chegada_escala', '$tempo_escala', '$fk_aeroporto_escala')";
-mysqli_query($conn, $query);
 
 if (mysqli_insert_id($conn)) {
 	$fk_escala = mysqli_insert_id($conn);
+}else {
+	$fk_escala = "NULL";
+}
 
 	// INSERIR DADOS NA TABELA DE VOOS
-	$query = "INSERT INTO voo (HORARIO_PARTIDA, HORARIO_CHEGADA, VALOR_PASSAGEM, CRIADO, FK_ORIGEM_AERO, FK_DESTINO_AERO, FK_AVIAO, FK_ESCALA) VALUES ('$horario_partida', '$horario_chegada', '$valor_passagem', NOW(), '$fk_origem_aero', '$fk_destino_aero', '$fk_aviao', '$fk_escala')";
+	$query = "INSERT INTO voo (HORARIO_PARTIDA, HORARIO_CHEGADA, VALOR_PASSAGEM, CRIADO, FK_ORIGEM_AERO, FK_DESTINO_AERO, FK_AVIAO, FK_ESCALA) VALUES ('$horario_partida', '$horario_chegada', '$valor_passagem', NOW(), '$fk_origem_aero', '$fk_destino_aero', '$fk_aviao', $fk_escala)";
 	mysqli_query($conn, $query);
 
 	if (mysqli_insert_id($conn)) {
@@ -37,9 +44,9 @@ if (mysqli_insert_id($conn)) {
 	} else {
 		echo "não criou voo";
 	}
-}
-else {
-	echo "Não criou escala nem voo";
-}
+// }
+// else {
+// 	echo "Não criou escala nem voo";
+// }
 
 ?>
