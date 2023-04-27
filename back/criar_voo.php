@@ -205,7 +205,7 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
         <!-- ESCOLHA DE ESCALA -->
         <hr>
         <div>
-            <h3>Escala</h3>
+            <h2>Escala</h2>
             <select name="fk_aeroporto_escala" style="display: none">
                 <option value="">--</option>
                 <?php
@@ -251,7 +251,10 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
             <input type="time" name="tempo_escala" step="1">
         </div>
 
+        <br>
+
         <!-- DEFINIR VALOR DAS PASSAGENS PARA ADULTOS -->
+        <hr>
         <div>
             <h3>Valor da Passagem</h3>
             <input type="text" name="valor_passagem" id="valor_passagem" oninput="formatarValor()">
