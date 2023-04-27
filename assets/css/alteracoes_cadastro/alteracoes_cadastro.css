@@ -500,6 +500,18 @@ svg {
     margin-top: 15%;
     margin-bottom: -5%;
   }
+  h5{
+    font-size: 30px;
+    font-family: "Roboto";
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #5c9f24;
+    padding: 25px;
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: -5%;
+  }
 
   .required:after {
     content: " Busca Automática"; 
@@ -567,9 +579,17 @@ svg {
     flex: 1 1 100%;
     position: relative;
     margin-top: -6%;
-    text-align: center;
+    text-align: ;
   }
-
+  .border{
+    padding: 30px;
+    border-color: #5c9f24;
+    width: 50%;
+    margin: auto;
+    margin-top:10%;
+    margin-bottom: -5%;
+    border-width: medium;
+  }
   /*--------------------------------------------------------------
   # Footer
   --------------------------------------------------------------*/
