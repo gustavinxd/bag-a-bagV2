@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include_once('../back/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -76,33 +81,59 @@
     </div>
   </header><!-- End Header -->
     
-  <main class="text-center"> <!-- ======== Início Main ========= -->
-    <br><br><br>
-    <br><br><br>
+  <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
+    
+    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; ">
+      <div class="collapse collapse-horizontal" id="collapseWidthExample">
+        <div class="card card-body" style="width: 300px;">
+          <h6>Assento 01</h6>
+          <br>
+          <p>Valor: R$49,00</p>
+        </div>
+      </div>
+    </div>
 
     <!-- ===== Div Master ===== -->
-    <div class="container" style="border: solid 1px blue"> 
-      <hr class="m-1">
-      <!-- ===== Linha 01 ===== -->
-      <div class="row offset-3">
+    <div class="container" style="border: solid 1px black"> 
+      <h3 class="text-center">Assentos</h3>
 
+    <?php 
+    $comando = 
+    "SELECT NUMERO_ASSENTO FROM assentos_codaviao
+    INNER JOIN aviao_codaviao ON ID_CODAVIAO = assentos_codaviao.FK_AVIAO
+    INNER JOIN voo ON ID_VOO = voo.FK_AVIAO WHERE ID_VOO = '1'
+     ";
+    $query = mysqli_query($conn,$comando);
+    $row_resultado = mysqli_fetch_assoc($query);
+
+    // for ($x = 0; $x < $row_resultado; $x++){
+    //   echo $x;
+    // }
+    
+
+    ?>
+
+
+      <!-- ===== Linha 01 ===== -->
+      <hr class="m-1">
+      <div class="row">
         <!-- ======== Lado Esquerdo ======= -->
-        <div class="col-3" style="border: solid 1px red">
+        <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
           <!-- === Botao === -->
           <button type="button" class="btn">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+            <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
           </button>
           <!-- === Botao === -->
-          <button type="button" class="btn">
+          <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
             <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
         </div> <!-- === Fim Lado Esquerdo === -->
-        1
+        
         <!-- ======== Lado Direito ======= -->
-        <div class="col-3" style="border: solid 1px red">
+        <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
           <!-- === Botao === -->
           <button type="button" class="btn">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
           <!-- === Botao === -->
           <button type="button" class="btn">
@@ -113,68 +144,7 @@
         
       </div> <!-- ==== Fim Linha 01 ==== -->
       <hr class="m-1">
-      <!-- ===== Linha 02 ===== -->
-      <div class="row offset-3">
-
-        <!-- ======== Lado Esquerdo ======= -->
-        <div class="col-3" style="border: solid 1px red">
-          <!-- === Botao === -->
-          <button type="button" class="btn ">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-        </div> <!-- === Fim Lado Esquerdo === -->
-        2
-        <!-- ======== Lado Direito ======= -->
-        <div class="col-3" style="border: solid 1px red">
-          <!-- === Botao === -->
-          <button type="button" class="btn ">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-       
-        </div> <!-- === Fim Lado Direito ===-->
-        
-      </div> <!-- ==== Fim Linha 02 ==== -->
-      <hr class="m-1">
-      <!-- ===== Linha 03 ===== -->
-      <div class="row offset-3">
-        
-
-        <!-- ======== Lado Esquerdo ======= -->
-        <div class="col-3" style="border: solid 1px red">
-          <!-- === Botao === -->
-          <button type="button" class="btn ">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-        </div> <!-- === Fim Lado Esquerdo === -->
-        3
-        <!-- ======== Lado Direito ======= -->
-        <div class="col-3" style="border: solid 1px red">
-          <!-- === Botao === -->
-          <button type="button" class="btn ">
-            <img src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-       
-        </div> <!-- === Fim Lado Direito ===-->
       
-      </div> <!-- ==== Fim Linha 03 ==== -->
-
-      <hr class="m-1">
       
     </div> <!-- ===== Fim Div Master ===== -->
 
