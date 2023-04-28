@@ -469,6 +469,8 @@ svg {
     border-style:groove;
     border-color: #5c9f24;
     padding: 2%;
+    box-shadow: 5px -5px rgb(163, 197, 171);
+
   }
   .main-alteracoes-endereco{
     width: 580px;
@@ -479,6 +481,7 @@ svg {
     border-style:groove;
     border-color: #5c9f24;
     padding: 2%;
+    box-shadow: 5px -5px rgb(163, 197, 171);
 
   }
 
@@ -511,38 +514,59 @@ svg {
     margin: auto;
     margin-top: 10%;
     margin-bottom: -5%;
+    box-shadow: 15px -10px rgb(163, 197, 171);
   }
-
-  .required:after {
-    content: " Busca Automática"; 
+  #cadastrar{
+    margin-top: 15%;
+    align-items: end;
+  }
+  .main-alteracoes-endereco .required:after {
+    content: "  Busca Automática"; 
     font-size: 10px;
     color: red;
   }
-  @media screen and (min-width: 320px) {
+  .main-alteracoes-dados .required:after {
+    content: "  Campo inalterável"; 
+    font-size: 10px;
+    color: red;
+  }
+  @media screen and (max-width: 320px) {
+      .main-alteracoes h5{
+        margin-bottom: 20%;
+        font-size: 20px;
+        width: 80%;
+    }
       .main-alteracoes {
         margin-top: 20%;
         margin-bottom: 10%;
     }
-  }
-  
-  @media screen and (min-width: 320px) {
-    .main-alteracoes-endereco {
-      margin-top: 10%;
-      margin-bottom: 10%;
+      .row{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    } 
+      .main-alteracoes-dados {
+        margin-top: 10%;
+        margin-bottom: 10%;
+        height: 830px;
+    }
+      .main-alteracoes-endereco {
+        margin-top: 10%;
+        margin-bottom: 10%;
     }
   }
   
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 768px) {
+      .main-alteracoes h5{
+        margin-top: 15%;
+        margin-bottom: 8%;
+      }
       .main-alteracoes {
           margin-top: 15%;
           margin-bottom: 10%;
     }
-  }
-  
-  @media screen and (min-width: 768px) {
-    .main-alteracoes-endereco {
-      margin-top: 10%;
-      margin-bottom: 10%;
+      .main-alteracoes-endereco {
+        margin-top: 10%;
+        margin-bottom: 10%;
     }
   }
   
@@ -551,6 +575,19 @@ svg {
           margin-top: 5%;
           margin-bottom: 10%;
     }
+      .main-alteracoes h5{
+        margin-top: 15%;
+        margin-bottom: 0;
+        font-size: 30px;
+        width: 80%;
+    }
+      .main-alteracoes-dados {
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+      .main-alteracoes #cadastrar{
+        margin-bottom: 20%;
+      }
   }
   
   form{
@@ -569,17 +606,9 @@ svg {
     margin-bottom: 7%;
     margin-top: 2%;
   }
-  .main-alteracoes-endereco .half-box diff{
-    flex: 1 1 45%;
-    position: relative;
-    margin: auto;
-  }
-
-  .full-box{
-    flex: 1 1 100%;
-    position: relative;
-    margin-top: -6%;
-    text-align: ;
+  .botao{
+    text-align: center;
+    margin-top: 15%;
   }
   .border{
     padding: 30px;

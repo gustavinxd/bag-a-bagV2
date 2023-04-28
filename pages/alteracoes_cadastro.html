@@ -153,13 +153,13 @@
               <div class="half-box">
                 <div class="col">
   <!-- Informações como nome, CPF, RG e Data de nascimento estará como disabled, precisará colocar o comando para a informação colocada em cadastro já aparecer nesses campos desabilitados -->
-                  <label for = "name"  style = "color: #5c9f24">Nome</label>
-                  <input type = "name" class="form-control" style = "background-color: #d8d8d8; border-color: black" name = "name" id = "name" disabled>
+                  <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
+                  <input type = "name" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "name" id = "name" disabled>
                 </div>
               </div>
               <div class = "half-box">
                 <div class = "col">
-                  <label for = "lastname"  style = "color: #5c9f24">Segundo nome</label>
+                  <label for = "lastname"  style = "color: #5c9f24">Nome do meio</label>
                   <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
                 </div>
               </div>
@@ -172,11 +172,11 @@
             </div>
             <div class="row">
               <div class = "half-box">
-                <label for = "cpf"  style = "color: #5c9f24" >CPF</label>
+                <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
                 <input type = "number" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "cpf" id = "cpf" disabled>
               </div>
               <div class = "half-box">
-                <label for = "rg"  style = "color: #5c9f24">RG</label>
+                <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
                 <input type = "rg" name = "rg" id = "rg" class="form-control required" style = "background-color: #d8d8d8; border-color: black">
               </div>
             </div>
@@ -186,7 +186,7 @@
                 <input type = "date" name = "dataexpedicao" id = "dataexpedicao" class="form-control" style = "background-color: #FFF; border-color: black">
               </div>
               <div class = "half-box">
-                  <label for = "date" style = "color: #5c9f24">Data de Nascimento</label>
+                  <label for = "date" class="required" style = "color: #5c9f24">Data de Nascimento</label>
                   <input type = "date" name = "datanascimento" id = "datanascimento" class="form-control" style = "background-color: #d8d8d8; border-color: black" disabled>
               </div>
             </div>
@@ -246,7 +246,7 @@
           </div>
         </div>
        </div>
-      <div class="full-box">
+      <div class="botao">
         <button type="button" id = "cadastrar" class="btn btn-success" a href="#">Salvar</button>
       </div>
       </form>
