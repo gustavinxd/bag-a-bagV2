@@ -1,3 +1,37 @@
+<?php
+  session_start();
+  include_once('../back/conexao.php');
+
+  $id = $_SESSION['id_usuario'];
+
+  $query = "SELECT * FROM usuario 
+    INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+    INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+    WHERE ID_USUARIO='$id'";
+    $query = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($query);
+    
+    if(empty($row)) {
+      header('Location: ../index.html');
+    }
+  
+ //pegando o valor total do pagamento vindo da tabela reserva
+  // $valorTotal = $pagamento['valor'];
+  $valorTotal = 3058.81;
+
+  
+  $parcelas = array();
+
+//Faz a divisão do valor total de 1 a 12 e armazena em um array para apresenta-lo posteriormente
+for ($i = 1; $i <= 12; $i++) {
+  $valorParcela = $valorTotal / $i; //Calcula o valor de cada parcela
+  $valorParcela = ceil($valorParcela * 100) / 100; // arredonda para cima com duas casas decimais
+  $valorParcelaFormatado = number_format($valorParcela, 2, ',', '.'); // formata o valor com duas casas decimais
+  array_push($parcelas, $valorParcelaFormatado); //Armazena a parcela no array de parcelas
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -123,12 +157,12 @@
      </form>
 
         
-        <form action="" method="post">
+        <form action="../back/controller/controller_verificar_pagamento.php" method="post">
           <div class="row">
             <h3 class="h-forma">Formas de pagamento</h3>
             <div id="caixa-pagamento" class="col-8 offset-2 shadow">
 
-                <input type="radio" id="termos" name="pagamento"  value=""> <label for="">Cartão de crédito</label> 
+                <input type="radio" id="termos" name="pagamento"  value="credito"> <label for="">Cartão de crédito</label> 
                 <div id="termoConteudo">
 
                   <div class="row">
@@ -142,7 +176,7 @@
 
                     <div class = "half-box">
                         <label for = "lastname" class="required" style = "color: #5c9f24">Número do cartão</label>
-                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <input type = "lastname" name="numeroCartao" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome" maxlength="19">
                         <br>
                       </div>
                     </div>
@@ -155,7 +189,7 @@
 
                     <div class = "half-box">
                       <label for = "rg" class="required" style = "color: #5c9f24">Validade</label>
-                      <input type = "text" name = "rg" id = "rg" placeholder="MM/AA" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <input type = "text" name = "dataValidade" id = "rg" placeholder="MM/AAAA" class="form-control required" style = "background-color: #FFF; border-color: black" maxlength="7">
                       <br>
                     </div>
                   </div>
@@ -163,22 +197,33 @@
                   <div class="row">
                       <div class = "half-box">
                         <label for = "email" class="required" style = "color: #5c9f24">Código de segurança</label>
-                        <input type = "email" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                        <input type = "text" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000" maxlength="4">
                       </div>
+
+                      <div class = "half-box">
+                      <label for = "parcelas" class="required" style = "color: #5c9f24">Parcelas</label>
+                      <select name="parcelas" id="parcelas" class="form-control required" style = "background-color: #FFF; border-color: black">
+                        <?php foreach ($parcelas as $key => $valorParcela): ?>  <!-- estrutura de repetição -->
+                        <option value="<?php echo $key+1; ?>"><?php echo ($key+1).'x de R$ '.$valorParcela; ?></option>  <!-- Número de parcelas, e seu respectivo valor -->
+                        <?php endforeach; ?> <!-- Fim da estrutura de repetição -->
+                      </select>
+                      
+                      <br>
                     </div>
+                  </div>
                     
                 </div>
 
                     <br>
                     <hr class="linha">
-                    <input type="radio" id="termos2" name="pagamento" value=""> <label for=""> Pagar com pix </label> 
+                    <input type="radio" id="termos2" name="pagamento" value="pix"> <label for=""> Pagar com pix </label> 
                     <div id="termoConteudo2">           
                       <img src="/assets/img/pagamento/qrcode.png" id="pix" alt="" srcset="">    
                       <!-- valor total da passagem -->
 
                     </div>
                     <hr class="linha">
-                    <input type="radio" id="termos3" name="pagamento" value=""> <label for=""> Boleto </label> 
+                    <input type="radio" id="termos3" name="pagamento" value="boleto"> <label for=""> Boleto </label> 
                     <i class="bi bi-upc-scan"></i>
                     <div  id="termoConteudo3">
                       <img src="/assets/img/pagamento/codigo.jpg" id="boleto" alt="" srcset="">
