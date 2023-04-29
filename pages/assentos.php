@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include_once('../back/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,7 +10,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ - Login</title>
+  <title>Bag-a-Bagₑ - Assentos</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,7 +36,7 @@
   <link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- CSS Bag-a-Bag -->
-  <link rel="stylesheet" href="../assets/css/login/login.css">
+  <link rel="stylesheet" href="../assets/css/assentos/assentos.css">
 
 
   <!-- =======================================================
@@ -75,44 +80,90 @@
 
     </div>
   </header><!-- End Header -->
-
-    <main class="container">
-
-        <div class="row">
-            <div id="caixa-form" class="col-8 offset-2 shadow">
-              
-                  <form class="" action="../back/controller/controller_login.php" method="post">
-                    <h4 class="text-center mb-3" style="color: #5C9F24">Login</h5>
-
-                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Endereço de Email</label>
-                    <div id="caixa-text" class=" mb-5">
-                      <input type="email" name="email" class="inputs col-12" id="email" required>
-                    </div>
-                    <!-- <p id="" class="form-text">Nunca pedimos ou compartilhamos seu e-mail com terceiros.</p> -->
-
-                    <label for="caixa-text" style="color: #5C9F24;" class="form-label">Senha</label>
-                    <div id="caixa-text" class="mb-3">
-                      <input type="password" name="senha" class="inputs col-xl-11 col-lg-11 col-md-11 col-lg-11 col-xs-11" id="senha" required>
-                      <span class="input-group-btn col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                        <button class="btn" class="" onclick="showpass()" type="button" id="imgeye"><i class="bi bi-eye"></i></button>
-                      </span>
-                    </div>
-
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="check">
-                      <label class="form-check-label form-tex mb-3" for="check">Lembre de mim</label>
-                    </div>
-
-                    <div class="row offset-4 col-4 align-items-center">
-                      <button type="submit" id="btn-submit" style="min-width: 80px;"class="btn btn-primary">Login</button>
-                    </div>
-                    
-                  </form>
-            </div>
     
+  <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
+    
+    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; ">
+      <div class="collapse collapse-horizontal" id="collapseWidthExample">
+        <div class="card card-body" style="width: 300px;">
+          <h6>Assento 01</h6>
+          <br>
+          <p>Valor: R$49,00</p>
         </div>
+      </div>
+    </div>
+
+    <!-- ===== Div Master ===== -->
+    <div class="container" style="border: solid 1px black"> 
+      <h3 class="text-center">Assentos Primeira Classe</h3>
+
+    <?php 
+    $comando = 
+    "SELECT NUMERO_ASSENTO FROM assentos_codaviao
+    INNER JOIN aviao_codaviao ON aviao_codaviao.ID_CODAVIAO = assentos_codaviao.FK_AVIAO
+    INNER JOIN voo ON  voo.FK_AVIAO = aviao_codaviao.ID_CODAVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
+     ";
+    $query = mysqli_query($conn,$comando);
+    $row_resultado = mysqli_fetch_all($query);
+    // print_r($row_resultado);
+
+    
+    for ($x = 0; $x < count($row_resultado); $x=$x+4){
+      for ($y = 0; $y < count($row_resultado); $y++){
+        ?>
+        <!-- ===== Linha ===== -->
+        <hr class="m-1">
+        <div class="row">
+          <!-- ======== Lado Esquerdo ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+          </div> <!-- === Fim Lado Esquerdo === -->
+          <?php
+          echo $y;
+          ?>
+          
+          <!-- ======== Lado Direito ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+         
+          </div> <!-- === Fim Lado Direito ===-->
+          
+        </div> <!-- ==== Fim Linha 01 ==== -->
+        <?php
+      }
+    }
+      ?>
+      
+      
+    
+
+    
+
+
+      <hr class="m-1">
+      
+      
+    </div> <!-- ===== Fim Div Master ===== -->
+
+    <br><br><br>
+    <br><br><br>
+      
         
-    </main>  
+  </main> <!-- ======= End Main ======= -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
