@@ -95,54 +95,65 @@ include_once('../back/conexao.php');
 
     <!-- ===== Div Master ===== -->
     <div class="container" style="border: solid 1px black"> 
-      <h3 class="text-center">Assentos</h3>
+      <h3 class="text-center">Assentos Primeira Classe</h3>
 
     <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos_codaviao
-    INNER JOIN aviao_codaviao ON ID_CODAVIAO = assentos_codaviao.FK_AVIAO
-    INNER JOIN voo ON ID_VOO = voo.FK_AVIAO WHERE ID_VOO = '1'
+    INNER JOIN aviao_codaviao ON aviao_codaviao.ID_CODAVIAO = assentos_codaviao.FK_AVIAO
+    INNER JOIN voo ON  voo.FK_AVIAO = aviao_codaviao.ID_CODAVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
      ";
     $query = mysqli_query($conn,$comando);
-    $row_resultado = mysqli_fetch_assoc($query);
+    $row_resultado = mysqli_fetch_all($query);
+    // print_r($row_resultado);
 
-    // for ($x = 0; $x < $row_resultado; $x++){
-    //   echo $x;
-    // }
+    
+    for ($x = 0; $x < count($row_resultado); $x=$x+4){
+      for ($y = 0; $y < count($row_resultado); $y++){
+        ?>
+        <!-- ===== Linha ===== -->
+        <hr class="m-1">
+        <div class="row">
+          <!-- ======== Lado Esquerdo ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+          </div> <!-- === Fim Lado Esquerdo === -->
+          <?php
+          echo $y;
+          ?>
+          
+          <!-- ======== Lado Direito ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+         
+          </div> <!-- === Fim Lado Direito ===-->
+          
+        </div> <!-- ==== Fim Linha 01 ==== -->
+        <?php
+      }
+    }
+      ?>
+      
+      
     
 
-    ?>
+    
 
 
-      <!-- ===== Linha 01 ===== -->
-      <hr class="m-1">
-      <div class="row">
-        <!-- ======== Lado Esquerdo ======= -->
-        <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-        </div> <!-- === Fim Lado Esquerdo === -->
-        
-        <!-- ======== Lado Direito ======= -->
-        <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-       
-        </div> <!-- === Fim Lado Direito ===-->
-        
-      </div> <!-- ==== Fim Linha 01 ==== -->
       <hr class="m-1">
       
       
