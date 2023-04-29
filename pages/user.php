@@ -4,6 +4,8 @@
 
   $id = $_GET["id"];
 
+  $_SESSION['id_usuario'] = $id;
+  
   $query = "SELECT * FROM usuario 
     INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
     INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
