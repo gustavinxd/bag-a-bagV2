@@ -19,10 +19,10 @@
        
         
         <label>Código Cupom:</label>
-        <input type="text" id="cupom" name="cupom" placeholder="XXX000" maxlength="6" required>
+        <input type="text" id="cupom" name="codigo_cupom" placeholder="XXX000" maxlength="6" required>
 
         <label>Valor em Porcentagem:</label>
-        <input type="number" id="valor" name="valor" maxlength="3" placeholder="20" required>
+        <input type="number" id="valor" name="valor_desconto" maxlength="3" placeholder="20" required>
 
        
       
