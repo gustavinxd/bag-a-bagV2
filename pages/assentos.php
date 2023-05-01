@@ -99,62 +99,82 @@ include_once('../back/conexao.php');
 
     <?php 
     $comando = 
-    "SELECT NUMERO_ASSENTO FROM assentos_codaviao
-    INNER JOIN aviao_codaviao ON aviao_codaviao.ID_CODAVIAO = assentos_codaviao.FK_AVIAO
-    INNER JOIN voo ON  voo.FK_AVIAO = aviao_codaviao.ID_CODAVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
+    "SELECT NUMERO_ASSENTO FROM assentos
+    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO
+    INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
      ";
     $query = mysqli_query($conn,$comando);
     $row_resultado = mysqli_fetch_all($query);
-    // print_r($row_resultado);
 
-    
-    for ($x = 0; $x < count($row_resultado); $x=$x+4){
-      for ($y = 0; $y < count($row_resultado); $y++){
+    //Comandos para verificar o funcionamento do vetor
+    echo count($row_resultado);
+    // print_r($row_resultado[0]);
+    // print_r($row_resultado[0][0]);
+    // print_r(count($row_resultado));
+
+    //Listagem de Linhas
+    for ($x = 0; $x < (count($row_resultado)/4); $x++){ ?>
+      <!-- ===== Linha ===== -->
+      <hr class="m-1">
+      <div class="row">
+
+      <?php
+      //Listagem Primeira Poltrona do Lado Esquerdo
+      for ($y1 = 0; $y1 < count($row_resultado)/4; $y1++){
         ?>
-        <!-- ===== Linha ===== -->
-        <hr class="m-1">
-        <div class="row">
           <!-- ======== Lado Esquerdo ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
-            <!-- === Botao === -->
+            <!-- === Botao Poltrona 01 === -->
             <button type="button" class="btn">
               <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
             </button>
-            <!-- === Botao === -->
+        <?php
+      } //Fim da Listagem da Primeira Poltrona
+            
+      //Listagem Segunda Poltrona do Lado Esquerdo
+      for ($y2 = 0; $y2 < count($row_resultado)/4; $y2++){
+        ?>
+            <!-- === Botao Poltrona 02 === -->
             <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
           </div> <!-- === Fim Lado Esquerdo === -->
-          <?php
-          echo $y;
-          ?>
-          
+        <?php 
+      } //Fim da Listagem da Segunda Poltrona  
+      echo $x;
+      //Listagem da Terceira Poltrona do Lado Direito
+      for ($y3 = 0; $y3 < count($row_resultado)/4; $y3++){
+        ?>
           <!-- ======== Lado Direito ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
-            <!-- === Botao === -->
+            <!-- === Botao Poltrona 3=== -->
             <button type="button" class="btn">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
-            <!-- === Botao === -->
+        <?php 
+      }//Fim da Listagem da Terceira Poltrona
+
+      //Listagem da Quarta Poltrona do Lado Direito
+      for ($y4 = 0; $y4 < count($row_resultado)/4; $y4++){
+        ?>
+            <!-- === Botao Poltrona 04 === -->
             <button type="button" class="btn">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
          
           </div> <!-- === Fim Lado Direito ===-->
-          
-        </div> <!-- ==== Fim Linha 01 ==== -->
+        
         <?php
-      }
-    }
+      }//Fim da Listagem da Quarta Poltrona
+        ?>
+
+        </div> <!-- ==== Fim Linha 01 ==== -->
+
+      <?php
+    }//Fim da Listagem das Linhas
       ?>
-      
-      
-    
-
-    
-
-
       <hr class="m-1">
+
       
       
     </div> <!-- ===== Fim Div Master ===== -->
