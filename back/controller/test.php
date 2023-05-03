@@ -43,9 +43,6 @@ session_start();
         <label for="">numero</label>
         <input type="text" name="numero" id="" maxlength="9">
 
-        <label for="">tipo</label>
-        <input type="text" name="tipo" id="">
-
         <input type="submit" value="Enviar">
     </form>
 </body>
