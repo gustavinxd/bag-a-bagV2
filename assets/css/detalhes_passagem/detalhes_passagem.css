@@ -20,7 +20,7 @@
     
     .linha-1{
         margin-top: 0.7cm;
-        border: solid  #4f8f1a 2.5px;
+        border: solid  #3A5C1D 2.5px;
     }
 
     .div-1{
@@ -34,17 +34,17 @@
 
     .div-2{
         font-size: 10px;
-        margin-left: 2cm;
+        margin-left: 33%;
         margin-top: -1.2cm;
     }
 
     #seta2{
-        margin-left: 1.7cm;
+        margin-left: 30%;
     }
 
     .div-3{
         font-size: 10px;
-        margin-left: 4.7cm;
+        margin-left: 70%;
         margin-top: -0.8cm;
     }
 
@@ -60,40 +60,129 @@
 
     .div-5{
         font-size: 10px;
-        margin-left: 2cm;
+        margin-left: 33%;
         margin-top: -1.2cm;
     }
 
     #seta4{
-        margin-left: 1.7cm;
+        margin-left: 30%;
     }
 
     .div-6{
         font-size: 10px;
-        margin-left: 4cm;
+        margin-left: 70%;
         margin-top: -1.2cm;
     }
 
     .div-7{
         font-size: 10px;
-        margin-left: 2cm;
-        margin-top: 0.5cm;
+
     }
 
     .div-8{
-        font-size: 20px;
-        margin-left: 16cm;
-        margin-top: -0.9cm;
+        font-size: 10px;
+        margin-left: 70%;
+        margin-top: -6%;
     }
 
     .div-9{
         font-size: 10px;
-        margin-left: 2cm;
+
         margin-top: 0.5cm;
     }
 }
   
 @media screen and (min-width: 768px) {
+    /* caixa detalhes da passagem */
+    #caixa-detalhes {
+        margin-top: 10%;
+        border: solid #000 1px;
+      }  
+  
+      #icon{
+          width: 7%;
+          margin-left: 10%;
+      }
+  
+      .bag-a-bag{
+          margin-top: 10px;
+          font-size: 30px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          margin-left: 20%;
+      }
+      
+      .linha-1{
+          margin-top: 1cm;
+          border: solid  #3A5C1D 2.5px;
+      }
+  
+      .div-1{
+          margin-left: 1%;
+          font-size: 20px;
+      }
+  
+      #seta1{
+          margin-left: 26%;
+      }
+  
+      .div-2{
+          font-size: 20px;
+          margin-left: 33%;
+          margin-top: -2.4cm;
+      }
+  
+      #seta2{
+          margin-left: 30%;
+      }
+  
+      .div-3{
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -1.7cm;
+      }
+  
+      .div-4{
+          font-size: 20px;
+          margin-top: 4%;
+          margin-left: 1%;
+      }
+  
+      #seta3{
+          margin-left: 26%;
+      }
+  
+      .div-5{
+          font-size: 20px;
+          margin-left: 33%;
+          margin-top: -2.4cm;
+      }
+  
+      #seta4{
+          margin-left: 30%;
+      }
+  
+      .div-6{
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -2.4cm;
+      }
+  
+      .div-7{
+          font-size: 20px;
+
+      }
+  
+      .div-8{
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -6%;
+      }
+  
+      .div-9{
+          font-size: 20px;
+
+          margin-top: 0.5cm;
+      }
  
 }
   
@@ -118,11 +207,11 @@
     
     .linha-1{
         margin-top: 1cm;
-        border: solid  #4f8f1a 2.5px;
+        border: solid  #3A5C1D 2.5px;
     }
 
     .div-1{
-        margin-left: 2.5cm;
+        margin-left: 5%;
         font-size: 20px;
     }
 
@@ -132,7 +221,7 @@
 
     .div-2{
         font-size: 20px;
-        margin-left: 9.5cm;
+        margin-left: 40%;
         margin-top: -2.4cm;
     }
 
@@ -142,14 +231,14 @@
 
     .div-3{
         font-size: 20px;
-        margin-left: 17cm;
+        margin-left: 75%;
         margin-top: -1.7cm;
     }
 
     .div-4{
         font-size: 20px;
         margin-top: 2cm;
-        margin-left: 2.5cm;
+        margin-left: 5%;
     }
 
     #seta3{
@@ -158,7 +247,7 @@
 
     .div-5{
         font-size: 20px;
-        margin-left: 9.5cm;
+        margin-left: 40%;
         margin-top: -2.4cm;
     }
 
@@ -168,25 +257,25 @@
 
     .div-6{
         font-size: 20px;
-        margin-left: 17cm;
+        margin-left: 75%;
         margin-top: -2.4cm;
     }
 
     .div-7{
         font-size: 20px;
-        margin-left: 2cm;
+        margin-left: 3%;
         margin-top: 0.5cm;
     }
 
     .div-8{
         font-size: 20px;
-        margin-left: 16cm;
-        margin-top: -0.9cm;
+        margin-left: 65%;
+        margin-top: -0.8cm;
     }
 
     .div-9{
         font-size: 20px;
-        margin-left: 2cm;
+        margin-left: 3%;
         margin-top: 0.5cm;
     }
 }
