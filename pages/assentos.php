@@ -82,57 +82,84 @@ include_once('../back/conexao.php');
   </header><!-- End Header -->
     
   <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
-    
-    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; ">
-      <div class="collapse collapse-horizontal" id="collapseWidthExample">
+
+  <!-- ====== Card de Informação do Assento ====== -->
+    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; z-index: 1;">
+      <div class="collapse collapse-horizontal" id="cardAssento">
         <div class="card card-body" style="width: 300px;">
-          <h6>Assento 01</h6>
+          <h6>Assento <?php  ?></h6>
           <br>
           <p>Valor: R$49,00</p>
+          <br>
+          <div class="row offset-1">
+            <button type="button" class="btn btn-success col-5">
+              Escolher
+            </button>
+            <button type="button" class="btn btn-danger col-5 mx-1">
+              Outro
+            </button>
+
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- ===== Div Master ===== -->
-    <div class="container" style="border: solid 1px black"> 
-      <h3 class="text-center">Assentos Primeira Classe</h3>
-
+  <!-- ====== Fim do Card de Informação do Assento ====== -->
+  
+  <!-- ===== Div Master ===== -->
+  <div class="container" style="border: solid 1px black"> 
+    <h3 class="text-center">Assentos Primeira Classe</h3>
+    
     <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos
     INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO
-    INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
+    INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = '1' AND CLASSE = 'Primeira'
      ";
     $query = mysqli_query($conn,$comando);
     $row_resultado = mysqli_fetch_all($query);
-
+    
     //Comandos para verificar o funcionamento do vetor
-    echo count($row_resultado);
+    // print_r($row_resultado);
+    // echo count($row_resultado[0]);
     // print_r($row_resultado[0]);
     // print_r($row_resultado[0][0]);
     // print_r(count($row_resultado));
-
+    $y1 = 1;
+    $y2 = 2;
+    $y3 = 3;
+    $y4 = 4;
+    
     //Listagem de Linhas
-    for ($x = 0; $x < (count($row_resultado)/4); $x++){ ?>
-      <!-- ===== Linha ===== -->
-      <hr class="m-1">
-      <div class="row">
+    for ($x = 0; $x < (count($row_resultado)); $x++){ 
+        
+       $y1 = $y1 + 4; 
+       $y2 = $y2 + 4; 
+       $y3 = $y3 + 4; 
+       $y4 = $y4 + 4; 
+      echo $y1;
+      
+      
+      ?>
 
       <?php
       //Listagem Primeira Poltrona do Lado Esquerdo
-      for ($y1 = 0; $y1 < count($row_resultado)/4; $y1++){
+      foreach($row_resultado as $y1){
+          // var_dump($y1);
         ?>
+          <!-- ===== Linha ===== -->
+          <hr class="m-1">
+          <div class="row">
           <!-- ======== Lado Esquerdo ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
             <!-- === Botao Poltrona 01 === -->
             <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
+              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#cardAssento" style="height: 50px; width: 50px;" alt="">
             </button>
         <?php
       } //Fim da Listagem da Primeira Poltrona
             
       //Listagem Segunda Poltrona do Lado Esquerdo
-      for ($y2 = 0; $y2 < count($row_resultado)/4; $y2++){
+      foreach($row_resultado as $y2){
         ?>
             <!-- === Botao Poltrona 02 === -->
             <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
@@ -143,7 +170,7 @@ include_once('../back/conexao.php');
       } //Fim da Listagem da Segunda Poltrona  
       echo $x;
       //Listagem da Terceira Poltrona do Lado Direito
-      for ($y3 = 0; $y3 < count($row_resultado)/4; $y3++){
+      foreach($row_resultado as $y3){
         ?>
           <!-- ======== Lado Direito ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
@@ -155,7 +182,7 @@ include_once('../back/conexao.php');
       }//Fim da Listagem da Terceira Poltrona
 
       //Listagem da Quarta Poltrona do Lado Direito
-      for ($y4 = 0; $y4 < count($row_resultado)/4; $y4++){
+      foreach($row_resultado as $y4){
         ?>
             <!-- === Botao Poltrona 04 === -->
             <button type="button" class="btn">
@@ -168,7 +195,7 @@ include_once('../back/conexao.php');
       }//Fim da Listagem da Quarta Poltrona
         ?>
 
-        </div> <!-- ==== Fim Linha 01 ==== -->
+        </div> <!-- ==== Fim Linha ==== -->
 
       <?php
     }//Fim da Listagem das Linhas
