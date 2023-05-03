@@ -137,6 +137,7 @@ svg {
     z-index: 997;
     height: 80px;
   }
+
   
   #header .logo {
     font-size: 28px;
@@ -532,7 +533,6 @@ svg {
   }
   @media screen and (max-width: 320px) {
       .main-alteracoes h5{
-        margin-bottom: 20%;
         font-size: 20px;
         width: 80%;
     }
@@ -549,10 +549,14 @@ svg {
         margin-bottom: 10%;
         height: 830px;
     }
+      .main-alteracoes-dados #ultname{
+        width: 210%;
+    }
       .main-alteracoes-endereco {
         margin-top: 10%;
         margin-bottom: 10%;
     }
+    
   }
   
   @media screen and (max-width: 768px) {
