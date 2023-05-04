@@ -142,20 +142,19 @@
 
   <!--- Começo do container/alteracoes -->
     <main class = "main-alteracoes">
-        <h5>Alteração Cadastral</h5>
-      </div>
-<!-- <form action="#" method> -->
-      <div class="row">
-        <div class = "main-alteracoes-dados">
+      <h5>Alteração Cadastral</h5>
+<!--  <form action="#" method> -->
+        <div class="row">
+          <div class = "main-alteracoes-dados">
             <h1>Dados pessoais</h1>
-            <div class="row">
-              <div class="half-box">
-                <div class="col">
+              <div class="row">
+                <div class="half-box">
+                  <div class="col">
   <!-- Informações como nome, CPF, RG e Data de nascimento estará como disabled, precisará colocar o comando para a informação colocada em cadastro já aparecer nesses campos desabilitados -->
-                  <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
-                  <input type = "name" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "name" id = "name" disabled>
+                    <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
+                    <input type = "name" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "name" id = "name" disabled>
+                  </div>
                 </div>
-              </div>
               <div class = "half-box">
                 <div class = "col">
                   <label for = "lastname"  style = "color: #5c9f24">Nome do meio</label>
@@ -242,12 +241,12 @@
                   <label for = "cep" class="required" style = "color: #5c9f24">CEP</label>
                   <input type = "number" name = "cep" id = "cep" class="form-control required" style = "background-color: #FFF; border-color: #000" onblur="pesquisacep(this.value);">
               </div>
+            </div>
           </div>
         </div>
-       </div>
-      <div class="botao">
-        <button type="button" id = "cadastrar" class="btn btn-success" a href="#">Salvar</button>
-      </div>
+        <div class="botao">
+          <button type="button" id = "cadastrar" class="btn btn-success" a href="#">Salvar</button>
+        </div>
       </form>
     </main>
     <!---Fim do container/alteracoes -->
