@@ -186,17 +186,24 @@
                 <input type = "number" name = "cep" id = "cep" class="form-control required" style = "background-color: #FFF; border-color: #000">
               </div>
               <div class = "half-box">
-                <label for = "cidade" class="required" style = "color: #5c9f24">Cidade</label>
-                <input type = "cidade" name = "cidade" id = "cidade" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                <label for = "estado" class="required" style = "color: #5c9f24">UF</label>
+                <input type = "estado" name = "estado" id = "estado" class="form-control required" style = "background-color: #FFF; border-color: #000">
+              </div>
+              
+          </div>
+          <div class="row">
+            <div class = "half-box">
+              <label for = "cidade" class="required" style = "color: #5c9f24">Cidade</label>
+              <input type = "cidade" name = "cidade" id = "cidade" class="form-control required" style = "background-color: #FFF; border-color: #000">
+            </div>
+            <div class = "half-box">
+              <label for = "bairro" class="required" style = "color: #5c9f24">Bairro</label>
+              <input type = "bairro" name = "bairro" id = "bairro" class="form-control required" style = "background-color: #FFF; border-color: #000">
             </div>
           </div>
           <div class="row">
             <div class = "half-box">
-              <label for = "estado" class="required" style = "color: #5c9f24">Estado</label>
-              <input type = "estado" name = "estado" id = "estado" class="form-control required" style = "background-color: #FFF; border-color: #000">
-            </div>
-            <div class = "half-box">
-              <label for = "endereco" class="required" style = "color: #5c9f24">Endereço</label>
+              <label for = "endereco" class="required" style = "color: #5c9f24">Logradouro</label>
               <input type = "endereco" name = "endereco" id = "endereco" class="form-control required" style = "background-color: #FFF; border-color: #000">
             </div>
           </div>
