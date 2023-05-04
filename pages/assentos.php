@@ -37,7 +37,7 @@ include_once('../back/conexao.php');
 
   <!-- CSS Bag-a-Bag -->
   <link rel="stylesheet" href="../assets/css/assentos/assentos.css">
-
+  
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -65,56 +65,60 @@ include_once('../back/conexao.php');
           <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
           <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul> -->
-          </li>
-          <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
+          <ul>
+            <li><a href="#">Drop Down 1</a></li>
+            <li><a href="#">Drop Down 2</a></li>
+            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="#">Drop Down 4</a></li>
+          </ul> -->
+        </li>
+        <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
+        <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
     
-  <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
+  </div>
+</header><!-- End Header -->
 
-  <!-- ====== Card de Informação do Assento ====== -->
-    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; z-index: 1;">
-      <div class="collapse collapse-horizontal" id="cardAssento">
-        <div class="card card-body" style="width: 300px;">
-          <h6>Assento <?php  ?></h6>
-          <br>
-          <p>Valor: R$49,00</p>
-          <br>
-          <div class="row offset-1">
-            <button type="button" class="btn btn-success col-5">
-              Escolher
-            </button>
-            <button type="button" class="btn btn-danger col-5 mx-1">
-              Outro
-            </button>
+<main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
 
+<!-- ===== Div Master ===== -->
+<div class="container mb-3" style="border: solid 1px black"> 
+  <h3 class="text-center mb-3 mt-3">Assentos Primeira Classe</h3>
+  <form action="../back/controller/controller_assentos.php" method="POST">
+    
+    <!-- ====== Card de Informação do Assento ====== -->
+      <div style="min-height: 120px; position: absolute; right: 0; top: 40%; z-index: 1;">
+        <div class="collapse collapse-horizontal" id="cardAssento">
+          <div class="card card-body" style="width: 300px;">
+            <input type="radio" id="qtd" name="qtd" enabled>
+            <h6>Primeira Classe</h6>
+            <h6 id="assento" name="qtd"></h6>
+            <br>
+            <p>Valor: R$49,00</p>
+            <br>
+            <div class="row offset-1">
+              <button type="submit" class="btn btn-success col-5" id="assento">
+                Escolher
+              </button>
+              <button type="button" class="btn btn-danger col-5 mx-1">
+                Outro
+              </button>
+    
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <!-- ====== Fim do Card de Informação do Assento ====== -->
-  
-  <!-- ===== Div Master ===== -->
-  <div class="container" style="border: solid 1px black"> 
-    <h3 class="text-center">Assentos Primeira Classe</h3>
+    <!-- ====== Fim do Card de Informação do Assento ====== -->
     
-    <?php 
+    
+      <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos
     INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO
     INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = '1' AND CLASSE = 'Primeira'
-     ";
+    ";
     $query = mysqli_query($conn,$comando);
     $row_resultado = mysqli_fetch_all($query);
     
@@ -124,78 +128,80 @@ include_once('../back/conexao.php');
     // print_r($row_resultado[0]);
     // print_r($row_resultado[0][0]);
     // print_r(count($row_resultado));
-    $y1 = 1;
-    $y2 = 2;
-    $y3 = 3;
-    $y4 = 4;
+    $x = 0;
+    $y = 0;
     
     //Listagem de Linhas
-    for ($x = 0; $x < (count($row_resultado)); $x++){ 
-        
-       $y1 = $y1 + 4; 
-       $y2 = $y2 + 4; 
-       $y3 = $y3 + 4; 
-       $y4 = $y4 + 4; 
-      echo $y1;
+    while($x < (count($row_resultado))){ 
+      
+      $x = $x + 1; //Variável correspondente ao número de cada poltrona
+      $y = $y + 1; //Variável capaz de organizar a impressão das poltronas
+      if($y == 5){ //Filtro limitador da quantidade de variáveis
+        $y = 1;
+      }
+
       
       
       ?>
 
-      <?php
+<?php
       //Listagem Primeira Poltrona do Lado Esquerdo
-      foreach($row_resultado as $y1){
-          // var_dump($y1);
+      if($y == 1){
+        
         ?>
-          <!-- ===== Linha ===== -->
-          <hr class="m-1">
-          <div class="row">
+        <!-- ===== Linha ===== -->
+        <hr class="m-1">
+        <div class="row">
           <!-- ======== Lado Esquerdo ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
             <!-- === Botao Poltrona 01 === -->
-            <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#cardAssento" style="height: 50px; width: 50px;" alt="">
+            <button type="button" class="btn" id="poltrona<?php echo $x?>"  data-bs-toggle="collapse"  data-bs-target="#cardAssento" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+              <img src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
             </button>
-        <?php
-      } //Fim da Listagem da Primeira Poltrona
             
+            <?php
+      } //Fim da Listagem da Primeira Poltrona
+      
       //Listagem Segunda Poltrona do Lado Esquerdo
-      foreach($row_resultado as $y2){
+      if($y == 2){
         ?>
             <!-- === Botao Poltrona 02 === -->
-            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
+            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
           </div> <!-- === Fim Lado Esquerdo === -->
-        <?php 
+          <?php 
       } //Fim da Listagem da Segunda Poltrona  
-      echo $x;
+      // echo $x;
+      ?>
+      <?php
       //Listagem da Terceira Poltrona do Lado Direito
-      foreach($row_resultado as $y3){
+      if($y == 3){
         ?>
           <!-- ======== Lado Direito ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
             <!-- === Botao Poltrona 3=== -->
-            <button type="button" class="btn">
+            <button type="button" class="btn" id="poltrona<?php echo $x ?>"  data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
         <?php 
       }//Fim da Listagem da Terceira Poltrona
 
       //Listagem da Quarta Poltrona do Lado Direito
-      foreach($row_resultado as $y4){
+      if($y == 4){
         ?>
-            <!-- === Botao Poltrona 04 === -->
-            <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-            </button>
+          <!-- === Botao Poltrona 04 === -->
+          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          </button>
          
           </div> <!-- === Fim Lado Direito ===-->
-        
+          
+        </div> <!-- ==== Fim Linha ==== -->
         <?php
       }//Fim da Listagem da Quarta Poltrona
-        ?>
+      ?>
 
-        </div> <!-- ==== Fim Linha ==== -->
 
       <?php
     }//Fim da Listagem das Linhas
@@ -203,7 +209,7 @@ include_once('../back/conexao.php');
       <hr class="m-1">
 
       
-      
+    </form> 
     </div> <!-- ===== Fim Div Master ===== -->
 
     <br><br><br>
@@ -297,4 +303,16 @@ include_once('../back/conexao.php');
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/login.js"></script>
+  <script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    
+    function envia(valor){
+      document.getElementById('assento').innerHTML= 'Assento ' + valor;
+      document.getElementById('qtd').value
+      <?php $assento?> = valor;
+      
+    }
+  
+  </script>
 </body>
