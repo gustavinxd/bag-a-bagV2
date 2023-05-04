@@ -21,7 +21,7 @@
         
         if(!empty($row_cupom)){
             $_SESSION["msg"] = "<p style='color: red;'> Não foi possível cadastrar com sucesso</p>";
-            header("Location:../cupom_desconto.php");
+            echo "<script>location.href='../cupom_desconto.php';</script>";
         }else  {
              //inserindo no banco
             $result_usuario = "INSERT INTO cupom (CODIGO_CUPOM, VALOR_DESCONTO) VALUES ('$codigo_cupom','$valor_desconto')";
@@ -30,7 +30,7 @@
 
     }else{
         $_SESSION["msg"] = "<p style='color: red;'> Não foi possível cadastrar com sucesso</p>";
-        header("Location:../cupom_desconto.php");
+        echo "<script>location.href='../cupom_desconto.php';</script>";
     }
     
 
