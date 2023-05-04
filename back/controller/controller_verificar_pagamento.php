@@ -74,27 +74,27 @@ include_once('../conexao.php');
         if (validarDadosCartao($numeroCartao, $dataValidade)) {
             $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Crédito','$valorTotal','$qtd_parcelas')";
             $resultado_usuario = mysqli_query($conn, $result_usuario);
-            header("Location:../../index.html");
+            echo "<script>location.href='../../index.html';</script>";
         } else {
-            header("Location:../../pages/pagamento.php");
+            echo "<script>location.href='../../pages/pagamento.php';</script>";
         }
         break;
     case "pix":
         // Inserção dos dados no banco 
         $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Pix','$valorTotal',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
-        header("Location:../../index.html");
+        echo "<script>location.href='../../index.html';</script>";
     break;
 
     case "boleto":
         // Inserção dos dados no banco 
         $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Boleto','$valorTotal',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
-        header("Location:../../index.html");
+        echo "<script>location.href='../../index.html';</script>";
     break;
     case "":
 
-        header("Location:../../pages/pagamento.php");
+        echo "<script>location.href='../../pages/pagamento.php';</script>";
     break;
     
         

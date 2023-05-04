@@ -152,14 +152,14 @@
 
         if (mysqli_insert_id($conn)) {
             $_SESSION["msg"] = "<p style='color: blue;'>Cadastrado realizado com sucesso</p>";
-            header("Location: ../../index.html");
+            echo "<script>location.href='../../index.html';</script>";
         } else {
             $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso</p>";
-            header("Location: ../../pages/cadastro.php");
+            echo "<script>location.href='../../pages/cadastro.php';</script>";
         }
     } else{
         $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso.</p>";
-        header("Location: ../../pages/cadastro.php");
+        echo "<script>location.href='../../pages/cadastro.php';</script>";
     }  
 ?>
 
