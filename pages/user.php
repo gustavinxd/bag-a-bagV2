@@ -100,8 +100,8 @@
           <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO_TELEFONE']?></p>
         </div>
         <div class="col-lg-2">
-          <a href="">     
-            <button type="submit" style="min-width: 80px;"class="btn btn-outline-success text-center">
+          <a href="<?php echo "alteracoes_cadastro.php?id=" . $row['ID_USUARIO'] ?>">     
+            <button type="button" style="min-width: 80px;"class="btn btn-outline-success text-center">
               <i class="bi bi-gear"></i>
               Editar
             </button>
