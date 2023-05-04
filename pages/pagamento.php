@@ -121,34 +121,34 @@ for ($i = 1; $i <= 12; $i++) {
                     <div class="half-box">
                         <div class="col">
                           <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
-                          <input type = "name" value="<?php echo ucfirst($row['NOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+                          <input type = "name" value="<?php echo ucfirst($row['NOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name" disabled>
                       </div>
                     </div>
                     <div class = "half-box">
                           <label for = "lastname" class="required" style = "color: #5c9f24">Sobrenome</label>
-                          <input type = "lastname" value= "<?php echo ucfirst($row['SOBRENOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                          <input type = "lastname" value= "<?php echo ucfirst($row['SOBRENOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome" disabled>
                         <br>
                     </div>
                 </div>
                 <div class="row">
                       <div class = "half-box">
                         <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
-                        <input type = "text" value="<?php echo $row['CPF'] ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
+                        <input type = "text" value="<?php echo $row['CPF'] ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf" disabled>
                     </div>
                     <div class = "half-box">
                         <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
-                        <input type = "text" value="<?php echo $row['NUMERO_RG'] ?>" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
+                        <input type = "text" value="<?php echo $row['NUMERO_RG'] ?>" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black" disabled>
                       <br>
                     </div>
                 </div>
                   <div class="row">
                       <div class = "half-box">
                           <label for = "email" class="required" style = "color: #5c9f24">E-mail</label>
-                          <input type = "email" value="<?php echo $row['EMAIL'] ?>" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                          <input type = "email" value="<?php echo $row['EMAIL'] ?>" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000" disabled>
                         </div>
                         <div class = "half-box">
                           <label for = "tel" class="required" style = "color: #5c9f24">Telefone</label>
-                          <input type = "tel" value = "<?php echo $row['DDD'] . ' ' . $row['NUMERO']?>" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black">
+                          <input type = "tel" value = "<?php echo $row['DDD'] . ' ' . $row['NUMERO_TELEFONE']?>" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black" disabled>
                         <br>
                     </div>
 
