@@ -72,7 +72,7 @@ include_once('../conexao.php');
         
         // Inserção dos dados no banco 
         if (validarDadosCartao($numeroCartao, $dataValidade)) {
-            $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Crédito','$valorTotal','$qtd_parcelas')";
+            $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, parcelas) VALUES ('Aprovado',NOW(),'Crédito','$qtd_parcelas')";
             $resultado_usuario = mysqli_query($conn, $result_usuario);
             header("Location:../../index.html");
         } else {
@@ -81,14 +81,14 @@ include_once('../conexao.php');
         break;
     case "pix":
         // Inserção dos dados no banco 
-        $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Pix','$valorTotal',NULL)";
+        $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, parcelas) VALUES ('Aprovado',NOW(),'Pix',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         header("Location:../../index.html");
     break;
 
     case "boleto":
         // Inserção dos dados no banco 
-        $result_usuario = "INSERT INTO pagamento (data_pagamento, tipo_pagamento, valor_pagamento, parcelas) VALUES (NOW(),'Boleto','$valorTotal',NULL)";
+        $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, parcelas) VALUES ('Aprovado',NOW(),'Boleto',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         header("Location:../../index.html");
     break;
