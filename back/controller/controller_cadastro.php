@@ -115,6 +115,15 @@
         $unico_cpf = true;
     }
 
+    // VERIFICA SE O TELEFONE JÁ ESTÁ CADASTRADO
+    $d = "SELECT * FROM telefone WHERE ddd=$ddd AND $telefone = $telefone";
+    $select_telefone = mysqli_query($conn, $d);
+    $row_telefone = mysqli_fetch_assoc($select_telefone);
+
+    // VERIFICA SE O ENDEREÕ JÁ ESTÁ CADASTRADO
+    $e = "SELECT * FROM endereco WHERE CEP=$cep AND rua='$rua' AND numero_endereco=$numero AND bairro='$bairro' AND cidade='$cidade' AND uf='$uf' AND complemento='$complemento'";
+    $select_endereco = mysqli_query($conn, $e);
+    $row_endereco = mysqli_fetch_assoc($select_endereco);
 
     //VERIFICANDO AS CONDIÇÕES 
 
@@ -123,7 +132,7 @@
         //inserindo os dados no tabela cadastro
         $result_cadastro = "INSERT INTO cadastro (email, senha, data_cadastro) VALUES ('$email','" . md5($senha) . "', NOW())";
         $result_endereco = "INSERT INTO endereco (cep, rua, numero_endereco, bairro, cidade, uf, complemento) VALUES ('$cep','$rua','$numero','$bairro','$cidade','$uf','$complemento')";
-        $result_telefone = "INSERT INTO telefone (ddd, numero) VALUES ('$ddd','$telefone')";
+        $result_telefone = "INSERT INTO telefone (ddd, numero_telefone) VALUES ('$ddd','$telefone')";
         $result_rg = "INSERT INTO rg (numero_rg, data_emissao) VALUES ('$rg', '$data_emissao')";
         $result_usuario = "INSERT INTO usuario (nome, nome_meio, sobrenome, cpf, data_nascimento, criado) VALUES ('$nome','$nome_meio', '$sobrenome', '$cpf', '$data_nascimento', NOW())";
     
@@ -134,12 +143,22 @@
         $resultado_cadastro = mysqli_query($conn, $result_cadastro);
         $id_cadastro = mysqli_insert_id($conn); //pegando o id do cadastro
 
-        $resultado_telefone = mysqli_query($conn, $result_telefone);
-        $id_telefone = mysqli_insert_id($conn); //pegando o id do telefone
+        if(!empty($row_telefone)){    
+            $id_telefone = $row_telefone['ID_TELEFONE'];
+        } else  {
+            $resultado_telefone = mysqli_query($conn, $result_telefone);
+            $id_telefone = mysqli_insert_id($conn); //pegando o id do telefone
+        }
+
+        if(!empty($row_endereco)){    
+            $id_endereco = $row_endereco['ID_ENDERECO'];
+        } else  {
+            $resultado_endereco = mysqli_query($conn, $result_endereco);
+            $id_endereco = mysqli_insert_id($conn); //pegando o id do endereco
+        }
 
         $resultado_rg = mysqli_query($conn, $result_rg);
         $id_rg = mysqli_insert_id($conn); //pegando o id do rg
-
 
         $result_usuario = "INSERT INTO usuario (nome, nome_meio, sobrenome, cpf, data_nascimento, fk_cadastro, fk_rg, fk_telefone, fk_endereco, criado) VALUES ('$nome','$nome_meio', '$sobrenome', '$cpf', '$data_nascimento', '$id_cadastro', '$id_rg', '$id_telefone', '$id_endereco', NOW())";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
@@ -152,14 +171,14 @@
 
         if (mysqli_insert_id($conn)) {
             $_SESSION["msg"] = "<p style='color: blue;'>Cadastrado realizado com sucesso</p>";
-            header("Location: ../../index.html");
+            // header("Location: ../../index.html");
         } else {
             $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso</p>";
-            header("Location: ../../pages/cadastro.php");
+            // header("Location: ../../pages/cadastro.php");
         }
-    } else{
+    } else {
         $_SESSION["msg"] = "<p style='color: red;'>Cadastro não foi realizado com sucesso.</p>";
-        header("Location: ../../pages/cadastro.php");
+        // header("Location: ../../pages/cadastro.php");
     }  
 ?>
 
