@@ -41,6 +41,70 @@
             telefone.value = telefone.value + '-'; //quando o campo já tiver 8 caracteres, o script irá inserir um tracinho, para melhor visualização do telefone.
     }
     </script>
+  <script>
+    
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('endereco').value=("");
+            document.getElementById('cidade').value=("");
+            document.getElementById('estado').value=("");    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('endereco').value=(conteudo.logradouro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('estado').value=(conteudo.uf);
+                  } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('endereco').value="...";
+                document.getElementById('cidade').value="...";
+                document.getElementById('estado').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+    </script>
   
 </head>
 
@@ -79,155 +143,113 @@
   <!--- Começo do container/alteracoes -->
 
     <main class = "main-alteracoes">
-    <form action="#" method>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-              <div class="card h-100">
-                <img src="../assets/img/alteracoes_cadastro/card-list.svg" id = nomepng class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Nome:</h5>
-                  <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                  <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+        <h5>Alteração Cadastral</h5>
+      </div>
+<!-- <form action="#" method> -->
+      <div class="row">
+        <div class = "main-alteracoes-dados">
+            <h1>Dados pessoais</h1>
+            <div class="row">
+              <div class="half-box">
+                <div class="col">
+  <!-- Informações como nome, CPF, RG e Data de nascimento estará como disabled, precisará colocar o comando para a informação colocada em cadastro já aparecer nesses campos desabilitados -->
+                  <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
+                  <input type = "name" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "name" id = "name" disabled>
+                </div>
+              </div>
+              <div class = "half-box">
+                <div class = "col">
+                  <label for = "lastname"  style = "color: #5c9f24">Nome do meio</label>
+                  <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100" style = "border-color: greenyellow; 3px">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a short card.</p>
-                </div>
+            <div class = "half-box" style = "width: 88%;">
+              <div class="col" style = "width: 54%;">
+                <label for = "ultname" style = "color: #5c9f24">Sobrenome</label>
+                <input type = "ultname"  class="form-control required" style = "background-color: #FFF; border-color: black" name = "ultname" id = "ultname" >
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                </div>
+            <div class="row">
+              <div class = "half-box">
+                <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
+                <input type = "number" class="form-control required" style = "background-color: #d8d8d8; border-color: black" name = "cpf" id = "cpf" disabled>
+              </div>
+              <div class = "half-box">
+                <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
+                <input type = "rg" name = "rg" id = "rg" class="form-control required" style = "background-color: #d8d8d8; border-color: black">
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
+            <div class="row">
+              <div class = "half-box">
+                <label for = "date"  style = "color: #5c9f24">Data de expedição (RG)</label>
+                <input type = "date" name = "dataexpedicao" id = "dataexpedicao" class="form-control" style = "background-color: #FFF; border-color: black">
+              </div>
+              <div class = "half-box">
+                  <label for = "date" class="required" style = "color: #5c9f24">Data de Nascimento</label>
+                  <input type = "date" name = "datanascimento" id = "datanascimento" class="form-control" style = "background-color: #d8d8d8; border-color: black" disabled>
               </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
+            <div class="row">
+              <div class = "half-box">
+                <div class = "col-4">
+                  <label for = "number"  style = "color: #5c9f24">DDD</label>
+                  <input type = "number" maxlength="2" name = "ddd"  placeholder = "(XX)" id = "ddd" class="form-control required" style = "background-color: #FFF; border-color: black">
                 </div>
               </div>
-            <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
+              <div class = "half-box">
+                <label for = "tel" style = "color: #5c9f24">Telefone</label>
+                <input type = "tel" name = "telefone" id = "telefone" placeholder = "XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="mascara(this)" style = "background-color: #FFF; border-color: black">
+              </div>
+           </div>
+              <div class = "half-box">
+                <label for = "email" style = "color: #5c9f24">E-mail</label>
+                <input type = "email" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000">
+              </div>
+        </div>
+        <div class = "main-alteracoes-endereco">
+          <h2>Localidade</h2>
+            <div class= "row">
+<!-- Informações como nome, CPF, RG e Data de nascimento estará como disabled, precisará colocar o comando para a informação colocada em cadastro já aparecer nesses campos desabilitados -->
+                <div class = "half-box">
+                  <label for = "endereco"  style = "color: #5c9f24">Endereço</label>
+                  <input type = "endereco" name = "endereco" id = "endereco" class="form-control required" style = "background-color: #FFF; border-color: #000">
                 </div>
               </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
+            <div class="row">
+              <div class = "half-box">
+                <label for = "cidade" style = "color: #5c9f24">Cidade</label>
+                <input type = "cidade" name = "cidade" id = "cidade" class="form-control required" style = "background-color: #FFF; border-color: #000">
               </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                </div>
+              <div class = "half-box">
+                <label for = "estado"  style = "color: #5c9f24">Estado</label>
+                <input type = "estado" name = "estado" id = "estado" class="form-control required" style = "background-color: #FFF; border-color: #000">
               </div>
           </div>
-    </form>
+          <div class="row">
+          </div>
+          <div class="row" style = "margin-bottom: 10%">
+            <div class = "half-box">
+              <label for = "number"  style = "color: #5c9f24">N°</label>
+              <input type = "number" name = "numero" id = "numero" class="form-control required" style = "background-color: #FFF; border-color: #000">
+            </div>
+            <div class = "half-box">
+              <label for = "complemento" style = "color: #5c9f24">Complemento</label>
+              <input type = "complemento" name = "complemento" id = "complemento" class = "form-control" style = "background-color: #FFF; border-color: #000"> 
+            </div>
+            <div class = "row">
+              <div class = "half-box" >
+                <div class="col-6" style = "margin: auto;">
+                  <label for = "number" class="required" style = "color: #5c9f24">CEP</label>
+                  <input type = "number" name = "cep" id = "cep" class="form-control required" style = "background-color: #FFF; border-color: #000" onblur="pesquisacep(this.value);">
+              </div>
+          </div>
+        </div>
+       </div>
+      <div class="botao">
+        <button type="button" id = "cadastrar" class="btn btn-success" a href="#">Salvar</button>
+      </div>
+      </form>
     </main>
     <!---Fim do container/alteracoes -->
 

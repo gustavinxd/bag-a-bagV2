@@ -6,6 +6,18 @@
     font-family: 'Poppins', sans-serif; 
 
 }
+.inputs{
+    border: none;
+    min-height: 40px;
+}
+#caixa-text{
+    background-color: white; 
+    border: solid 1px gray;
+}
+textarea:focus, input:focus, i:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
 
 #btn-submit{
     background-color: #5C9F24;
@@ -20,12 +32,16 @@
     #caixa-form{
         margin-top: 30%;
     }
+    /* #senha{
+        width: 70%;
+    } */
 }
 
 @media screen and (min-width: 768px) {
     #caixa-form{
         margin-top: 15%;
     }
+   
 }
 
 @media screen and (min-width: 1024px) {
@@ -33,3 +49,10 @@
         margin-top: 10%;
     }
 }
+
+/* button::before{
+    content: none !important ;
+}
+i::before{
+    content: none ;
+} */
