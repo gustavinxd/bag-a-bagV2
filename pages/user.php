@@ -97,7 +97,7 @@
           <h1><?php echo ucfirst($row['NOME']) . ' ' . ucfirst($row['NOME_MEIO']). ' ' . ucfirst($row['SOBRENOME']) ?></h1>
           <p>E-mail: <?php echo $row['EMAIL'] ?></p>
           <p>CPF: <?php echo $row['CPF'] ?></p> 
-          <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO']?></p>
+          <p>Telefone: <?php echo $row['DDD'] . ' ' . $row['NUMERO_TELEFONE']?></p>
         </div>
         <div class="col-lg-2">
           <a href="">     
