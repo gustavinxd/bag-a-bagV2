@@ -1,5 +1,5 @@
 <?php
-    $servidor = "dbserverbag.mysql.database.azure.com";   
+    $servidor = "db-amri.mysql.database.azure.com";   
     $usuario = "admin1";          
     $senha = "Senai@115";
     $dbname = "bag_a_bag";
