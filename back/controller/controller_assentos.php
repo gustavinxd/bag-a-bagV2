@@ -3,7 +3,7 @@
     include_once("../conexao.php"); //incluindo conexão
 
   //PEGANDO DADOS
-  $poltrona = filter_input(INPUT_POST, "qtd");
+  $poltrona = filter_input(INPUT_POST, "ast");
   
   var_dump($poltrona);
   echo($poltrona);

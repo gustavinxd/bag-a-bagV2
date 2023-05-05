@@ -84,26 +84,40 @@ include_once('../back/conexao.php');
 <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
 
 <!-- ===== Div Master ===== -->
-<div class="container mb-3" style="border: solid 1px black"> 
+<div class="container mb-3 shadow" style="border: solid 1px black">
+<div class="">
   <h3 class="text-center mb-3 mt-3">Assentos Primeira Classe</h3>
+  <button type="button" class="btn btn-outline-success"  data-bs-toggle="collapse"  data-bs-target="#cardAssento">Assentos Selecionados</button>
+</div> 
   <form action="../back/controller/controller_assentos.php" method="POST">
     
     <!-- ====== Card de Informação do Assento ====== -->
-      <div style="min-height: 120px; position: absolute; right: 0; top: 40%; z-index: 1;">
-        <div class="collapse collapse-horizontal" id="cardAssento">
+
+      <!-- === Estilização para Fixagem Lateral do Card === -->
+      <div style="min-height: 120px; position: fixed; right: 0; top: 20%; z-index: 1;">
+      <!-- === Referencial para Puxagem do Botão === -->
+        <div class="collapse collapse-horizontal shadow" id="cardAssento">
+          <!-- === Inicio Estilização === -->
           <div class="card card-body" style="width: 300px;">
-            <input type="radio" id="qtd" name="qtd" enabled>
-            <h6>Primeira Classe</h6>
-            <h6 id="assento" name="qtd"></h6>
-            <br>
-            <p>Valor: R$49,00</p>
-            <br>
-            <div class="row offset-1">
-              <button type="submit" class="btn btn-success col-5" id="assento">
-                Escolher
+            <!-- <input type="radio" id="ast" name="ast" enabled> -->
+            <div class="row text-center">
+              <h6 class="col-10">Assentos Selecionados</h6>
+              <button type="button"  data-bs-toggle="collapse" data-bs-target="#cardAssento" class="btn-close col-2"  aria-label="Close"></button>
+
+            </div>
+            <!-- === Campo dos Assentos === -->
+            <div id="ListaAssentos" style="overflow-y: auto; height: 300px;">
+    
+              <!-- Inserção via JS -->
+
+            </div>
+
+            <div class="row offset-1 mt-1">
+              <button type="submit" class="btn btn-success col-5" id="">
+                Prosseguir
               </button>
-              <button type="button" class="btn btn-danger col-5 mx-1">
-                Outro
+              <button type="button" onclick="remove()"  class="btn btn-danger col-5 mx-1">
+                Remover
               </button>
     
             </div>
@@ -113,7 +127,7 @@ include_once('../back/conexao.php');
     <!-- ====== Fim do Card de Informação do Assento ====== -->
     
     
-      <?php 
+    <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos
     INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO
@@ -151,11 +165,11 @@ include_once('../back/conexao.php');
         ?>
         <!-- ===== Linha ===== -->
         <hr class="m-1">
-        <div class="row">
+        <div class="row"> 
           <!-- ======== Lado Esquerdo ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
             <!-- === Botao Poltrona 01 === -->
-            <button type="button" class="btn" id="poltrona<?php echo $x?>"  data-bs-toggle="collapse"  data-bs-target="#cardAssento" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <button type="button" class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
               <img src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
             </button>
             
@@ -166,7 +180,7 @@ include_once('../back/conexao.php');
       if($y == 2){
         ?>
             <!-- === Botao Poltrona 02 === -->
-            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
           </div> <!-- === Fim Lado Esquerdo === -->
@@ -181,7 +195,7 @@ include_once('../back/conexao.php');
           <!-- ======== Lado Direito ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
             <!-- === Botao Poltrona 3=== -->
-            <button type="button" class="btn" id="poltrona<?php echo $x ?>"  data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
               <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
         <?php 
@@ -191,7 +205,7 @@ include_once('../back/conexao.php');
       if($y == 4){
         ?>
           <!-- === Botao Poltrona 04 === -->
-          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="qtd" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
             <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
          
@@ -303,16 +317,6 @@ include_once('../back/conexao.php');
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/login.js"></script>
-  <script>
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    
-    function envia(valor){
-      document.getElementById('assento').innerHTML= 'Assento ' + valor;
-      document.getElementById('qtd').value
-      <?php $assento?> = valor;
-      
-    }
-  
-  </script>
+  <!-- Script Assento -->
+  <script src="../assets/js/assentos.js"></script>
 </body>
