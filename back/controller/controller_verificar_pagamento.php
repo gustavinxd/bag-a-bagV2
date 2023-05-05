@@ -83,19 +83,29 @@ include_once('../conexao.php');
         $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, parcelas) VALUES ('Aprovado',NOW(),'Pix',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         echo "<script>location.href='../../index.html';</script>";
-    break;
+        break;
 
     case "boleto":
         // Inserção dos dados no banco 
         $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, parcelas) VALUES ('Aprovado',NOW(),'Boleto',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         echo "<script>location.href='../../index.html';</script>";
-    break;
+        break;
     case "":
 
         echo "<script>location.href='../../pages/pagamento.php';</script>";
-    break;
+        break;
     
+    //verificando se tem o mesmo valor no ID da reserva e a FK em pagamento
+    $query2 = "SELECT * FROM reserva 
+    INNER JOIN pagamento ON FK_RESERVA = ID_RESERVA";
+      $query2 = mysqli_query($conn, $query2);
+      $row2 = mysqli_fetch_assoc($query2);
+
+      if(!empty($row2)) {
+        $result_usuario = "UPDATE reserva SET STATUS_RESERVA = 'Confirmada'";
+        $resultado_usuario = mysqli_query($conn, $result_usuario);
+      }
         
 }
 
