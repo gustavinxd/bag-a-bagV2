@@ -16,20 +16,12 @@
       header('Location: ../index.html');
     }
 
-    $query2 = "SELECT * FROM reserva 
-    INNER JOIN pagamento ON FK_RESERVA = ID_RESERVA;
-      $query2 = mysqli_query($conn, $query2);
-      $row2 = mysqli_fetch_assoc($query2);
+   
     
-    if(empty($row2)) {
-      header('Location: ../index.html');
-    }
     
-    $valorTotal = $row2['VALOR_TOTAL'];
   
  //pegando o valor total do pagamento vindo da tabela reserva
-  // $valorTotal = $pagamento['valor'];
-  $valorTotal = 3058.81;
+  
   $_SESSION['valorTotal'] = $valorTotal;
   
   $parcelas = array();
