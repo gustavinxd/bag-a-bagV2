@@ -14,7 +14,7 @@
   $row = mysqli_fetch_assoc($query);
 
   if(empty($row)) {
-    header('Location: ../index.html');
+    echo "<script>location.href='../index.html';</script>";
   }
 ?>
 
@@ -25,12 +25,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ</title>
+  <title>BAG-A-BAGₑ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/airplane_favicon.png" rel="icon">
+  <link href="../assets/img/favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -81,8 +81,8 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="nav-link scrollto" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="cadastro.php">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>" style = "margin-left: 80px;">Ver perfil</a></li>
+          <li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php" >LOGOFF</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -137,10 +137,9 @@
               <div class="footer-info">
                 <h3>BAG-A-BAGₑ</h3>
                 <p>
-                  Av. Washington Luís<br>
-                  Vila Congonhas<br>
-                  São Paulo - SP N°4878<br><br>
-                  <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
+                  A108 Adam Street <br>
+                  NY 535022, USA<br><br>
+                  <strong>Telefone:</strong>(11) 9000-0000<br>
                   <strong>Email:</strong>bag.a.bag@gmail.com<br>
                 </p>
                 <div class="social-links mt-3">
