@@ -5,14 +5,32 @@ session_start();
 include_once('../conexao.php');
 include_once('../funcoes.php');
 
-$id_usuario = filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT); // id do usurário associado ao passageiro
-$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-$sobrenome = filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-$cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
-$data_nascimento = filter_input(INPUT_POST, 'data_nascimento');
-$ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
-$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRING);
+// PEGAR OS DADOS COM O ARRAY FAZER DO JEITO CERTO!
+$array_dados = array_values($_POST);
+
+echo var_dump($array_dados);
+
+// for ($i=1; $i < $total_passageiros; $i++) {
+    
+//     $name_id_usuario = 'id_usuario' . $i;
+//     $name_nome = 'nome' . $i;
+//     $name_sobrenome = 'sobrenome' . $i;
+//     $name_email = 'email' . $i;
+//     $name_cpf = 'cpf' . $i;
+//     $name_data_nascimento = 'data_nascimento' . $i;
+//     $name_ddd = 'ddd' . $i;
+//     $name_numero = 'numero' . $i;
+
+//     eval("$id_usuario = filter_input(INPUT_POST, '". $name_id_usuario . "', FILTER_SANITIZE_NUMBER_INT"); // id do usurário associado ao passageiro
+//     eval("$nome = filter_input(INPUT_POST, '" . $name_nome . "', FILTER_SANITIZE_STRING");
+//     eval("$sobrenome = filter_input(INPUT_POST, '" . $name . "', FILTER_SANITIZE_STRING);
+//     eval("$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+//     eval("$cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
+//     eval("$data_nascimento = filter_input(INPUT_POST, 'data_nascimento');
+//     eval("$ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
+//     eval("$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRING);
+// }
+
 
 if(validarCPF($cpf)) {
     // procura pelo telefone informado

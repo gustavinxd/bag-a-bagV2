@@ -1,17 +1,14 @@
 <?php
-
-// $total_passageiros = $_POST['total_passageiros'];
+session_start();
+// $_SESSION['total_passageiros'] = $_POST['total_passageiros'];
 $total_passageiros = 2;
 
 $form_content = "";
 
-for ($i=1; $i <= $total_passageiros; $i++) { 
-  $form_content = $form_content . "
-        <div class='row'>
-          <div class='half-box'>
-            <h2>Passageiro " . $i . "</h2>" .
-          "</div>
-        </div>
+if ($total_passageiros == 1) {
+  $i = 1;
+
+  $form_content = $form_content ."
         <div class='row'>
           <div class='half-box'>
             <div class='col'>
@@ -54,8 +51,58 @@ for ($i=1; $i <= $total_passageiros; $i++) {
               <input type = 'email' name = 'email_passageiro" . $i . "' id = 'email' class='form-control required' style = 'background-color: #FFF; border-color: #000'>
             </div>
         </div>";
+} else {
+  for ($i=1; $i <= $total_passageiros; $i++) { 
+    $form_content = $form_content . "
+    <div class='row'>
+      <div class='half-box'>
+        <h2>Passageiro " . $i . "</h2>" .
+      "</div>
+    </div>
+    <div class='row'>
+      <div class='half-box'>
+        <div class='col'>
+          <label for = 'nome_passageiro" . $i . "' class='required' style = 'color: #5c9f24'>Nome</label>
+          <input type = 'text' name='nome_passageiro" . $i ."' class='form-control required' style = 'background-color: #FFF; border-color: black' id = 'name'>
+        </div>
+      </div>
+    </div>
+      <div class = 'half-box'>
+      <div class='col'>
+        <label for = 'sobrenome_passageiro" . $i . "' class='required' style = 'color: #5c9f24'>Sobrenome</label>
+        <input type='text' name='sobrenome_passageiro" . $i . "'  class='form-control required' style = 'background-color: #FFF; border-color: black' id = 'ultname'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class = 'half-box'>
+        <label for = 'cpf_passageiro" . $i . "' class='required' style = 'color: #5c9f24' >CPF</label>
+        <input type = 'number' name='cpf_passageiro" . $i . "' class='form-control required' style = 'background-color: #FFF; border-color: black' id = 'cpf'>
+      </div>
+      <div class = 'half-box'>
+          <label for = 'data_nasc_passageiro" . $i . "' class='required' style = 'color: #5c9f24'>Data de Nascimento</label>
+          <input type = 'date' name = 'data_nasc_passageiro" . $i . "' id = 'data_nasc' class='form-control' style = 'background-color: #FFF; border-color: black'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class = 'half-box'>
+        <div class = 'col-4'>
+          <label for = 'ddd" . $i . "' class='required' style = 'color: #5c9f24'>DDD</label>
+          <input type = 'number' maxlength='2' name = 'ddd" . $i . "' placeholder = '(XX)' id = 'ddd' class='form-control required'style = 'background-color: #FFF; border-color: black'>
+        </div>
+      </div>
+      <div class = 'half-box'>
+        <label for = 'numero_telefone" . $i . "' class='required' style = 'color: #5c9f24'>Telefone</label>
+        <input type = 'tel' name = 'numero_telefone" . $i . "' id = 'telefone' placeholder = 'XXXXX-XXXX' maxlength='15' class='form-control required' onkeypress='tel(this)' style = 'background-color: #FFF; border-color: black'>
+      </div>
+    </div>
+    <div class='row'>
+        <div class = 'half-box'>
+          <label for = 'email_passageiro" . $i . "' class='required' style = 'color: #5c9f24'>E-mail</label>
+          <input type = 'email' name = 'email_passageiro" . $i . "' id = 'email' class='form-control required' style = 'background-color: #FFF; border-color: #000'>
+        </div>
+    </div>";
+  }
 }
-
 $form_content = $form_content . "<div class='row'>
             <div class='full-box'>
               <button type='submit' id = 'cadastrar' class='btn btn-success'>Cadastrar</button>
