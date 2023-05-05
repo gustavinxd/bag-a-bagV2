@@ -25,12 +25,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BAG-A-BAGₑ</title>
+  <title>Bag-a-Bagₑ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/airplane_favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -137,9 +137,10 @@
               <div class="footer-info">
                 <h3>BAG-A-BAGₑ</h3>
                 <p>
-                  A108 Adam Street <br>
-                  NY 535022, USA<br><br>
-                  <strong>Telefone:</strong>(11) 9000-0000<br>
+                  Av. Washington Luís<br>
+                  Vila Congonhas<br>
+                  São Paulo - SP N°4878<br><br>
+                  <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
                   <strong>Email:</strong>bag.a.bag@gmail.com<br>
                 </p>
                 <div class="social-links mt-3">
