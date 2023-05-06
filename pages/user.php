@@ -16,6 +16,51 @@
   if(empty($row)) {
     header('Location: ../index.html');
   }
+
+  //Pegando dados para imprimir nos campos de origem, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
+
+  $query2 = "SELECT * FROM passagem
+  INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
+  INNER JOIN voo ON FK_VOO = ID_VOO
+  INNER JOIN aeroporto ON FK_ORIGEM_AERO = ID_AEROPORTO
+  INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
+   WHERE FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC LIMIT 1";
+  $query2 = mysqli_query($conn, $query2);
+  $row2 = mysqli_fetch_assoc($query2);
+  
+  //Pegando dados para imprimir nos campos de destino, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
+  $query3 = "SELECT * FROM passagem
+  INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
+  INNER JOIN voo ON FK_VOO = ID_VOO
+  INNER JOIN aeroporto ON FK_DESTINO_AERO = ID_AEROPORTO
+  INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
+   WHERE FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC LIMIT 1";
+  $query3 = mysqli_query($conn, $query3);
+  $row3 = mysqli_fetch_assoc($query3);
+
+  
+
+if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
+  // A reserva tem FK_AVIAO_IDA e FK_AVIAO_VOLTA preenchidos, logo é ida e volta
+  $tipo_passagem = "Reserva de ida e volta";
+} elseif (!empty($row3['FK_AVIAO_IDA'])) {
+  // A reserva tem apenas FK_AVIAO_IDA preenchido, logo é apenas ida
+  $tipo_passagem = "Reserva de ida";
+  $row2['CODIGO_AVIAO'] = '-';
+} elseif (!empty($row2['FK_AVIAO_VOLTA'])) {
+  // A reserva tem apenas FK_AVIAO_VOLTA preenchido, logo é apenas volta
+  $tipo_passagem = "Reserva de volta";
+  $row2['CODIGO_AVIAO'] = '-';
+} else {
+  // Nenhum dos campos está preenchido, logo não é possível determinar o tipo dos campos
+  $tipo_passagem = "";
+  $row2['CIDADE'] = "";
+  $row3['CIDADE'] = "";
+  $row3['CODIGO_AVIAO'] = "";
+  $row2['CODIGO_AVIAO'] = "";
+  $row3['VALOR_TOTAL'] = "";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -110,16 +155,16 @@
     </section>
 
     <section id="reservar" class="container">
-      <h2 class="text-center">Ultimas Reservas</h2>
+      <h2 class="text-center">Últimas Reservas</h2>
       <div class="card col-12 mt-5" style="width: 100%;">
         <div class="card-body">
           <h5 class="card-title">ID da Reserva</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Origem : </h6>
-          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Destino : </h6>
-          <p class="card-text mt-2">Tipo da passagem: </p>
-          <p class="card-text mt-2">Numero do avião: </p>
-          <p class="card-text mt-2">Numero do avião 2: </p>
-          <p class="card-text mt-2">Preço: </p>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Origem : <?php echo $row2['CIDADE'] ?> </h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Destino : <?php echo $row3['CIDADE'] ?> </h6>
+          <p class="card-text mt-2">Tipo da passagem: <?php echo $tipo_passagem ?></p>
+          <p class="card-text mt-2">Número do avião: <?php echo $row3['CODIGO_AVIAO'] ?> </p>
+          <p class="card-text mt-2">Número do avião 2: <?php echo $row2['CODIGO_AVIAO'] ?> </p>
+          <p class="card-text mt-2">Preço: <?php echo $row3['VALOR_TOTAL'] ?> </p>
           <h5 class="card-title">Detalhes do(s) passageiro(s)</h5>
         </div>
       </div>
