@@ -20,9 +20,8 @@
     
     
   
- //pegando o valor total do pagamento vindo da tabela reserva
-  
-  $_SESSION['valorTotal'] = $valorTotal;
+ //pegando o valor total do pagamento vindo da reserva
+ $valorTotal = $_SESSION['valor_total'];
   
   $parcelas = array();
 
