@@ -2,7 +2,11 @@
 session_start();
 include_once("../back/funcoes.php");
 // $_SESSION['total_passageiros'] = $_POST['total_passageiros'];
-$total_passageiros = 2;
+
+$assentos_escolhidos = "6,5,9"; // filter_input(INPUT_POST, "assentos");
+$assentos = explode(",", $assentos_escolhidos);
+
+$total_passageiros = sizeof($assentos);
 
 ?>
 
