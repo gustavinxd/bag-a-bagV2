@@ -100,7 +100,7 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
         }
 
         // CRIAR PASSAGEM
-        $query "INSERT INTO passagem (FK_ASSENTO, FK_PASSAGEIRO, FK_VOO, FK_CUPOM, FK_RESERVA) VALUES ($assentos[$passageiro], $id_passageiro, $id_voo, DEFAULT, $id_reserva)";
+        $query = "INSERT INTO passagem (FK_ASSENTO, FK_PASSAGEIRO, FK_VOO, FK_CUPOM, FK_RESERVA) VALUES ($assentos[$passageiro], $id_passageiro, $id_voo, DEFAULT, $id_reserva)";
         
     } else {
         $_SESSION['msg'] = "<p style='color:red;'>Erro. O CPF informado é inválido.</p>";
