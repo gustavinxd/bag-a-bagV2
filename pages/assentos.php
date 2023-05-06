@@ -116,7 +116,7 @@ include_once('../back/conexao.php');
               <button type="submit" class="btn btn-success col-5" id="">
                 Prosseguir
               </button>
-              <button type="button" onclick="remove()"  class="btn btn-danger col-5 mx-1">
+              <button type="button" id="remover" onclick="remove()"  class="btn btn-danger col-5 mx-1">
                 Remover
               </button>
     
@@ -130,11 +130,19 @@ include_once('../back/conexao.php');
     <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos
-    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO
+    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO            -- V  variavel a ser trocada, para o voo correspondente
     INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = '1' AND CLASSE = 'Primeira'
     ";
     $query = mysqli_query($conn,$comando);
     $row_resultado = mysqli_fetch_all($query);
+
+    $comando_ocupado = 
+    "SELECT NUMERO_ASSENTO FROM assentos
+    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO               -- V  variavel a ser trocada, para o voo correspondente
+    INNER JOIN passagem ON passagem.FK_ASSENTO = ID_ASSENTO WHERE FK_VOO = '1' AND CLASSE = 'Primeira'
+    ";
+    $query_ocupado = mysqli_query($conn,$comando_ocupado);
+    $row_resultado_ocupado = mysqli_fetch_all($query_ocupado);
     
     //Comandos para verificar o funcionamento do vetor
     // print_r($row_resultado);
@@ -142,8 +150,13 @@ include_once('../back/conexao.php');
     // print_r($row_resultado[0]);
     // print_r($row_resultado[0][0]);
     // print_r(count($row_resultado));
+    
+    //Comandos para verificar o funcionamento do Ocupado
+    // print_r($row_resultado_ocupado[0][0]);
+
     $x = 0;
     $y = 0;
+    $z = 0;
     
     //Listagem de Linhas
     while($x < (count($row_resultado))){ 
@@ -153,9 +166,12 @@ include_once('../back/conexao.php');
       if($y == 5){ //Filtro limitador da quantidade de variáveis
         $y = 1;
       }
-
       
-      
+      //Contador para Listagem de Poltronas Ocupadas
+      if($z < (count($row_resultado_ocupado))){
+        $z = $z + 1;
+      }
+    
       ?>
 
 <?php
@@ -168,23 +184,46 @@ include_once('../back/conexao.php');
         <div class="row"> 
           <!-- ======== Lado Esquerdo ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
-            <!-- === Botao Poltrona 01 === -->
-            <button type="button" class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
-            </button>
-            
             <?php
-      } //Fim da Listagem da Primeira Poltrona
+            if ($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
+              ?>
+            <!-- === Poltrona 01 Caso Ocupada === -->
+            <button type="button" disabled class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+              <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png"  style="height: 50px; width: 50px;" alt="">
+            </button>
+            <?php
+            }else{
+              ?>
+              <!-- === Poltrona 01 Caso Desocupada === -->
+              <button type="button" class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+                <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
+              </button>
+              <?php
+            
+          }
+            
+          } //Fim da Listagem da Primeira Poltrona
       
       //Listagem Segunda Poltrona do Lado Esquerdo
       if($y == 2){
-        ?>
-            <!-- === Botao Poltrona 02 === -->
-            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-            </button>
+        if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
+          ?>
+          <!-- === Poltrona 02 Caso Ocupada === -->
+          <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+          </button>
           </div> <!-- === Fim Lado Esquerdo === -->
-          <?php 
+          <?php
+        }else{
+          ?>
+          <!-- === Poltrona 02 Caso Descoupada === -->
+          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          </button>
+          </div> <!-- === Fim Lado Esquerdo === -->
+          <?php
+        }
+          
       } //Fim da Listagem da Segunda Poltrona  
       // echo $x;
       ?>
@@ -194,30 +233,54 @@ include_once('../back/conexao.php');
         ?>
           <!-- ======== Lado Direito ======= -->
           <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
-            <!-- === Botao Poltrona 3=== -->
-            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            <?php 
+            if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
+            ?>
+            <!-- === Poltrona 3 Caso Ocupada === -->
+            <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+              <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
         <?php 
+        }else{
+          ?>
+          <!-- === Poltrona 3 Caso Descoupada === -->
+            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+              <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <?php
+        }
       }//Fim da Listagem da Terceira Poltrona
 
       //Listagem da Quarta Poltrona do Lado Direito
       if($y == 4){
+        if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
         ?>
-          <!-- === Botao Poltrona 04 === -->
-          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          <!-- === Poltrona 04 Caso Ocupada === -->
+          <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
          
           </div> <!-- === Fim Lado Direito ===-->
           
         </div> <!-- ==== Fim Linha ==== -->
         <?php
+        }else{
+          ?>
+          <!-- === Poltrona 04 Caso Desocupada === -->
+          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
+            <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          </button>
+         
+          </div> <!-- === Fim Lado Direito ===-->
+          
+        </div> <!-- ==== Fim Linha ==== -->
+        <?php
+        }
       }//Fim da Listagem da Quarta Poltrona
-      ?>
+      
 
 
-      <?php
+      
     }//Fim da Listagem das Linhas
       ?>
       <hr class="m-1">
