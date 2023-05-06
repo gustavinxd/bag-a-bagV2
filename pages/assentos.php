@@ -89,7 +89,7 @@ include_once('../back/conexao.php');
   <h3 class="text-center mb-3 mt-3">Assentos Primeira Classe</h3>
   <button type="button" class="btn btn-outline-success"  data-bs-toggle="collapse"  data-bs-target="#cardAssento">Assentos Selecionados</button>
 </div> 
-  <form action="../back/controller/controller_assentos.php" method="POST">
+  <form action="../pages/cadastro-passageiro.php" method="POST">
     
     <!-- ====== Card de Informação do Assento ====== -->
 
