@@ -38,13 +38,11 @@ function envia(valor){
 
     console.log(assentos);
 
-            
     
 }
 
 let i;
 let botao;
-let node;
 
 function remove(){
     
@@ -67,4 +65,11 @@ function remove(){
     //Removendo o ultimo assento selecionado do array
     assentos.pop();
     console.log(assentos);
-    }  
+}  
+
+function enviadado(){
+    //envia assentos
+    document.getElementById("enviaArray").value = assentos;
+
+}
+    

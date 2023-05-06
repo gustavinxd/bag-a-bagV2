@@ -109,11 +109,13 @@ include_once('../back/conexao.php');
             <div id="ListaAssentos" style="overflow-y: auto; height: 300px;">
     
               <!-- Inserção via JS -->
-
+            
             </div>
+            
 
             <div class="row offset-1 mt-1">
-              <button type="submit" class="btn btn-success col-5" id="">
+              <input type="hidden" id="enviaArray" name="assentos" value=""/>
+              <button type="submit" onclick="enviadado()" class="btn btn-success col-5" id="">
                 Prosseguir
               </button>
               <button type="button" id="remover" onclick="remove()"  class="btn btn-danger col-5 mx-1">
