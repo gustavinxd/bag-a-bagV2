@@ -14,7 +14,7 @@
   $row = mysqli_fetch_assoc($query);
 
   if(empty($row)) {
-    echo "<script>location.href='../index.html';</script>";
+    echo "<script>location.href='../index.php';</script>";
   }
 ?>
 
@@ -30,7 +30,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/airplane_favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -62,17 +62,17 @@
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="../index.html">BAG-A-BAGₑ</a></h1>
+      <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="../index.html">HOME</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#about">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="destinos.html">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
+          <li><a class="nav-link scrollto active" href="../index.php">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="destinos.php">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -155,19 +155,19 @@
             <div class="col-lg-2 col-md-6 footer-links">
               <h4>BAG-A-BAGₑ</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#about">Sobre</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="destinos.php">Destinos</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
               </ul>
             </div>
   
           <div class="col-lg-3 col-md-6 footer-links">
               <h4>Conta</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>">Ver perfil</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>
                 <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
