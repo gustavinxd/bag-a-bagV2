@@ -77,6 +77,9 @@ $total_aeroporto = mysqli_num_rows($consulta);
     <body style="margin-top: 8em;">
         <div class="container">
             <h1>Aeroportos</h1>
+            <a href="./cadastro_aeroporto.php">
+                <button type="button" class="btn btn-primary">Cadastrar Aeroporto</button>
+            </a>
             <?php
             if (isset($_SESSION['msg'])) {
                 echo $_SESSION['msg'];

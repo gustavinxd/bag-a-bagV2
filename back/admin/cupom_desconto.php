@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,9 +14,14 @@
 </head>
 
 <body >
-
+<?php
+if (isset($_SESSION['msg'])) {
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+?>
   
-    <form action="controller/controller_cupom.php" method="post">
+    <form action="../controller/controller_cupom.php" method="post">
 
        
         

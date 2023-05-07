@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,8 +10,13 @@
 <body>
 
 	<h1>Cadastro de Aeroportos</h1>
-
-	<form action="controller/controller_cadastro_aeroporto.php" method="POST">
+	<?php
+	if (isset($_SESSION['msg'])) {
+		echo $_SESSION['msg'];
+		unset($_SESSION['msg']);
+	}
+	?>
+	<form action="../controller/controller_cadastro_aeroporto.php" method="POST">
 
 		<label for="sigla">Sigla:</label>
 		<input type="text" id="sigla" name="sigla" required><br>

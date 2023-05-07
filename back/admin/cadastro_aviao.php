@@ -21,7 +21,7 @@
         }
     ?>
     
-    <form action="controller/controller_adicionar_aviao.php" method="post">
+    <form action="../controller/controller_adicionar_aviao.php" method="post">
         <label>Código da Aeronave: </label>
         <input
             type="text"

@@ -12,14 +12,14 @@ try {
 
         if(mysqli_affected_rows($conn)) {
             $_SESSION['msg'] = "<p style='color: green;' class='text-center'>AEROPORTO DELETADO COM SUCESSO</p>";
-            echo "<script>location.href='../admin/aeroporto.php'</script>";
+            echo "<script>location.href='../admin/aerporto.php'</script>";
         } else {
             $_SESSION['msg'] = "<p style='color: red;' class='text-center'>ERRO! AEROPORTO NÃO FOI DELETADO</p>";
-            echo "<script>location.href='../admin/aeroporto.php'</script>";
+            echo "<script>location.href='../admin/aerporto.php'</script>";
         }
     }
 } catch (\Exception $e) {
     $_SESSION['msg'] = "$e";
-    echo "<script>location.href='../admin/aeroporto.php'</script>";
+    echo "<script>location.href='../admin/aerporto.php'</script>";
 }
 ?>

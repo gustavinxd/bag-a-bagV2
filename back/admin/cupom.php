@@ -77,6 +77,9 @@ $total_cupom = mysqli_num_rows($consulta);
     <body style="margin-top: 8em;">
         <div class="container">
             <h1>Cupons</h1>
+            <a href="./cupom_desconto.php">
+                <button type="button" class="btn btn-primary">Cadastrar Cupom</button>
+            </a>
             <?php
             if (isset($_SESSION['msg'])) {
                 echo $_SESSION['msg'];

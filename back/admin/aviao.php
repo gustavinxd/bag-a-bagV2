@@ -77,6 +77,9 @@ $total_aviao = mysqli_num_rows($consulta);
     <body style="margin-top: 8em;">
         <div class="container">
             <h1>Aviões</h1>
+            <a href="./cadastro_aviao.php">
+                <button type="button" class="btn btn-primary">Cadastrar Avião</button>
+            </a>
             <?php
             if (isset($_SESSION['msg'])) {
                 echo $_SESSION['msg'];
