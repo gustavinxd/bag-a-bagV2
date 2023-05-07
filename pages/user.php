@@ -14,7 +14,7 @@
   $row = mysqli_fetch_assoc($query);
 
   if(empty($row)) {
-    header('Location: ../index.html');
+    echo "<script>location.href='../index.php';</script>";
   }
 
   //Pegando dados para imprimir nos campos de origem, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
@@ -70,7 +70,7 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ</title>
+  <title>BAG-A-BAGₑ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -107,17 +107,17 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="../index.html">BAG-A-BAGₑ</a></h1>
+      <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="../index.html">HOME</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#about">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="destinos.html">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
+          <li><a class="nav-link scrollto active" href="../index.php">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="destinos.php">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -126,8 +126,8 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="nav-link scrollto" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="cadastro.php">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>" style = "margin-left: 80px;">Ver perfil</a></li>
+          <li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php" >LOGOFF</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -182,10 +182,9 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
               <div class="footer-info">
                 <h3>BAG-A-BAGₑ</h3>
                 <p>
-                  Av. Washington Luís<br>
-                  Vila Congonhas<br>
-                  São Paulo - SP N°4878<br><br>
-                  <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
+                  A108 Adam Street <br>
+                  NY 535022, USA<br><br>
+                  <strong>Telefone:</strong>(11) 9000-0000<br>
                   <strong>Email:</strong>bag.a.bag@gmail.com<br>
                 </p>
                 <div class="social-links mt-3">
@@ -201,19 +200,19 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
             <div class="col-lg-2 col-md-6 footer-links">
               <h4>BAG-A-BAGₑ</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#about">Sobre</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="destinos.php">Destinos</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
               </ul>
             </div>
   
           <div class="col-lg-3 col-md-6 footer-links">
               <h4>Conta</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>">Ver perfil</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>
                 <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                 <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
