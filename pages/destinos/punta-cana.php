@@ -1,3 +1,9 @@
+<?php 
+session_start(); //iniciando sessão
+include_once("conexao.php"); //incluindo conexão
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -95,7 +101,7 @@
 
   <main id="main" class="container-fluid">
     
-    <!-- ====================== Modal de Filtragem =========================-->
+  <!-- ============================ Modal de Filtragem ==============================-->
     <div id="meuModal" class="modal fade" role="dialog" style="z-index: 99991;">
     
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
@@ -255,7 +261,7 @@
           
       </div>
     </div>
-    <!-- ================================================================= -->
+  <!-- ========================== Fim Modal de Filtragem ======================================= -->
       
 
     <!-- ================== Div Master ================= -->
@@ -273,8 +279,8 @@
           </div>
         
           
-          <!-- Card 01 -->
-          <a href="../../index.html">
+          <!-- ===== Card dos Vôos Existentes ====== -->
+          <a href="../../index.html"> <!-- Enviar para Tela de Assentos -->
             <div class="card mb-3 shadow" id="cards-bab" style="width: 90%; margin: 0 auto;">
               <div class="card-body" style="padding: 0;">
 
