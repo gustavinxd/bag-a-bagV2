@@ -83,7 +83,7 @@ function validarDataRg($data_emissao){
     $diff = date_diff(date_create($data_emissao), date_create($data_atual));
     $idade = $diff->format('%y');
     
-    if ($idade < 10 && $data_atual > $data_emissao){
+    if ($idade < 10 && $data_atual >= $data_emissao){
         return true;
     } else {
         return false;

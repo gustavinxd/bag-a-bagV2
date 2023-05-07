@@ -19,9 +19,9 @@ $id = $row_usuario['ID_CADASTRO'];
 //Fazendo a validação da senha fornecida pelo usuário, e a cadastrada no db
 if ($senha_md5 == $senha_banco){
     
-    header("Location:../../pages/user.php?id={$row_usuario['ID_CADASTRO']}");
+    echo "<script>location.href='../../pages/user.php?id={$row_usuario['ID_CADASTRO']}';</script>";
 } else{
     $_SESSION["msg"] = "<p style='color: red;'>Nome de usuário ou senha incorretos.</p>";
-    header("Location: ../../pages/login.html");
+    echo "<script>location.href='../../pages/login.html';</script>";
 }
 ?>
