@@ -1,15 +1,20 @@
+<?php 
+  session_start();
+  include_once('../back/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>BAG-A-BAGₑ</title>
+    <title>Bag-a-Bagₑ - Destinos</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/airplane_favicon.png" rel="icon" />
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
@@ -52,52 +57,51 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
       <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="../index.html">Groovin</a></h1>
+  
+        <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+  
         <nav id="navbar" class="navbar">
           <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">Teste</a></li>
-            <li><a class="nav-link scrollto" href="#services">Services</a></li>
-            <li>
-              <a class="nav-link scrollto" href="#portfolio">Portfolio</a>
-            </li>
-            <li><a class="nav-link scrollto" href="#team">Team</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li class="dropdown">
-              <a href="#"
-                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
-              ></a>
+            <li><a class="nav-link scrollto " href="../index.php">HOME</a></li>
+            <li><a class="nav-link scrollto" href="../index.php#about">SOBRE</a></li>
+            <li><a class="nav-link scrollto active" href="./destinos.php">DESTINOS</a></li>
+            <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+            <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
+            <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown">
-                  <a href="#"
-                    ><span>Deep Drop Down</span>
-                    <i class="bi bi-chevron-right"></i
-                  ></a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
                 <li><a href="#">Drop Down 2</a></li>
                 <li><a href="#">Drop Down 3</a></li>
                 <li><a href="#">Drop Down 4</a></li>
-              </ul>
+              </ul> -->
             </li>
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <li>
-              <a class="getstarted scrollto" href="#about">Get Started</a>
-            </li>
+            <?php
+            //VERIFICANDO SE TEM UM USUARIO LOGADO
+            if(isset($_SESSION['id_usuario'])) {
+              $id = $_SESSION['id_usuario'];
+
+              $query = "SELECT * FROM usuario 
+              INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+              INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+              WHERE ID_USUARIO='$id'";
+              $query = mysqli_query($conn, $query);
+              $row = mysqli_fetch_assoc($query);
+              //SE ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+              echo '<li><a class="getstarted scrollto" href="user.php?id=' . $row["ID_USUARIO"] . '" style="margin-left: 80px;">Ver perfil</a></li>';
+              echo '<li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php">LOGOFF</a></li>';
+            }
+            else{
+              //SE NÃO ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+              echo '<li><a class="nav-link scrollto" href="login.html" style="margin-left: 80px;">LOGIN</a></li>';
+              echo '<li><a class="getstarted scrollto" href="cadastro.php">CADASTRE-SE</a></li>';
+            }
+          ?>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
+        </nav><!-- .navbar -->
+  
       </div>
     </header>
     <!-- End Header -->
@@ -130,7 +134,7 @@
       </section>
 
       <!-- <h1 class="container">DESTAQUES</h1> -->
-      <section id="destinos" class="container destinos">
+      <section id="internacionais" class="container destinos">
         <div class="row mb-4 text-center">
           <h2>Destinos Internacionais</h2>
         </div>
@@ -208,7 +212,7 @@
         </div>
       </section>
 
-      <section id="destinos" class="destinos">
+      <section id="nacionais" class="destinos">
         <div class="row mb-4 text-center">
           <h2>Destinos Nacionais</h2>
         </div>
@@ -256,15 +260,15 @@
               <div class="card" style="width: 100%">
                 <img
                   class="card-img-top"
-                  src="../assets/img/destinos/cancun.jpg"
+                  src="../assets/img/destinos/porto-seguro.jpg"
                   alt="Card image cap"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Cancún</h5>
+                  <h5 class="card-title">Porto Seguro</h5>
                   <p class="card-text text-black">Saindo de São Paulo</p>
                   <hr />
                   <p class="card-text text-black">Preço por pessoa:</p>
-                  <p class="card-text">R$ 1750</p>
+                  <p class="card-text">R$ 750</p>
                   <p class="card-text text-black">
                     Taxas e impostos não inclusos
                   </p>
@@ -288,79 +292,89 @@
     </main>
     <!-- End #main -->
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top">
-          <div class="container">
-            <div class="row">
-    
-              <div class="col-lg-3 col-md-6">
-                <div class="footer-info">
-                  <h3>BAG-A-BAGₑ</h3>
-                  <p>
-                    A108 Adam Street <br>
-                    NY 535022, USA<br><br>
-                    <strong>Telefone:</strong>(11) 9000-0000<br>
-                    <strong>Email:</strong>bag.a.bag@gmail.com<br>
-                  </p>
-                  <div class="social-links mt-3">
-                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="col-lg-2 col-md-6 footer-links">
-                <h4>BAG-A-BAGₑ</h4>
-                <ul>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Ofertas</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Contato</a></li>
-                </ul>
-              </div>
-    
-            <div class="col-lg-3 col-md-6 footer-links">
-                <h4>Conta</h4>
-                <ul>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Cadastre-se</a></li>
-                  <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
-                </ul>
-              </div>
-    
-              <div class="col-lg-4 col-md-6 footer-newsletter">
-                <h4>Inscreva-se para receber ofertas exclusivas</h4>
-                <!-- <p>Inscreva-se para receber ofertas exclusivas</p> -->
-                <form action="" method="post">
-                  <input type="email" name="email"><input type="submit" value="Quero recebê-las!">
-                </form>
-    
+       <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>BAG-A-BAGₑ</h3>
+              <p>
+                Av. Washington Luís<br>
+                Vila Congonhas<br>
+                São Paulo - SP N°4878<br><br>
+                <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
+                <strong>Email:</strong>bag.a.bag@gmail.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
               </div>
             </div>
           </div>
-        </div>
-    
-        <div class="container">
-          <div class="copyright">
-            &copy; Copyright <strong><span>Groovin</span></strong>. All rights Reserved.
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>BAG-A-BAGₑ</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#about">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
+            </ul>
           </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
-            Designed by  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Conta</h4>
+            <ul>
+              <?php 
+                if(isset($_SESSION['id_usuario'])) {
+                  //SE ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+                  echo '<li><i class="bx bx-chevron-right"></i> <a href="user.php?id=' . $row["ID_USUARIO"] . '">Ver perfil</a></li>';
+                  echo '<li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>';
+                }
+                else {
+                  //SE NÃO ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+                  echo '<li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>';
+                  echo '<li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>';
+                }
+              ?>
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Inscreva-se para receber ofertas exclusivas</h4>
+            <!-- <p>Inscreva-se para receber ofertas exclusivas</p> -->
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Quero recebê-las!">
+            </form>
+
           </div>
         </div>
-      </footer>
-    <!-- End Footer -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Groovin</span></strong>. All rights Reserved.
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
+        Designed by  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 
     <a
       href="#"

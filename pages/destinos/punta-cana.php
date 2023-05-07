@@ -11,7 +11,7 @@ include_once("conexao.php"); //incluindo conexão
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BAG-A-BAGₑ</title>
+  <title>Bag-a-Bagₑ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -52,7 +52,7 @@ include_once("conexao.php"); //incluindo conexão
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="../index.html">BAG-A-BAGₑ</a></h1>
+      <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -355,9 +355,10 @@ include_once("conexao.php"); //incluindo conexão
             <div class="footer-info">
               <h3>BAG-A-BAGₑ</h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Telefone:</strong>(11) 9000-0000<br>
+                Av. Washington Luís<br>
+                Vila Congonhas<br>
+                São Paulo - SP N°4878<br><br>
+                <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
                 <strong>Email:</strong>bag.a.bag@gmail.com<br>
               </p>
               <div class="social-links mt-3">

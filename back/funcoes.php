@@ -1,4 +1,6 @@
 <?php
+include_once("conexao.php");
+date_default_timezone_set('America/Sao_Paulo');
 // VALIDAR RG
 function validarRG($rg) {
     // Remover pontos e traços do número de RG
@@ -6,22 +8,23 @@ function validarRG($rg) {
     
     // Verificar se o número de RG tem 9 dígitos
     if (strlen($rg) != 9) {
-      return false;
+        return false;
     }
     
     // Calcular o dígito verificador
     $soma = 0;
     for ($i = 0; $i < 8; $i++) {
-      $soma += ($rg[$i] * (9 - $i));
+        $soma += ($rg[$i] * (9 - $i));
     }
     $dv = ($soma % 11);
     if ($dv == 10) {
-      $dv = 'X';
+        $dv = 'X';
     }
     
     // Verificar se o dígito verificador é igual ao último dígito do número de RG
     if ($dv != $rg[8]) {
-      return false;
+        return false;
+        //$_SESSION["rg"] = "<p style='color: red;'>RG inválido</p>";
     }
     
     // RG válido
@@ -30,47 +33,63 @@ function validarRG($rg) {
 
 // VALIDAR CPF
 function validarCPF($cpf) {
+$a = 10;
+$c = 11;
+$calculo = 0;
+$calculo2 = 0;
 
-    // Remover pontos e traços do número de CPF
-    $cpf = preg_replace('/\D/', '', $cpf);
-    
-    // Verificar se o número de CPF tem 11 dígitos
-    if (strlen($cpf) != 11) {
-      return false;
-    }
-    
-    // Verificar se todos os dígitos são iguais
-    if (preg_match('/^(\d)\1*$/', $cpf)) {
-      return false;
-    }
-    
-    // Calcular o primeiro dígito verificador
-    $soma = 0;
-    for ($i = 0; $i < 9; $i++) {
-      $soma += ($cpf[$i] * (10 - $i));
-    }
-    $dv1 = ($soma % 11);
-    if ($dv1 == 10) {
-      $dv1 = 0;
-    }
-    
-    // Calcular o segundo dígito verificador
-    $soma = 0;
-    for ($i = 0; $i < 10; $i++) {
-      $soma += ($cpf[$i] * (11 - $i));
-    }
-    $dv2 = ($soma % 11);
-    if ($dv2 == 10) {
-      $dv2 = 0;
-    }
-    
-    // Verificar se os dígitos verificadores são iguais aos últimos dois dígitos do CPF
-    if ($dv1 != $cpf[9] || $dv2 != $cpf[10]) {
-      return false;
-    }
-    
-    // CPF válido
-    return true;
+// VALIDAÇÃO DO PRIMEIRO NÚMERO
+for ($i = 0; $i < 9; $i++) {
+    $calculo = $calculo + ($cpf[$i] * ($a--));
 }
+$resultado = $calculo % 11;
+$primeiro_numero = 11 - $resultado;
+
+if ($primeiro_numero > 10) {
+    $primeiro_numero = 0;
+}
+
+
+if ($primeiro_numero != $cpf[9]) {
+    return false;
+} 
+// VALIDAÇÃO SEGUNDO NÚMERO
+else {
+    for ($b = 0; $b < 10; $b++) {
+        $calculo2 = $calculo2 + ($cpf[$b] * ($c--));
+    }
+    $resultado2 = $calculo2 % 11;
+    $segundo_numero = 11 - $resultado2;
+
+
+    if ($segundo_numero > 10) {
+        $segundo_numero = 0;
+    }
+
+    if ($segundo_numero != $cpf[10]) {
+        return false;
+        //$_SESSION["cpf"] = "<p style='color: red;'>CPF inválido</p>";
+    }
+    else {
+        return true;
+
+        
+    }
+}
+}
+
+function validarDataRg($data_emissao){
+    $data_atual = date("Y-m-d");
+    $diff = date_diff(date_create($data_emissao), date_create($data_atual));
+    $idade = $diff->format('%y');
+    
+    if ($idade < 10 && $data_atual >= $data_emissao){
+        return true;
+    } else {
+        return false;
+        //$_SESSION["data_rg"] = "<p style='color: red;'>Data de emissão inválida</p>"; 
+    }
+}
+
 
 ?>

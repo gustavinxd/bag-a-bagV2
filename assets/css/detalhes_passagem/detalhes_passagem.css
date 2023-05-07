@@ -1,0 +1,336 @@
+
+@media screen and (min-width: 320px) {  
+    /* caixa com todos os detalhes da passagem */
+    #caixa-detalhes {
+        margin-top: 3cm;
+        border: solid #000 1px;
+    }  
+
+    /* icon da bag-a-bag */
+    #icon{
+        width: 10%;
+        margin-left: 10%;
+    }  
+
+    /* nome da empresa */
+    .bag-a-bag{
+        margin-top: 10px;
+        font-size: 10px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin-left: 20%;
+    }
+    
+    .linha-1{
+        margin-top: 0.7cm;
+        border: solid  #3A5C1D 2.5px;
+    }
+
+    /*  origem do voo */
+    .div-1{
+        width: 25%;
+        font-size: 10px;
+        margin-left: cm;
+    }
+
+    #seta1{
+        margin-left: 130%;
+    }
+
+    /* destino de chegada */
+    .div-2{
+        width: 50%;
+        font-size: 10px;
+        margin-left: 33%;
+        margin-top: -1.2cm;
+    }
+
+    #seta2{
+        margin-left: 60%;
+    }
+
+    /* informação se a viagem será ida e volta */
+    .div-3{
+        width: 30%;
+        font-size: 10px;
+        margin-left: 70%;
+        margin-top: -0.8cm;
+    }
+
+    /* data da ida e volta */
+    .div-4{
+        width: 25%;
+        font-size: 10px;
+        margin-top: 1cm;
+        margin-left: cm;
+    }
+
+    #seta3{
+        margin-left: 130%;
+    }
+
+    /* número do voo */
+    .div-5{
+        width: 50%;
+        font-size: 10px;
+        margin-left: 33%;
+        margin-top: -1.2cm;
+    }
+
+    #seta4{
+        margin-left: 60%;
+    }
+
+    /* como foi efetuado o pagamento da pessoa e o valor */
+    .div-6{
+        width: 30%;
+        font-size: 10px;
+        margin-left: 70%;
+        margin-top: -1.2cm;
+    }
+
+    /* nome do passageiro */
+    .div-7{
+        font-size: 10px;
+
+    }
+
+    /* assento do passageiro */
+    .div-8{
+        width: 35%;
+        font-size: 10px;
+        margin-left: 70%;
+        margin-top: -5.5%;
+        
+    }
+
+    /* recibo eletrônico */
+    .div-9{
+        font-size: 10px;
+
+        margin-top: 0.5cm;
+    }
+}
+  
+@media screen and (min-width: 768px) {
+    /* caixa detalhes da passagem */
+    #caixa-detalhes {
+        margin-top: 15%;
+        border: solid #000 1px;
+      }  
+  
+      /* icon da bag-a-bag */
+      #icon{
+          width: 7%;
+          margin-left: 10%;
+      }
+  
+      /* nome da empresa */
+      .bag-a-bag{
+          margin-top: 10px;
+          font-size: 30px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          margin-left: 20%;
+      }
+      
+      .linha-1{
+          margin-top: 1cm;
+          border: solid  #3A5C1D 2.5px;
+      }
+  
+      /*  origem do voo */
+      .div-1{
+        width: 25%;
+        margin-left: 1%;
+        font-size: 20px;
+      }
+  
+      #seta1{
+          margin-left: 120%;
+      }
+  
+      /* destino de chegada */
+      .div-2{
+          width: 50%;
+          font-size: 20px;
+          margin-left: 33%;
+          margin-top: -2.4cm;
+      }
+  
+      #seta2{
+          margin-left: 60%;
+      }
+  
+    /* informação se a viagem será ida e volta */
+      .div-3{
+          width: 30%;
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -1.7cm;
+      }
+  
+      /* data da ida e volta */
+      .div-4{
+          width: 25%;
+          font-size: 20px;
+          margin-top: 4%;
+          margin-left: 1%;
+      }
+  
+      #seta3{
+          margin-left: 120%;
+      }
+  
+      /* número do voo */
+      .div-5{
+          width: 50%;
+          font-size: 20px;
+          margin-left: 33%;
+          margin-top: -2.4cm;
+      }
+  
+      #seta4{
+          margin-left: 60%;
+      }
+  
+      /* como foi efetuado o pagamento da pessoa e o valor */
+      .div-6{
+          width: 30%;
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -2.4cm;
+      }
+  
+      /* nome do passageiro */
+      .div-7{
+        width: 80%;
+        font-size: 20px;
+
+      }
+  
+      /* assento do passageiro */
+      .div-8{
+        width: 30%;
+          font-size: 20px;
+          margin-left: 70%;
+          margin-top: -6.3%;
+      }
+  
+    /* recibo eletrônico */
+      .div-9{
+          font-size: 20px;
+          margin-top: 0.5cm;
+      }
+ 
+}
+  
+@media screen and (min-width: 1024px) {
+    /* caixa detalhes da passagem */
+    #caixa-detalhes {
+      margin-top: 10%;
+      border: solid #000 1px;
+    }  
+
+    /* icon da bag-a-bag */
+    #icon{
+        width: 7%;
+        margin-left: 10%;
+    }
+
+    /* nome da empresa */
+    .bag-a-bag{
+        margin-top: 10px;
+        font-size: 30px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin-left: 23%;
+    }
+    
+    .linha-1{
+        margin-top: 1cm;
+        border: solid  #3A5C1D 2.5px;
+    }
+
+    /*  origem do voo */
+    .div-1{
+        width: 25%;
+        margin-left: 5%;
+        font-size: 20px;
+    }
+
+    #seta1{
+        margin-left: 4cm;
+    }
+
+    /* destino de chegada */
+    .div-2{
+        width: 40%;
+        font-size: 20px;
+        margin-left: 40%;
+        margin-top: -2.4cm;
+    }
+
+    #seta2{
+        margin-left: 5cm;
+    }
+
+    /* informação se a viagem será ida e volta */
+    .div-3{
+        width: 25%;
+        font-size: 20px;
+        margin-left: 75%;
+        margin-top: -1.7cm;
+    }
+
+    /* data da ida e volta */
+    .div-4{
+        width: 25%;
+        font-size: 20px;
+        margin-top: 2cm;
+        margin-left: 5%;
+    }
+
+    #seta3{
+        margin-left: 4cm;
+    }
+
+    /* número do voo */
+    .div-5{
+        width: 40%;
+        font-size: 20px;
+        margin-left: 40%;
+        margin-top: -2.4cm;
+    }
+
+    #seta4{
+        margin-left: 5cm;
+    }
+
+    /* como foi efetuado o pagamento da pessoa e o valor */
+    .div-6{
+        width: 25%;
+        font-size: 20px;
+        margin-left: 75%;
+        margin-top: -2.4cm;
+    }
+
+    /* nome do passageiro */
+    .div-7{
+        font-size: 20px;
+        margin-left: 3%;
+        margin-top: 0.5cm;
+    }
+
+    /* assento do passageiro */
+    .div-8{
+        width: 35%;
+        font-size: 20px;
+        margin-left: 65%;
+        margin-top: -0.8cm;
+    }
+
+    /* recibo eletrônico */
+    .div-9{
+        font-size: 20px;
+        margin-left: 3%;
+        margin-top: 0.5cm;
+    }
+}
