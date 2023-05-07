@@ -1,23 +1,3 @@
-<?php 
-session_start();
-include_once('../back/conexao.php');
-
-$id = $_SESSION['id_usuario'];
-
-$query = "SELECT * FROM usuario 
-INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
-INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
-INNER JOIN rg ON FK_RG = ID_RG
-WHERE ID_USUARIO='$id'";
-$query = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($query);
-
-if(empty($row)) {
-  header('Location: ../index.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,7 +5,7 @@ if(empty($row)) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ - Assentos</title>
+  <title>Bag-a-Bagₑ - Detalhes da passagem</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -51,7 +31,7 @@ if(empty($row)) {
   <link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- CSS Bag-a-Bag -->
-  <link rel="stylesheet" href="../assets/css/assentos/assentos.css">
+  <link rel="stylesheet" href="../assets/css/detalhes_passagem/detalhes_passagem.css">
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -74,7 +54,7 @@ if(empty($row)) {
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto" href="../index.php">HOME</a></li>
-          <li><a class="nav-link scrollto" href="../index.php#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#services">SOBRE</a></li>
           <li><a class="nav-link scrollto" href="./destinos.php">DESTINOS</a></li>
           <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
           <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
@@ -86,100 +66,92 @@ if(empty($row)) {
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="getstarted scrollto" href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>" style = "margin-left: 80px;">Ver perfil</a></li>
-          <li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php" >LOGOFF</a></li>
+          <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
+          <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
-    
-  <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
-    
-    <div style="min-height: 120px; position: absolute; right: 0; top: 30%; ">
-      <div class="collapse collapse-horizontal" id="collapseWidthExample">
-        <div class="card card-body" style="width: 300px;">
-          <h6>Assento 01</h6>
-          <br>
-          <p>Valor: R$49,00</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Div Master ===== -->
-    <div class="container" style="border: solid 1px black"> 
-      <h3 class="text-center">Assentos Primeira Classe</h3>
-
-    <?php 
-    $comando = 
-    "SELECT NUMERO_ASSENTO FROM assentos_codaviao
-    INNER JOIN aviao_codaviao ON aviao_codaviao.ID_CODAVIAO = assentos_codaviao.FK_AVIAO
-    INNER JOIN voo ON  voo.FK_AVIAO = aviao_codaviao.ID_CODAVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
-     ";
-    $query = mysqli_query($conn,$comando);
-    $row_resultado = mysqli_fetch_all($query);
-    // print_r($row_resultado);
-
-    
-    for ($x = 0; $x < count($row_resultado); $x=$x+4){
-      for ($y = 0; $y < count($row_resultado); $y++){
-        ?>
-        <!-- ===== Linha ===== -->
-        <hr class="m-1">
-        <div class="row">
-          <!-- ======== Lado Esquerdo ======= -->
-          <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
-            <!-- === Botao === -->
-            <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
-            </button>
-            <!-- === Botao === -->
-            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-            </button>
-          </div> <!-- === Fim Lado Esquerdo === -->
-          <?php
-          echo $y;
-          ?>
-          
-          <!-- ======== Lado Direito ======= -->
-          <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
-            <!-- === Botao === -->
-            <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-            </button>
-            <!-- === Botao === -->
-            <button type="button" class="btn">
-              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-            </button>
-         
-          </div> <!-- === Fim Lado Direito ===-->
-          
-        </div> <!-- ==== Fim Linha 01 ==== -->
-        <?php
-      }
-    }
-      ?>
-      
-      
-    
-
-    
 
 
-      <hr class="m-1">
-      
-      
-    </div> <!-- ===== Fim Div Master ===== -->
+  <!-- detalhes passagem -->
+    <main class="container">
+        <form action="" method="post">
+            <div class="row">
+                <div id="caixa-detalhes" class="col-8 offset-2 shadow">
+                    <img src="/assets/img/detalhes_passagem/ico.png" id="icon" alt="" srcset=""><label class="bag-a-bag" for="">BAG-A-BAGₑ</label>
+                    <div class="row">
+                      <hr class="linha-1">
+                      <!-- origem do voo -->
+                    <div class="div-1">                       
+                        <label for="">Origem</label><br>
+                        <label id="seta1" for=""> > </label><br>
+                        <label for="">Guarulhos</label>
+                    </div>
+                    <!-- fim origem voo -->
+                    <!-- destino de chegada  -->
+                    <div class="div-2">
+                        <label for="">Destino</label><br>
+                        <label id="seta2" for=""> > </label><br>
+                        <label for="">Punta Cana</label>
+                    </div>
+                    <!-- fim destino de chegada -->
+                    <!-- informação se a viagem será ida e volta -->
+                    <div class="div-3">
+                        <label for="">Ida e Volta</label>
+                    </div>
+                    <!-- fim viagem ida e volta -->
+                    <!-- data da ida e volta -->
+                    <div class="div-4">                       
+                        <label for="">25/07/2023</label><br>
+                        <label id="seta3" for=""> > </label><br>
+                        <label for="">05/07/2023</label>
+                    </div>
+                    <!-- fim data -->
+                    <!-- número do voo -->
+                    <div class="div-5">
+                        <label for="">N° do voo</label><br>
+                        <label id="seta4" for=""> > </label><br>
+                        <label for="">5426565</label>
+                    </div>
+                    <!-- fim numero voo -->
+                    <!-- como foi efetuado o pagamento da pessoa e o valor -->
+                    <div class="div-6">
+                        <label for="">Cartão de </label><br>
+                        <label for="">Crédito</label><br>
+                        <label class="money" for=""><sup>R$</sup>2.590<span> </span></label>
+                    </div>
+                    <!-- fim pagamento  -->
+                    <hr class="linha-1">
+                </div>
+                <div class="row">
+                  <!-- nome do passageiro -->
+                    <div class="div-7">                        
+                        <label for="">Passageiro: Mark Elliot Zuckerberg</label>
+                    </div>
+                    <!-- fim nome do passageiro -->
+                    <!-- assento do passageiro -->
+                    <div class="div-8">                        
+                        <label for="">Assento:       10F</label>
+                    </div>
+                    <!-- fim assento -->
+                    <!-- recibo eletrônico -->
+                    <div class="div-9">                        
+                        <label for="">Recibo bilhete eletrônico: 105798961687873534817878</label><br><br>
+                    </div>
+                    <!-- fim recibo -->
+                </div>
+                
+                </div>
+            </div>
+        </form>
+        <br>
+    </main>  
+    <!-- fim detalhes passagem -->
 
-    <br><br><br>
-    <br><br><br>
-      
-        
-  </main> <!-- ======= End Main ======= -->
-
-  <!-- ======= Footer ======= -->
+    <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -189,9 +161,10 @@ if(empty($row)) {
             <div class="footer-info">
               <h3>BAG-A-BAGₑ</h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Telefone:</strong>(11) 9000-0000<br>
+                Av. Washington Luís<br>
+                Vila Congonhas<br>
+                São Paulo - SP N°4878<br><br>
+                <strong>Telefone:</strong>(11) <em></em> 9000-0000<br>
                 <strong>Email:</strong>bag.a.bag@gmail.com<br>
               </p>
               <div class="social-links mt-3">
@@ -207,19 +180,19 @@ if(empty($row)) {
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#about">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="destinos.php">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
+              <li><a class="nav-link scrollto" href="../index.php">HOME</a></li>
+              <li><a class="nav-link scrollto" href="../index.php#services">SOBRE</a></li>
+              <li><a class="nav-link scrollto" href="./destinos.php">DESTINOS</a></li>
+              <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+              <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
             </ul>
           </div>
 
         <div class="col-lg-3 col-md-6 footer-links">
             <h4>Conta</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>">Ver perfil</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="./cadastro.php">Cadastre-se</a></li>
               <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
@@ -252,7 +225,6 @@ if(empty($row)) {
     </div>
   </footer><!-- End Footer -->
 
-
     <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -263,5 +235,4 @@ if(empty($row)) {
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/login.js"></script>
 </body>
