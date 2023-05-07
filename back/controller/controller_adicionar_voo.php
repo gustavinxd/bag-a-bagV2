@@ -40,9 +40,11 @@ if (mysqli_insert_id($conn)) {
 	mysqli_query($conn, $query);
 
 	if (mysqli_insert_id($conn)) {
-		echo "DEU CERTO";
+		$_SESSION['msg'] = "<p style='color: green;' class='text-center'>VOO CADASTRADO COM SUCESSO!</p>";
+		echo "<script>location.href='../admin/voo.php'</script>";
 	} else {
-		echo "não criou voo";
+		$_SESSION['msg'] = "<p style='color: red;' class='text-center'>ERRO!</p>";
+		echo "<script>location.href='../admin/criar_voo.php'</script>";
 	}
 // }
 // else {
