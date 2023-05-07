@@ -4,16 +4,16 @@ session_start();
 include_once('conexao.php');
 
 // PEGAR AS AERONAVES
-$options_avioes_id_codaviao = "";
+$options_avioes_id_aviao = "";
 $options_avioes_codigo_aviao = "";
 $options_avioes_empresa = "";
 $options_avioes_total_assentos = "";
 
-$query = "SELECT * FROM aviao_codaviao";
+$query = "SELECT * FROM aviao";
 $consulta = mysqli_query($conn, $query);
 
 while($row_aviao = mysqli_fetch_assoc($consulta)) {
-    $options_avioes_id_codaviao = $options_avioes_id_codaviao . "<option value='" . $row_aviao['ID_CODAVIAO'] . "'>" . $row_aviao['ID_CODAVIAO'] . "</option>";
+    $options_avioes_id_aviao = $options_avioes_id_aviao . "<option value='" . $row_aviao['ID_AVIAO'] . "'>" . $row_aviao['ID_AVIAO'] . "</option>";
     $options_avioes_codigo_aviao = $options_avioes_codigo_aviao . "<option>" . $row_aviao['CODIGO_AVIAO'] . "</option>";
     $options_avioes_empresa = $options_avioes_empresa . "<option>" . $row_aviao['EMPRESA'] . "</option>";
     $options_avioes_total_assentos = $options_avioes_total_assentos . "<option>" . $row_aviao['TOTAL_ASSENTO'] . "</option>";
@@ -66,7 +66,7 @@ while($row_origem = mysqli_fetch_assoc($consulta)) {
             <select name="fk_aviao" style="display: none">
                 <option value="">--</option>
                 <?php
-                    echo "$options_avioes_id_codaviao";
+                    echo "$options_avioes_id_aviao";
                 ?>
             </select>
             <label>Codigo da Aeronave: </label>

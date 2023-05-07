@@ -1,6 +1,21 @@
 <?php 
 session_start();
 include_once('../back/conexao.php');
+
+$id = $_SESSION['id_usuario'];
+
+$query = "SELECT * FROM usuario 
+INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+INNER JOIN rg ON FK_RG = ID_RG
+WHERE ID_USUARIO='$id'";
+$query = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($query);
+
+if(empty($row)) {
+  header('Location: ../index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,17 +68,17 @@ include_once('../back/conexao.php');
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="../index.html">BAG-A-BAGₑ</a></h1>
+      <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="../index.html">HOME</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#about">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="./destinos.html">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
+          <li><a class="nav-link scrollto" href="../index.php">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="./destinos.php">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -72,8 +87,8 @@ include_once('../back/conexao.php');
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="./cadastro.php">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>" style = "margin-left: 80px;">Ver perfil</a></li>
+          <li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php" >LOGOFF</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -95,54 +110,65 @@ include_once('../back/conexao.php');
 
     <!-- ===== Div Master ===== -->
     <div class="container" style="border: solid 1px black"> 
-      <h3 class="text-center">Assentos</h3>
+      <h3 class="text-center">Assentos Primeira Classe</h3>
 
     <?php 
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos_codaviao
-    INNER JOIN aviao_codaviao ON ID_CODAVIAO = assentos_codaviao.FK_AVIAO
-    INNER JOIN voo ON ID_VOO = voo.FK_AVIAO WHERE ID_VOO = '1'
+    INNER JOIN aviao_codaviao ON aviao_codaviao.ID_CODAVIAO = assentos_codaviao.FK_AVIAO
+    INNER JOIN voo ON  voo.FK_AVIAO = aviao_codaviao.ID_CODAVIAO WHERE ID_VOO = 1 AND CLASSE = 'Primeira'
      ";
     $query = mysqli_query($conn,$comando);
-    $row_resultado = mysqli_fetch_assoc($query);
+    $row_resultado = mysqli_fetch_all($query);
+    // print_r($row_resultado);
 
-    // for ($x = 0; $x < $row_resultado; $x++){
-    //   echo $x;
-    // }
+    
+    for ($x = 0; $x < count($row_resultado); $x=$x+4){
+      for ($y = 0; $y < count($row_resultado); $y++){
+        ?>
+        <!-- ===== Linha ===== -->
+        <hr class="m-1">
+        <div class="row">
+          <!-- ======== Lado Esquerdo ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+          </div> <!-- === Fim Lado Esquerdo === -->
+          <?php
+          echo $y;
+          ?>
+          
+          <!-- ======== Lado Direito ======= -->
+          <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+            <!-- === Botao === -->
+            <button type="button" class="btn">
+              <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            </button>
+         
+          </div> <!-- === Fim Lado Direito ===-->
+          
+        </div> <!-- ==== Fim Linha 01 ==== -->
+        <?php
+      }
+    }
+      ?>
+      
+      
     
 
-    ?>
+    
 
 
-      <!-- ===== Linha 01 ===== -->
-      <hr class="m-1">
-      <div class="row">
-        <!-- ======== Lado Esquerdo ======= -->
-        <div class="col-6 col-sm-5 col-md-4 col-lg-4 col-xl-4 offset-sm-1 offset-md-2 offset-lg-2 offset-xl-2 d-flex justify-content-end">
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo 'pq n funciona?'?>aaaa">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-        </div> <!-- === Fim Lado Esquerdo === -->
-        
-        <!-- ======== Lado Direito ======= -->
-        <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-4 d-flex justify-content-start">
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-          <!-- === Botao === -->
-          <button type="button" class="btn">
-            <img src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
-          </button>
-       
-        </div> <!-- === Fim Lado Direito ===-->
-        
-      </div> <!-- ==== Fim Linha 01 ==== -->
       <hr class="m-1">
       
       
@@ -182,19 +208,19 @@ include_once('../back/conexao.php');
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#about">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="destinos.html">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#about">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="destinos.php">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
             </ul>
           </div>
 
         <div class="col-lg-3 col-md-6 footer-links">
             <h4>Conta</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="cadastro.php">Cadastre-se</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>">Ver perfil</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>
               <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->

@@ -85,7 +85,7 @@ include_once('../conexao.php');
             $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, fk_reserva, parcelas) VALUES ('Aprovado',NOW(),'Crédito','$id_reserva','$qtd_parcelas')";
             $resultado_usuario = mysqli_query($conn, $result_usuario);
             $resultado = atualizar_status_reserva($conn, $id_reserva);
-            echo "<script>location.href='../../index.html';</script>";
+            echo "<script>location.href='../../index.php';</script>";
         } else {
             echo "<script>location.href='../../pages/pagamento.php';</script>";
         }
@@ -95,7 +95,7 @@ include_once('../conexao.php');
         $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, fk_reserva, parcelas) VALUES ('Aprovado',NOW(),'Pix','$id_reserva',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         $resultado = atualizar_status_reserva($conn, $id_reserva);
-        echo "<script>location.href='../../index.html';</script>";
+        echo "<script>location.href='../../index.php';</script>";
         break;
 
     case "boleto":
@@ -103,7 +103,7 @@ include_once('../conexao.php');
         $result_usuario = "INSERT INTO pagamento (status_pagamento, data_pagamento, tipo_pagamento, fk_reserva, parcelas) VALUES ('Aprovado',NOW(),'Boleto','$id_reserva',NULL)";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         $resultado = atualizar_status_reserva($conn, $id_reserva);
-        echo "<script>location.href='../../index.html';</script>";
+        echo "<script>location.href='../../index.php';</script>";
         break;
     case "":
 

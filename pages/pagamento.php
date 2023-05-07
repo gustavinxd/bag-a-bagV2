@@ -1,3 +1,40 @@
+<?php
+  session_start();
+  include_once('../back/conexao.php');
+
+  $id = $_SESSION['id_usuario'];
+
+  $query = "SELECT * FROM usuario 
+    INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+    INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+    INNER JOIN rg ON FK_RG = ID_RG
+    WHERE ID_USUARIO='$id'";
+    $query = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($query);
+    
+    if(empty($row)) {
+      header('Location: ../index.php');
+    }
+
+   
+    
+    
+  
+ //pegando o valor total do pagamento vindo da reserva
+ $valorTotal = $_SESSION['valor_total'];
+  
+  $parcelas = array();
+
+//Faz a divisão do valor total de 1 a 12 e armazena em um array para apresenta-lo posteriormente
+for ($i = 1; $i <= 12; $i++) {
+  $valorParcela = $valorTotal / $i; //Calcula o valor de cada parcela
+  $valorParcela = ceil($valorParcela * 100) / 100; // arredonda para cima com duas casas decimais
+  $valorParcelaFormatado = number_format($valorParcela, 2, ',', '.'); // formata o valor com duas casas decimais
+  array_push($parcelas, $valorParcelaFormatado); //Armazena a parcela no array de parcelas
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,12 +42,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pagamento</title>
+  <title>>Bag-a-Bagₑ - Pagamento</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/airplane_favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -47,17 +84,17 @@
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="../index.html">BAG-A-BAGₑ</a></h1>
+      <h1 class="logo"><a href="../index.php">BAG-A-BAGₑ</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="../index.html">HOME</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#services">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="./destinos.html">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="../index.html#pricing">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="../index.html#contact">CONTATO</a></li>
+          <li><a class="nav-link scrollto" href="../index.php">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#services">SOBRE</a></li>
+          <li><a class="nav-link scrollto" href="./destinos.php">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../index.php#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../index.php#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -66,8 +103,8 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul> -->
           </li>
-          <li><a class="nav-link scrollto active" href="login.html" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="./cadastro.html">CADASTRE-SE</a></li>
+          <li><a class="getstarted scrollto" href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>" style = "margin-left: 80px;">Ver perfil</a></li>
+          <li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php" >LOGOFF</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -86,34 +123,34 @@
                     <div class="half-box">
                         <div class="col">
                           <label for = "name" class="required" style = "color: #5c9f24">Nome</label>
-                          <input type = "name" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name">
+                          <input type = "name" value="<?php echo ucfirst($row['NOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "name" id = "name" disabled>
                       </div>
                     </div>
                     <div class = "half-box">
                           <label for = "lastname" class="required" style = "color: #5c9f24">Sobrenome</label>
-                          <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                          <input type = "lastname" value= "<?php echo ucfirst($row['SOBRENOME']) ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome" disabled>
                         <br>
                     </div>
                 </div>
                 <div class="row">
                       <div class = "half-box">
                         <label for = "cpf" class="required" style = "color: #5c9f24" >CPF</label>
-                        <input type = "text" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf">
+                        <input type = "text" value="<?php echo $row['CPF'] ?>" class="form-control required" style = "background-color: #FFF; border-color: black" name = "cpf" id = "cpf" disabled>
                     </div>
                     <div class = "half-box">
                         <label for = "rg" class="required" style = "color: #5c9f24">RG</label>
-                        <input type = "text" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black">
+                        <input type = "text" value="<?php echo $row['NUMERO_RG'] ?>" name = "rg" id = "rg" class="form-control required" style = "background-color: #FFF; border-color: black" disabled>
                       <br>
                     </div>
                 </div>
                   <div class="row">
                       <div class = "half-box">
                           <label for = "email" class="required" style = "color: #5c9f24">E-mail</label>
-                          <input type = "email" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                          <input type = "email" value="<?php echo $row['EMAIL'] ?>" name = "email" id = "email" class="form-control required" style = "background-color: #FFF; border-color: #000" disabled>
                         </div>
                         <div class = "half-box">
                           <label for = "tel" class="required" style = "color: #5c9f24">Telefone</label>
-                          <input type = "tel" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black">
+                          <input type = "tel" value = "<?php echo $row['DDD'] . ' ' . $row['NUMERO_TELEFONE']?>" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black" disabled>
                         <br>
                     </div>
 
@@ -123,12 +160,12 @@
      </form>
 
         
-        <form action="" method="post">
+        <form action="../back/controller/controller_verificar_pagamento.php" method="post">
           <div class="row">
             <h3 class="h-forma">Formas de pagamento</h3>
             <div id="caixa-pagamento" class="col-8 offset-2 shadow">
 
-                <input type="radio" id="termos" name="pagamento"  value=""> <label for="">Cartão de crédito</label> 
+                <input type="radio" id="termos" name="pagamento"  value="credito"> <label for="">Cartão de crédito</label> 
                 <div id="termoConteudo">
 
                   <div class="row">
@@ -142,7 +179,7 @@
 
                     <div class = "half-box">
                         <label for = "lastname" class="required" style = "color: #5c9f24">Número do cartão</label>
-                        <input type = "lastname" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome">
+                        <input type = "lastname" name="numeroCartao" class="form-control required" style = "background-color: #FFF; border-color: black" name = "sobrenome" id = "sobrenome" maxlength="19">
                         <br>
                       </div>
                     </div>
@@ -155,7 +192,7 @@
 
                     <div class = "half-box">
                       <label for = "rg" class="required" style = "color: #5c9f24">Validade</label>
-                      <input type = "text" name = "rg" id = "rg" placeholder="MM/AA" class="form-control required" style = "background-color: #FFF; border-color: black">
+                      <input type = "text" name = "dataValidade" id = "rg" placeholder="MM/AAAA" class="form-control required" style = "background-color: #FFF; border-color: black" maxlength="7">
                       <br>
                     </div>
                   </div>
@@ -163,22 +200,33 @@
                   <div class="row">
                       <div class = "half-box">
                         <label for = "email" class="required" style = "color: #5c9f24">Código de segurança</label>
-                        <input type = "email" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000">
+                        <input type = "text" name = "email" id = "email" placeholder="CVV" class="form-control required" style = "background-color: #FFF; border-color: #000" maxlength="4">
                       </div>
+
+                      <div class = "half-box">
+                      <label for = "parcelas" class="required" style = "color: #5c9f24">Parcelas</label>
+                      <select name="parcelas" id="parcelas" class="form-control required" style = "background-color: #FFF; border-color: black">
+                        <?php foreach ($parcelas as $key => $valorParcela): ?>  <!-- estrutura de repetição -->
+                        <option value="<?php echo $key+1; ?>"><?php echo ($key+1).'x de R$ '.$valorParcela; ?></option>  <!-- Número de parcelas, e seu respectivo valor -->
+                        <?php endforeach; ?> <!-- Fim da estrutura de repetição -->
+                      </select>
+                      
+                      <br>
                     </div>
+                  </div>
                     
                 </div>
 
                     <br>
                     <hr class="linha">
-                    <input type="radio" id="termos2" name="pagamento" value=""> <label for=""> Pagar com pix </label> 
+                    <input type="radio" id="termos2" name="pagamento" value="pix"> <label for=""> Pagar com pix </label> 
                     <div id="termoConteudo2">           
                       <img src="/assets/img/pagamento/qrcode.png" id="pix" alt="" srcset="">    
                       <!-- valor total da passagem -->
 
                     </div>
                     <hr class="linha">
-                    <input type="radio" id="termos3" name="pagamento" value=""> <label for=""> Boleto </label> 
+                    <input type="radio" id="termos3" name="pagamento" value="boleto"> <label for=""> Boleto </label> 
                     <i class="bi bi-upc-scan"></i>
                     <div  id="termoConteudo3">
                       <img src="/assets/img/pagamento/codigo.jpg" id="boleto" alt="" srcset="">
@@ -227,19 +275,19 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>BAG-A-BAGₑ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#services">Sobre</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="./destinos.html">Destinos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#pricing">Ofertas</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="../index.html#contact">Contato</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#services">Sobre</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="./destinos.php">Destinos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#pricing">Ofertas</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../index.php#contact">Contato</a></li>
             </ul>
           </div>
 
         <div class="col-lg-3 col-md-6 footer-links">
             <h4>Conta</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="./cadastro.php">Cadastre-se</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="<?php echo "user.php?id=" . $row['ID_USUARIO'] ?>">Ver perfil</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="../back/controller/controller_logoff.php">Logoff</a></li>
               <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
