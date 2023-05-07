@@ -6,17 +6,27 @@ include_once('../conexao.php');
 include_once('../funcoes.php');
 
 // ID_USUARIO
-$id_usuario = 4;
+$id_usuario = 4; //$_SESSION['id_usuario'];
 
 // /\ 
 // esses dados serão recebidos por variaveis SESSION ou pelo <form>
 // \/ 
 
 // ID_VOO
-$id_voo = 1;
+$id_voo = 1; 
 
-// RECEBER OS IDs DOS ASSENTOS
-// $assentos = ;  // (tipo array)
+// OBTER OS IDs DOS ASSENTOS
+$assentos = $_SESSION['assentos'];
+$total_passageiros = count($assentos);
+
+$assentos_pks = [];
+for ($i=0; $i < $total_passageiros; $i++) { 
+    $query = "SELECT ID_ASSENTO FROM assentos INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO INNER JOIN voo ON voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO=$id_voo AND NUMERO_ASSENTO=$assentos[$i]";
+    $consulta = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($consulta);
+    
+    $assentos_pks[] = $row['ID_ASSENTO'];
+}
 
 // PEGAR OS DADOS DO(S) PASSAGEIRO(S) COM O ARRAY POST
 $array_dados = array_values($_POST);
@@ -32,10 +42,13 @@ $valor_total = $valor_passagem * $total_passageiros;
 
 // VERIFICA SE TODOS OS PASSAGEIROS POSSUEM CPF VÁLIDO
 for ($passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
+    $nome = $array_dados[0+(7*$passageiro)];
+    $sobrenome = $array_dados[1+(7*$passageiro)];
     $cpf_passageiro = $array_dados[2+(7*$passageiro)];
+
     if (!(validarCPF($cpf_passageiro))) {
-        $_SESSION['msg'] = "<p style='color:red;'>Erro. O CPF informado ($cpf_passageiro) é inválido.</p>";
-        echo "<script>history.back();</script>";
+        $_SESSION['msg'] = "<p style='color:red;'>Erro. O CPF informado para o passageiro <b> $nome $sobrenome </b> ($cpf_passageiro) é inválido.</p>";
+        echo "<script>location.href='../../pages/cadastro-passageiro.php';</script>";
         break;
     }
 }
@@ -44,11 +57,12 @@ for ($passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
 $query = "INSERT INTO reserva (STATUS_RESERVA, VALOR_TOTAL, DATA_RESERVA, DATA_STATUS, FK_USUARIO) VALUES ('Pendente', $valor_total, NOW(), NOW(), $id_usuario)";
 $consulta = mysqli_query($conn, $query);
 
+
 if (mysqli_insert_id($conn)) {
     $id_reserva = mysqli_insert_id($conn);
 } else {
     $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível criar a reserva. Tente novamente.</p>";
-    echo "<script>history.back();</script>";
+    echo "<script>location.href='../../pages/cadastro-passageiro.php';</script>";
 }
 
 // CRIAÇÃO DE PASSAGEM
@@ -61,7 +75,7 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
     $numero_telefone = $array_dados[$i++]; 
     $numero_telefone = str_replace("-", "", $numero_telefone);
     $email_passageiro = $array_dados[$i++];
-    // $fk_assento = $assentos[$passageiro];
+    $fk_assento = $assentos_pks[$passageiro];
 
     // procura por um passageiro com os dados informados no banco
     $query = "SELECT * FROM passageiro WHERE CPF_PASSAGEIRO=$cpf_passageiro AND DATA_NASC_PASSAGEIRO='$data_nasc_passageiro'";
@@ -76,14 +90,14 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
         // SE NÃO HOUVER ESTE TELEFONE NO BANCO...
         if (mysqli_num_rows($consulta) == 0) {
             // ...inserir telefone do passageiro no banco
-            $query = "INSERT INTO telefone (DDD, NUMERO_TELEFONE, MODIFICADO) VALUES ($ddd, $numero, NOW())";
+            $query = "INSERT INTO telefone (DDD, NUMERO_TELEFONE, MODIFICADO) VALUES ($ddd, $numero_telefone, NOW())";
             $consulta = mysqli_query($conn, $query);
 
             if (mysqli_insert_id($conn)) {
                 $id_telefone = mysqli_insert_id($conn);
             } else {
                 $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível realizar o cadastro. Tente novamente.</p>";
-                echo "<script>history.back();</script>";
+                echo "<script>location.href='../../pages/cadastro-passageiro.php';</script>";
                 break;
             }
 
@@ -97,12 +111,11 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
         $consulta = mysqli_query($conn, $query);
         
         if (mysqli_insert_id($conn)) {
+            $id_passageiro = mysqli_insert_id($conn);
             $_SESSION['msg'] = "<p style='color:green;'>Cadastro realizado com sucesso.</p>";
-            echo "<script>history.back();</script>";
-            break;
         } else {
             $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível realizar o cadastro. Tente novamente.</p>";
-            echo "<script>history.back();</script>";
+            echo "<script>location.href='../../pages/cadastro-passageiro.php';</script>";
             break;
         }
     }
@@ -112,12 +125,21 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
         $id_passageiro = $row['ID_PASSAGEIRO'];
     }
 
-        // CRIAR PASSAGEM
-        $query = "INSERT INTO passagem (FK_ASSENTO, FK_PASSAGEIRO, FK_VOO, FK_CUPOM, FK_RESERVA) VALUES (5, $id_passageiro, $id_voo, DEFAULT, $id_reserva)";
-        $consulta = mysqli_query($conn, $query);
-    }
+    // CRIAR PASSAGEM
+    $query = "INSERT INTO passagem (FK_ASSENTO, FK_PASSAGEIRO, FK_VOO, FK_CUPOM, FK_RESERVA) VALUES ($assentos_pks[$passageiro], $id_passageiro, $id_voo, DEFAULT, $id_reserva)";
+    $consulta = mysqli_query($conn, $query);
+}
 
-$_SESSION['valor_total'] = $valor_total;
-$_SESSION['id_reserva'] = $id_reserva;
+if (mysqli_insert_id($conn)) {        
+    $_SESSION['valor_total'] = $valor_total;
+    $_SESSION['id_reserva'] = $id_reserva;
+
+    $_SESSION['msg'] = "<p style='color:green;'>Cadastro de passageiros realizado com sucesso.</p>";
+    echo $_SESSION['msg'];
+    // echo "<script>location.href='../../pages/pagamento.php';</script>";
+} else {
+    $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível realizar o cadastro. Tente novamente.</p>";
+    echo "<script>location.href='../../pages/cadastro-passageiro.php';</script>";
+}
 
 ?>

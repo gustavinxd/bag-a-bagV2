@@ -1,12 +1,17 @@
 <?php
 session_start();
 include_once("../back/funcoes.php");
-// $_SESSION['total_passageiros'] = $_POST['total_passageiros'];
 
-$assentos_escolhidos = "6,5,9"; // filter_input(INPUT_POST, "assentos");
-$assentos = explode(",", $assentos_escolhidos);
+$str_assentos = filter_input(INPUT_POST, "assentos");
 
-$total_passageiros = sizeof($assentos);
+if (!empty($str_assentos)) {
+  $assentos = explode(",", $str_assentos);
+  $_SESSION['assentos'] = $assentos;
+} else {
+  $assentos = $_SESSION['assentos'];
+}
+
+$total_passageiros = count($assentos);
 
 ?>
 
