@@ -15,11 +15,13 @@
     if(empty($row)) {
       header('Location: ../index.html');
     }
-  
- //pegando o valor total do pagamento vindo da tabela reserva
-  // $valorTotal = $pagamento['valor'];
-  $valorTotal = 3058.81;
 
+   
+    
+    
+  
+ //pegando o valor total do pagamento vindo da reserva
+ $valorTotal = $_SESSION['valor_total'];
   
   $parcelas = array();
 
