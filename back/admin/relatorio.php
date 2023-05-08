@@ -14,7 +14,7 @@ $query1 = mysqli_query($conn, $query1);
 $row1 = mysqli_fetch_assoc($query1);
 
 if(empty($row1)) {
-  echo "<script>location.href='../../index.php';</script>";
+  echo "<script>location.href='./login.php';</script>";
 }
 
 ?>
