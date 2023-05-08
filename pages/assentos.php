@@ -2,19 +2,19 @@
 session_start(); //iniciando sessão
 include_once('../back/conexao.php'); //incluindo conexão
 
-// $id = $_SESSION['id_usuario'];
+$id = $_SESSION['id_usuario'];
 
-// $query = "SELECT * FROM usuario 
-// INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
-// INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
-// INNER JOIN rg ON FK_RG = ID_RG
-// WHERE ID_USUARIO='$id'";
-// $query = mysqli_query($conn, $query);
-// $row = mysqli_fetch_assoc($query);
+$query = "SELECT * FROM usuario 
+INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+INNER JOIN rg ON FK_RG = ID_RG
+WHERE ID_USUARIO='$id'";
+$query = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($query);
 
-// if(empty($row)) {
-//   header('Location: ../pages/login.html');
-// }
+if(empty($row)) {
+  header('Location: ../pages/login.html');
+}
 
 ?>
 
