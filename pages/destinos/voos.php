@@ -349,7 +349,7 @@ include_once("../../back/conexao.php"); //incluindo conexão
                   <!-- Informações do Vôo -->
                   <div class="col-9" id="card-voo-left">
                     <div class="card-title row">
-                      <h5 class="col-3" style="color:#3A5C1D;">IDA <?php echo $id_voo ?></h5>
+                      <h5 class="col-3" style="color:#3A5C1D;">IDA <?php // echo $id_voo ?></h5>
                       <h5 class="col-9 text-center"><?php echo $locais_ida_origem ?> ➝ <?php echo $locais_ida_destino?></h5>
                     </div>
 
