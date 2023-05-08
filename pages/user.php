@@ -17,90 +17,36 @@
     header('Location: ../index.html');
   }
 
-  // Pegando dados para imprimir nos campos de origem, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
+  //Pegando dados para imprimir nos campos de origem, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
 
-  // $query2 = "SELECT * FROM passagem
-  // INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
-  // INNER JOIN voo ON FK_VOO = ID_VOO
-  // INNER JOIN aeroporto ON FK_ORIGEM_AERO = ID_AEROPORTO
-  // INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-  //  WHERE STATUS_RESERVA = 'Confirmada' AND FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC ";
-  // $query2 = mysqli_query($conn, $query2);
-  
-  
-  // //Pegando dados para imprimir nos campos de destino, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
-  // $query3 = "SELECT * FROM passagem
-  // INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
-  // INNER JOIN voo ON FK_VOO = ID_VOO
-  // INNER JOIN aeroporto ON FK_DESTINO_AERO = ID_AEROPORTO
-  // INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-  //  WHERE STATUS_RESERVA = 'Confirmada' AND FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC  ";
-  // $query3 = mysqli_query($conn, $query3);
- 
-  $query4= "SELECT ID_RESERVA FROM reserva WHERE FK_USUARIO = '$id' AND STATUS_RESERVA = 'Confirmada'";
-  $result4 = mysqli_query($conn, $query4);
-  $row4 = mysqli_fetch_assoc($result4);
-  $reservas_ids = [];
-  $j = 0;
-  $total_reserva = 0; 
-  while ($row4 = mysqli_fetch_assoc($result4)) {
-    $total_reserva++;
-    $reservas_ids[$j] = $row4['ID_RESERVA'];
-    $j++;
-  }
-  var_dump($reservas_ids);
-  for ($i=0; $i < count($reservas_ids) ; $i++) { 
-    
-  } 
-  $query1 = "SELECT DISTINCT *
-  FROM passagem
+  $query2 = "SELECT * FROM passagem
   INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
   INNER JOIN voo ON FK_VOO = ID_VOO
-  INNER JOIN aeroporto AS origem ON FK_ORIGEM_AERO = origem.ID_AEROPORTO
-  INNER JOIN aeroporto AS destino ON FK_DESTINO_AERO = destino.ID_AEROPORTO
+  INNER JOIN aeroporto ON FK_ORIGEM_AERO = ID_AEROPORTO
+  INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_VOLTA
+   WHERE STATUS_RESERVA = 'Confirmada' AND FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC LIMIT 1";
+  $query2 = mysqli_query($conn, $query2);
+  $row2 = mysqli_fetch_assoc($query2);
+  
+  //Pegando dados para imprimir nos campos de destino, tipo de passagem, numero do aviao(ida, volta), e preço da reserva
+  $query3 = "SELECT * FROM passagem
+  INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
+  INNER JOIN voo ON FK_VOO = ID_VOO
+  INNER JOIN aeroporto ON FK_DESTINO_AERO = ID_AEROPORTO
   INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-  WHERE FK_USUARIO = '$reservas_ids[$x]' AND STATUS_RESERVA = 'Confirmada'
-  ORDER BY ID_RESERVA DESC;";
+   WHERE STATUS_RESERVA = 'Confirmada' AND FK_USUARIO = '$id' ORDER BY ID_RESERVA DESC LIMIT 1 ";
+  $query3 = mysqli_query($conn, $query3);
+  $row3 = mysqli_fetch_assoc($query3);
 
-$result1 = mysqli_query($conn, $query1);
-
-
-$query2 = "SELECT DISTINCT passagem.*, aviao.*, origem.CIDADE as ORIGEM_CIDADE, destino.CIDADE as DESTINO_CIDADE
+  $query = "SELECT *
 FROM passagem
+INNER JOIN passageiro ON FK_PASSAGEIRO = ID_PASSAGEIRO
+INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE
 INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
-INNER JOIN voo ON FK_VOO = ID_VOO
-INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-JOIN aeroporto origem ON voo.FK_ORIGEM_AERO = origem.ID_AEROPORTO
-JOIN aeroporto destino ON voo.FK_DESTINO_AERO = destino.ID_AEROPORTO
-WHERE FK_USUARIO = '$id' AND STATUS_RESERVA = 'Confirmada'
-ORDER BY ID_RESERVA DESC;";
+WHERE FK_USUARIO = '$id' AND STATUS_RESERVA = 'Confirmada' AND ID_RESERVA = (SELECT MAX(ID_RESERVA) FROM reserva WHERE FK_USUARIO = '$id' AND STATUS_RESERVA = 'Confirmada')";
 
-$result2 = mysqli_query($conn, $query2);
+$result = mysqli_query($conn, $query);
 
-$query3 = "SELECT a1.CODIGO_AVIAO AS CODIGO_AVIAO_IDA, a2.CODIGO_AVIAO AS CODIGO_AVIAO_VOLTA
-FROM passagem
-INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
-INNER JOIN voo ON FK_VOO = ID_VOO
-INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-JOIN aviao a1 ON FK_AVIAO_IDA = a1.ID_AVIAO
-JOIN aviao a2 ON FK_AVIAO_VOLTA = a2.ID_AVIAO
-WHERE FK_USUARIO = '$id' AND STATUS_RESERVA = 'Confirmada'
-ORDER BY ID_RESERVA DESC;";
-
-$result3 = mysqli_query($conn, $query3);
-
-// Criar o array associativo combinando os resultados dos dois SELECTs
-$data = array();
-while ($row2 = mysqli_fetch_assoc($result2)) {
-  $row1 = mysqli_fetch_assoc($result1);
-  $combined_row = array_merge($row1, $row2);
-  $row3 = mysqli_fetch_assoc($result3);
-  $final_row = array_merge($combined_row, $row3);
-  $data[] = $final_row;
-}
-
-
-// var_dump($data);
   
 
 if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
@@ -219,42 +165,31 @@ if (!empty($row3['FK_AVIAO_IDA']) && !empty($row2['FK_AVIAO_VOLTA'])) {
     </section>
 
     <section id="reservar" class="container">
-    <h2 class="text-center">Últimas Reservas</h2>
-    
-    <?php for ($i=0; $i < count($data); $i++) {  ?>
-        <div class="card col-12 mt-5" style="width: 100%;">
-            <div class="card-body">
-                <h5 class="card-title">ID da Reserva: <?php echo $data[$i]['ID_RESERVA'] ?></h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Origem : <?php echo $data[$i]['ORIGEM_CIDADE'] ?> </h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Destino : <?php echo $data[$i]['DESTINO_CIDADE'] ?> </h6>
-                <p class="card-text mt-2">Tipo da passagem: <?php echo $tipo_passagem ?></p>
-                <p class="card-text mt-2">Código do avião de ida: <?php echo $data[$i]['CODIGO_AVIAO_IDA'] ?> </p>
-                <p class="card-text mt-2">Código do avião de volta: <?php echo $data[$i]['CODIGO_AVIAO_VOLTA'] ?> </p>
-                <p class="card-text mt-2">Preço: <?php echo $data[$i]['VALOR_TOTAL'] ?> </p>
-        <h5 class="card-title">Detalhes do(s) passageiro(s)</h5>
-        <?php 
-          $query_passageiro = "SELECT * FROM passagem
-           INNER JOIN reserva ON ID_RESERVA = FK_RESERVA
-           INNER JOIN voo ON FK_VOO = ID_VOO
-           INNER JOIN aeroporto ON FK_DESTINO_AERO = ID_AEROPORTO
-           INNER JOIN aviao ON ID_AVIAO = FK_AVIAO_IDA
-           INNER JOIN passageiro ON FK_PASSAGEIRO = ID_PASSAGEIRO
-           INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE
-                              WHERE FK_RESERVA = ".$data[$i]['ID_RESERVA'];
-          $result_passageiro = mysqli_query($conn, $query_passageiro);
-          while ($row_passageiro = mysqli_fetch_assoc($result_passageiro)) { 
-            $data_formatada = date("d/m/Y", strtotime($row_passageiro['DATA_NASC_PASSAGEIRO']));
-        ?>
-            <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Nome: <?php echo ucfirst($row_passageiro['NOME_PASSAGEIRO']) . ' ' . $row_passageiro['SOBRENOME_PASSAGEIRO']; ?></h6>
-            <p class="card-text mt-2">E-mail: <?php echo $row_passageiro['EMAIL_PASSAGEIRO']; ?></p>
-            <p class="card-text mt-2">CPF: <?php echo $row_passageiro['CPF_PASSAGEIRO']; ?></p>
-            <p class="card-text mt-2">Data de nascimento: <?php echo $data_formatada; ?></p>
-            <p class="card-text mt-2">Telefone: <?php echo $row_passageiro['DDD'] . ' ' . $row_passageiro['NUMERO_TELEFONE']; ?></p>
-        <?php }?>
+      <h2 class="text-center">Última Reserva</h2>
+      <div class="card col-12 mt-5" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">ID da Reserva: <?php echo $row3['ID_RESERVA'] ?></h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Origem : <?php echo $row2['CIDADE'] ?> </h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-4">Destino : <?php echo $row3['CIDADE'] ?> </h6>
+          <p class="card-text mt-2">Tipo da passagem: <?php echo $tipo_passagem ?></p>
+          <p class="card-text mt-2">Código do avião de ida: <?php echo $row3['CODIGO_AVIAO'] ?> </p>
+          <p class="card-text mt-2">Código do avião de volta: <?php echo $row2['CODIGO_AVIAO'] ?> </p>
+          <p class="card-text mt-2">Preço: R$ <?php echo $row3['VALOR_TOTAL'] ?> </p>
+          <h5 class="card-title">Detalhes do(s) passageiro(s)</h5>
+          <?php while ($row = mysqli_fetch_assoc($result)) {
+            // exibir informações do passageiro
+            $data_formatada = date("d/m/Y", strtotime($row['DATA_NASC_PASSAGEIRO']));
+      // exibe a data formatada
+          echo "<br><h6 class=card-subtitle mb-2 text-body-secondary mt-4> Nome: " . ucfirst($row['NOME_PASSAGEIRO']) . ' ' . $row['SOBRENOME_PASSAGEIRO'] . "</h6><br>";" ";
+          echo "<p class=card-text mt-2> E-mail: " . $row['EMAIL_PASSAGEIRO']  . "</p>";" ";
+          echo "<p class=card-text mt-2> CPF: " . $row['CPF_PASSAGEIRO']  . "</p>";" ";
+          echo "<p class=card-text mt-2> Data de nascimento: " . $data_formatada  . "</p>";" ";
+          echo "<p class=card-text mt-2> Telefone: " . $row['DDD'] . ' ' . $row['NUMERO_TELEFONE'] . "</p>";" ";
+          }
+          ?>
+        </div>
       </div>
-    </div>
-  <?php }?>
-</section> 
+    </section>
   </main>
 
 
