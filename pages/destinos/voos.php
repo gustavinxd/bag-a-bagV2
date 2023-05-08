@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start(); //iniciando sessão
 include_once("../../back/conexao.php"); //incluindo conexão
 
@@ -58,27 +58,46 @@ include_once("../../back/conexao.php"); //incluindo conexão
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="#">HOME</a></li>
-          <li><a class="nav-link scrollto" href="#">SOBRE</a></li>
-          <li><a class="nav-link scrollto active" href="">DESTINOS</a></li>
-          <li><a class="nav-link scrollto " href="#">OFERTAS</a></li>
-          <li><a class="nav-link scrollto" href="#">CONTATO</a></li>
+          <li><a class="nav-link scrollto " href="../../index.php">HOME</a></li>
+          <li><a class="nav-link scrollto" href="../../index.php#about">SOBRE</a></li>
+          <li><a class="nav-link scrollto active" href="../destinos.php">DESTINOS</a></li>
+          <li><a class="nav-link scrollto " href="../../index.php#pricing">OFERTAS</a></li>
+          <li><a class="nav-link scrollto" href="../../index.php#contact">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul> -->
+              <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li><a href="#">Drop Down 2</a></li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+              </ul> -->
           </li>
-          <li><a class="nav-link scrollto" href="#contact" style = "margin-left: 80px;">LOGIN</a></li>
-          <li><a class="getstarted scrollto" href="#about">CADASTRE-SE</a></li>
+          <?php
+          //VERIFICANDO SE TEM UM USUARIO LOGADO
+          if (isset($_SESSION['id_usuario'])) {
+            $id = $_SESSION['id_usuario'];
+
+            $query = "SELECT * FROM usuario 
+              INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+              INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+              WHERE ID_USUARIO='$id'";
+            $query = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($query);
+            //SE ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+            echo '<li><a class="getstarted scrollto" href="user.php?id=' . $row["ID_USUARIO"] . '" style="margin-left: 80px;">Ver perfil</a></li>';
+            echo '<li><a class="nav-link scrollto" href="../back/controller/controller_logoff.php">LOGOFF</a></li>';
+          } else {
+            //SE NÃO ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
+            echo '<li><a class="nav-link scrollto" href="login.html" style="margin-left: 80px;">LOGIN</a></li>';
+            echo '<li><a class="getstarted scrollto" href="cadastro.php">CADASTRE-SE</a></li>';
+          }
+          ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
   <!-- ======= Carrossel ======= -->
   <section id="hero" style="height: 40vw;">
@@ -100,14 +119,14 @@ include_once("../../back/conexao.php"); //incluindo conexão
   </section><!-- fim do carrossel -->
 
   <main id="main" class="container-fluid">
-    
-  <!-- ============================ Modal de Filtragem ==============================-->
+
+    <!-- ============================ Modal de Filtragem ==============================-->
     <div id="meuModal" class="modal fade" role="dialog" style="z-index: 99991;">
-    
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
-    
+
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
         <div class="modal-content">
-          
+
           <form action="" method="POST">
             <div class="container">
               <div class="row">
@@ -128,14 +147,14 @@ include_once("../../back/conexao.php"); //incluindo conexão
                         Todas as Paradas
                       </label>
                     </div>
-        
+
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="paradas" id="dois" value="">
                       <label class="form-check-label" for="dois">
                         Direto
                       </label>
                     </div>
-        
+
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="paradas" id="tres" value="">
                       <label class="form-check-label" for="tres">
@@ -172,11 +191,11 @@ include_once("../../back/conexao.php"); //incluindo conexão
                       </label>
                     </div>
                     <!--  ================ Área Referente ao Preço ============== -->
-                    
+
 
                     <!--  ================ Área Referente a Classe do Vôo ============== -->
                     <h5 class="mt-4">Classe</h5>
-                    
+
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" name="classe" id="um" value="" checked>
                       <label class="form-check-label" for="um">
@@ -213,7 +232,7 @@ include_once("../../back/conexao.php"); //incluindo conexão
                         Noite / 18:00 - 18:00
                       </label>
                     </div>
-                    <!--  ================ Área Referente ao Horário de Saída ============== -->  
+                    <!--  ================ Área Referente ao Horário de Saída ============== -->
                     <h5 class="mt-4">Horário de Saída</h5>
 
                     <div class="form-check">
@@ -236,7 +255,7 @@ include_once("../../back/conexao.php"); //incluindo conexão
                         Noite / 18:00 - 18:00
                       </label>
                     </div>
-                    
+
                   </div>
                   <!-- ========= Fim Div Child 1 Modal ========= -->
                   <!--- ================ Botões de Submit ========================-->
@@ -248,40 +267,40 @@ include_once("../../back/conexao.php"); //incluindo conexão
                       Aplicar
                     </button>
                   </div>
-    
-                </div>  <!-- ==== Fim Div Master =====-->
-    
+
+                </div> <!-- ==== Fim Div Master =====-->
+
               </div> <!-- === Fim Div Row ===-->
-    
+
             </div> <!-- === Fim Container ===-->
           </form>
-    
+
         </div>
-        
-          
+
+
       </div>
     </div>
-  <!-- ========================== Fim Modal de Filtragem ======================================= -->
-      
+    <!-- ========================== Fim Modal de Filtragem ======================================= -->
+
 
     <!-- ================== Div Master ================= -->
     <div style="border: solid 0px blue;" class="">
-      
-      <!-- ================= Area de Passagens ================= -->
-        <div class="mb-2 container mt-3 shadow rounded" id="form-filtros">
-          <!-- ================== Conteúdo ================= -->
-          <div class="container text-center">
-            <h1 class="mt-3 mb-3">Vôos</h1>
-            
-            <button type="button" id="botao-modal" class="btn btn-outline-success mb-5" data-bs-toggle="modal" data-bs-target="#meuModal">
-              Filtrar e Ordenar
-            </button>
-          </div>
 
-          <?php
-          //Descobrir e Listar todos os Vôos Existentes
-          
-          $comando = 
+      <!-- ================= Area de Passagens ================= -->
+      <div class="mb-2 container mt-3 shadow rounded" id="form-filtros">
+        <!-- ================== Conteúdo ================= -->
+        <div class="container text-center">
+          <h1 class="mt-3 mb-3">Vôos</h1>
+
+          <button type="button" id="botao-modal" class="btn btn-outline-success mb-5" data-bs-toggle="modal" data-bs-target="#meuModal">
+            Filtrar e Ordenar
+          </button>
+        </div>
+
+        <?php
+        //Descobrir e Listar todos os Vôos Existentes
+
+        $comando =
           "SELECT 
           voo.ID_VOO,
           voo.VALOR_PASSAGEM,
@@ -312,58 +331,59 @@ include_once("../../back/conexao.php"); //incluindo conexão
           LEFT JOIN aviao AS av2 ON voo.FK_AVIAO_VOLTA = av2.ID_AVIAO
           ";
 
-          $query = mysqli_query($conn,$comando);
-          $row_resultado = mysqli_fetch_all($query);
+        $query = mysqli_query($conn, $comando);
+        $row_resultado = mysqli_fetch_all($query);
 
 
-          // var_dump($row_resultado[5][0]);
-          
-          $x = 0;
+        // var_dump($row_resultado[5][0]);
 
-          while ($x < (count($row_resultado))){
-            $x = $x + 1;
-            //Variável que Representa o ID do Voo
-            $id_voo = $row_resultado[$x-1][0];//<- Esse último número representa a coluna a ser obtida as informações, indo de 0(id_voo) até 11(nome_aeroporto_escala_volta) 
-            
-            //obter local de origem ida
-            $local_ida_full = $row_resultado[$x-1][8];
-            $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
-            $locais_ida_origem = preg_replace($pattern,'',$local_ida_full);
+        $x = 0;
 
-            //obter local de origem ida
-            $local_volta_full = $row_resultado[$x-1][9];
-            $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
-            $locais_ida_destino = preg_replace($pattern,'',$local_volta_full);
+        while ($x < (count($row_resultado))) {
+          $x = $x + 1;
+          //Variável que Representa o ID do Voo
+          $id_voo = $row_resultado[$x - 1][0]; //<- Esse último número representa a coluna a ser obtida as informações, indo de 0(id_voo) até 11(nome_aeroporto_escala_volta) 
 
-            //obter valor da cadeira
-            $_SESSION['valor_poltrona'] = $row_resultado[$x-1][1]
+          //obter local de origem ida
+          $local_ida_full = $row_resultado[$x - 1][8];
+          $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
+          $locais_ida_origem = preg_replace($pattern, '', $local_ida_full);
+
+          //obter local de origem ida
+          $local_volta_full = $row_resultado[$x - 1][9];
+          $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
+          $locais_ida_destino = preg_replace($pattern, '', $local_volta_full);
+
+          //obter valor da cadeira
+          $_SESSION['valor_poltrona'] = $row_resultado[$x - 1][1]
 
 
-            ?>
+        ?>
           <!-- ===== Card dos Vôos Existentes ====== -->
-          <a href="../assentos.php?voo=<?php echo $id_voo?>"> <!-- Enviar para Tela de Assentos -->
+          <a href="../assentos.php?voo=<?php echo $id_voo ?>"> <!-- Enviar para Tela de Assentos -->
             <div class="card mb-3 shadow" id="cards-bab" style="width: 90%; margin: 0 auto;">
               <div class="card-body" id="demo" style="padding: 0;">
-                
-              <div class="row">
+
+                <div class="row">
                   <!-- Informações do Vôo -->
                   <div class="col-9" id="card-voo-left">
                     <div class="card-title row">
-                      <h5 class="col-3" style="color:#3A5C1D;">IDA <?php // echo $id_voo ?></h5>
-                      <h5 class="col-9 text-center"><?php echo $locais_ida_origem ?> ➝ <?php echo $locais_ida_destino?></h5>
+                      <h5 class="col-3" style="color:#3A5C1D;">IDA <?php // echo $id_voo 
+                                                                    ?></h5>
+                      <h5 class="col-9 text-center"><?php echo $locais_ida_origem ?> ➝ <?php echo $locais_ida_destino ?></h5>
                     </div>
 
                     <hr>
                     <div class="row card-subtitle mb-2 text-body-secondary">
                       <h6 class="col-3">
-                        <i class="bi bi-check-circle" style="color:green;"></i>  
-                        <?php echo $row_resultado[$x-1][6]?>
+                        <i class="bi bi-check-circle" style="color:green;"></i>
+                        <?php echo $row_resultado[$x - 1][6] ?>
                       </h6>
-                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][2])) ?> ➝ <?php echo date('d/m/y H:m',strtotime($row_resultado[$x-1][3])) ?></h6>
+                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m', strtotime($row_resultado[$x - 1][2])) ?> ➝ <?php echo date('d/m/y H:m', strtotime($row_resultado[$x - 1][3])) ?></h6>
                     </div>
 
                     <hr>
-                    
+
                     <div class="card-title row">
                       <h5 class="col-3" style="color:#3A5C1D;">VOLTA</h5>
                       <h5 class="col-9 text-center">A definir ➝ A definir</h5>
@@ -372,25 +392,25 @@ include_once("../../back/conexao.php"); //incluindo conexão
                     <hr>
                     <div class="row card-subtitle mb-2 text-body-secondary">
                       <h6 class="col-3">
-                        <i class="bi bi-check-circle" style="color:green;"></i> 
-                        <?php echo $row_resultado[$x-1][7] ?>
+                        <i class="bi bi-check-circle" style="color:green;"></i>
+                        <?php echo $row_resultado[$x - 1][7] ?>
                       </h6>
-                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][4])) ?> ➝ <?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][5])) ?></h6>
+                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m', strtotime($row_resultado[$x - 1][4])) ?> ➝ <?php echo date('d/m/Y H:m', strtotime($row_resultado[$x - 1][5])) ?></h6>
                     </div>
-                    
+
                   </div>
                   <!-- Valor do Vôo -->
                   <div class="text-center col-3 " id="card-voo-right">
-                    <h4 class="card-title mt-5"><?php echo $row_resultado[$x-1][1]; ?></h4>
+                    <h4 class="card-title mt-5"><?php echo $row_resultado[$x - 1][1]; ?></h4>
                     <h6 class="card-subtitle mt-1 text-body-secondary">por adulto, sem taxas</h6>
                     <p class="mt-2" style="margin:-2px;">ou</p>
-                    <p class="mt-1">12x de R$<?php echo number_format($row_resultado[$x-1][1]/12, 2,'.',""); ?></p>
+                    <p class="mt-1">12x de R$<?php echo number_format($row_resultado[$x - 1][1] / 12, 2, '.', ""); ?></p>
 
                     <!-- <input type="button" class="btn btn-success mt-3" value="Fazer Pedido"> -->
                   </div>
                 </div>
 
-              </div>  <!-- Card Body -->
+              </div> <!-- Card Body -->
 
             </div> <!-- ==================== Fim Card ===================== -->
           </a>
@@ -398,15 +418,15 @@ include_once("../../back/conexao.php"); //incluindo conexão
         } //Fim While
         ?>
 
-        </div>  <!-- ===== Fim Área de Passsagens ===== -->
-          
+      </div> <!-- ===== Fim Área de Passsagens ===== -->
 
-        
-      </div><!-- Fim Div Master -->
 
-    
-    
-      
+
+    </div><!-- Fim Div Master -->
+
+
+
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -446,7 +466,7 @@ include_once("../../back/conexao.php"); //incluindo conexão
             </ul>
           </div>
 
-        <div class="col-lg-3 col-md-6 footer-links">
+          <div class="col-lg-3 col-md-6 footer-links">
             <h4>Conta</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
@@ -478,7 +498,7 @@ include_once("../../back/conexao.php"); //incluindo conexão
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
-        Designed by  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
   </footer><!-- End Footer -->

@@ -3,6 +3,7 @@
 include_once('../conexao.php');
 
  $qtd_parcelas = $_POST['parcelas'];  // quantidade de parcelas escolhida pelo usuário na página pagamento.php
+ $valorTotal = $_SESSION['valor_total'];
  $opcao = $_POST["pagamento"];
 
  $id_reserva = $_SESSION['id_reserva']; // Obter o ID_RESERVA da variável de sessão
