@@ -11,7 +11,7 @@ $consulta = mysqli_query($conn, $query);
 
 if (!(mysqli_num_rows($consulta)==0)) {
     $_SESSION["msg"] = "<p style='color: red;' class='text-center'>Cadastro não realizado. Código de aeronave já cadastrado</p>";
-    echo "<script>location.href='../admin/cadastro_aviao.php';</script>";
+    echo "<script>location.href='../admin/aviao.php';</script>";
 }
 
 // adicionar o avião ao banco
@@ -38,7 +38,5 @@ if (mysqli_insert_id($conn)) {
 }
 else {
     $_SESSION['msg'] = "<p style='color:red;'>Erro. Não foi possível inserir o avião ao banco de dados. Tente novamente</p>";
-    header('Location: ../cadastro_aviao.php');
+    echo "<script>location.href='../admin/aviao.php';</script>";
 }
-
-?>
