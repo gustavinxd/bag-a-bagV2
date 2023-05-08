@@ -68,8 +68,10 @@ if (empty($aviao_volta)) {
 } else {
 	$query = "INSERT INTO voo 
 	(FK_ORIGEM_AERO, FK_DESTINO_AERO, FK_ESCALA_IDA, FK_ESCALA_VOLTA, VALOR_PASSAGEM, IDA_HORARIO_PARTIDA, IDA_HORARIO_CHEGADA, VOLTA_HORARIO_PARTIDA, VOLTA_HORARIO_CHEGADA, FK_AVIAO_IDA, FK_AVIAO_VOLTA, CRIADO) 
-	VALUES ('$aeroporto_origem', '$aeroporto_destino', '$fk_escala_ida', '$fk_escala_volta', '$valor_passagem', '$horario_partida_ida', '$horario_chegada_ida', '$horario_partida_volta', '$horario_chegada_volta', '$aviao_ida', '$aviao_volta', NOW())";
+	VALUES ('$aeroporto_origem', '$aeroporto_destino', $fk_escala_ida, $fk_escala_volta, '$valor_passagem', '$horario_partida_ida', '$horario_chegada_ida', '$horario_partida_volta', '$horario_chegada_volta', '$aviao_ida', '$aviao_volta', NOW())";
 }
+
+echo $query;
 
 mysqli_query($conn, $query);
 

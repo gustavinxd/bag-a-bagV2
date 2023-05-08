@@ -152,8 +152,12 @@ $total_voos = mysqli_num_rows($consulta);
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn btn-outline-primary" style="margin-right: 5px;">Editar</button>
-
+                                <?php
+                                echo
+                                "<a href='./editar_voo.php?id=" . $voo['ID_VOO'] .  "'>
+                                <button type='button' class='btn btn-outline-primary' style='margin-right: 5px;''>Editar</button>
+                                </a>"
+                                ?>
                                 <?php echo
                                 "<a href='../controller/controller_deletar_voo.php?id=" . $voo['ID_VOO'] . "'>
                                     <button type='submit' class='btn btn-outline-danger'>Excluir</button>
