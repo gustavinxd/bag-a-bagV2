@@ -38,7 +38,7 @@ $total_voos = mysqli_num_rows($consulta);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Painel Voo</title>
     <!-- Favicons -->
     <link href="../../assets/img/airplane_favicon.png" rel="icon">
     <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -74,7 +74,7 @@ $total_voos = mysqli_num_rows($consulta);
                     <li><a class="nav-link scrollto " href="./admin.php">PAINEL</a></li>
                     <li><a class="nav-link scrollto active" href="./voo.php">VOO</a></li>
                     <li><a class="nav-link scrollto" href="./aviao.php">AVIAO</a></li>
-                    <li><a class="nav-link scrollto " href="./aerporto.php">AEROPORTO</a></li>
+                    <li><a class="nav-link scrollto " href="./aeroporto.php">AEROPORTO</a></li>
                     <li><a class="nav-link scrollto" href="./cupom.php">CUPOM</a></li>
                     <li><a class="nav-link scrollto" href="./relatorio.php">RELATORIO</a></li>
                     <li><a class="nav-link scrollto" href="./perfis.php">PERFIS</a></li>

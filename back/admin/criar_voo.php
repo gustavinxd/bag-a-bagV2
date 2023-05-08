@@ -22,7 +22,7 @@ $aeroporto = mysqli_fetch_assoc($consulta_aeroporto);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro Voo</title>
     <!-- Favicons -->
     <link href="../../assets/img/airplane_favicon.png" rel="icon">
     <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -58,7 +58,7 @@ $aeroporto = mysqli_fetch_assoc($consulta_aeroporto);
                     <li><a class="nav-link scrollto " href="./admin.php">PAINEL</a></li>
                     <li><a class="nav-link scrollto active" href="./voo.php">VOO</a></li>
                     <li><a class="nav-link scrollto" href="./aviao.php">AVIAO</a></li>
-                    <li><a class="nav-link scrollto " href="./aerporto.php">AEROPORTO</a></li>
+                    <li><a class="nav-link scrollto " href="./aeroporto.php">AEROPORTO</a></li>
                     <li><a class="nav-link scrollto" href="./cupom.php">CUPOM</a></li>
                     <li><a class="nav-link scrollto" href="./relatorio.php">RELATORIO</a></li>
                     <li><a class="nav-link scrollto" href="./perfis.php">PERFIS</a></li>
@@ -149,6 +149,39 @@ $aeroporto = mysqli_fetch_assoc($consulta_aeroporto);
                         <h3 class="mt-4">Horario chegada Volta</h3>
                         <input type="datetime-local" name="horario_chegada_volta">
                     </div>
+                </div>
+
+                <div>
+                    <h3 class="mt-4">Aeroporto Escala Ida</h3>
+                    <select name="aeroporto_escala_ida" id="" >
+                        <option value="">--</option>
+                        <?php mysqli_data_seek($consulta_aeroporto, 0);
+                            while ($aeroporto = mysqli_fetch_assoc($consulta_aeroporto)) { ?>
+                            <option value="<?php echo $aeroporto['ID_AEROPORTO']?>"><?php echo $aeroporto['NOME_AEROPORTO'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <label for="">Previsão Escala Ida</label>
+                    <input type="datetime-local" name="horario_ida_escala">
+                    <label for="">Duração Escala Ida</label>
+                    <input type="time" name="tempo_escala_ida" step="1">
+
+                    <h3 class="mt-4">Aeroporto Escala Volta</h3>
+                    <select name="aeroporto_escala_volta" id="" >
+                        <option value="">--</option>
+                        <?php mysqli_data_seek($consulta_aeroporto, 0);
+                            while ($aeroporto = mysqli_fetch_assoc($consulta_aeroporto)) { ?>
+                            <option value="<?php echo $aeroporto['ID_AEROPORTO']?>"><?php echo $aeroporto['NOME_AEROPORTO'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <label for="">Previsão Escala Volta</label>
+                    <input type="datetime-local" name="horario_volta_escala">
+                    <label for="">Duração Escala Volta</label>
+                    <input type="time" name="tempo_escala_volta" step="1">
+                </div>
+
+                <div>
+                    <h3 class="mt-4">Valor Passagem</h3>
+                    <input type="text" name="valor_passagem">
                 </div>
                 <div class="mt-4 card-footer text-center">
                     <input class="btn btn-primary" type="submit"></input>

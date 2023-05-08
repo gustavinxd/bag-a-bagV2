@@ -52,7 +52,7 @@
         
         if (mysqli_insert_id($conn)) {
             $_SESSION["msg"] = "<p style='color: green;' class='text-center'>CADASTRO REALIZADO COM SUCESSO</p>";
-            echo "<script>location.href='../admin/aerporto.php';</script>";
+            echo "<script>location.href='../admin/aeroporto.php';</script>";
         }
     } else {
         $_SESSION["msg"] = "<p style='color: red;'>Cadastro não realizado. Sigla e/ou nome já cadastrado</p>";
