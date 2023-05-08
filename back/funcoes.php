@@ -30,9 +30,63 @@ function validarRG($rg) {
 
 // VALIDAR CPF
 function validarCPF($cpf) {
+    if (strlen($cpf) == 11){
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            return false;
+        } else {
+            $a = 10;
+            $c = 11;
+            $calculo = 0;
+            $calculo2 = 0;
 
-    // Remover pontos e traços do número de CPF
-    $cpf = preg_replace('/\D/', '', $cpf);
+            // VALIDAÇÃO DO PRIMEIRO NÚMERO
+            for ($i = 0; $i < 9; $i++) {
+                $calculo = $calculo + ($cpf[$i] * ($a--));
+            }
+            $resultado = $calculo % 11;
+            $primeiro_numero = 11 - $resultado;
+
+            if ($primeiro_numero > 10) {
+                $primeiro_numero = 0;
+            }
+
+
+            if ($primeiro_numero != $cpf[9]) {
+                return false;
+            } 
+            // VALIDAÇÃO SEGUNDO NÚMERO
+            else {
+                for ($b = 0; $b < 10; $b++) {
+                    $calculo2 = $calculo2 + ($cpf[$b] * ($c--));
+                }
+                $resultado2 = $calculo2 % 11;
+                $segundo_numero = 11 - $resultado2;
+
+
+                if ($segundo_numero > 10) {
+                    $segundo_numero = 0;
+                }
+
+                if ($segundo_numero != $cpf[10]) {
+                    return false;
+                    //$_SESSION["cpf"] = "<p style='color: red;'>CPF inválido</p>";
+                }
+                else {
+                    return true;
+
+                    
+                }
+            }
+        }
+    } else {
+        return false;
+    }
+}
+
+function validarDataRg($data_emissao){
+    $data_atual = date("Y-m-d");
+    $diff = date_diff(date_create($data_emissao), date_create($data_atual));
+    $idade = $diff->format('%y');
     
     // Verificar se o número de CPF tem 11 dígitos
     if (strlen($cpf) != 11) {
