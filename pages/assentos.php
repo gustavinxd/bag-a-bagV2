@@ -1,20 +1,20 @@
 <?php 
-session_start();
-include_once('../back/conexao.php');
+session_start(); //iniciando sessão
+include_once('../back/conexao.php'); //incluindo conexão
 
-$id = $_SESSION['id_usuario'];
+// $id = $_SESSION['id_usuario'];
 
-$query = "SELECT * FROM usuario 
-INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
-INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
-INNER JOIN rg ON FK_RG = ID_RG
-WHERE ID_USUARIO='$id'";
-$query = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($query);
+// $query = "SELECT * FROM usuario 
+// INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+// INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+// INNER JOIN rg ON FK_RG = ID_RG
+// WHERE ID_USUARIO='$id'";
+// $query = mysqli_query($conn, $query);
+// $row = mysqli_fetch_assoc($query);
 
-if(empty($row)) {
-  header('Location: ../index.php');
-}
+// if(empty($row)) {
+//   header('Location: ../pages/login.html');
+// }
 
 ?>
 
@@ -99,11 +99,44 @@ if(empty($row)) {
 <main style="margin-top: 100px" class="text-center"> <!-- ======== Início Main ========= -->
 
 <!-- ===== Div Master ===== -->
-<div class="container mb-3 shadow" style="border: solid 1px black">
+<div class="container mb-3 shadow" id="demo" style="border: solid 1px black">
+<!-- Cabeçalho da Listagem -->
 <div class="">
-  <h3 class="text-center mb-3 mt-3">Assentos Primeira Classe</h3>
-  <button type="button" class="btn btn-outline-success"  data-bs-toggle="collapse"  data-bs-target="#cardAssento">Assentos Selecionados</button>
+  <h3 class="text-center mb-3 mt-3" id="titulo">Assentos Econômicos</h3>
+  <button type="button" class="btn btn-outline-success"  data-bs-toggle="collapse" data-bs-target="#cardAssento">Assentos Selecionados</button>
+
+  
 </div> 
+
+<?php 
+$tipo = 'Primeira';
+
+// Verifica se o formulário foi enviado
+if(isset($_POST['tipo'])){
+  // Atualiza a variável com o valor enviado pelo formulário
+  $tipo = $_POST['tipo'];
+}
+
+// Exibe o valor atual da variável
+// echo 'Classe atual: ' . $tipo;
+
+// Exibe o formulário com o botão switch
+?>
+  <div class="text-start" style="border: solid 0px red;">
+
+  <form method="post">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="tipoSwitch" name="tipo" value="Econômica" <?php if($tipo == 'Econômica'){ echo 'checked'; } ?> onchange="this.form.submit()">
+        <label class="form-check-label" for="tipoSwitch"><?php if ($tipo == 'Primeira'){echo 'Assentos de Primeira Classe';}else{echo 'Assentos de Classe Econômica';} ?></label>
+    </div>
+  </form>
+
+  </div>
+
+
+
+
+<!-- Fim Cabeçalho Listagem -->
   <form action="../pages/cadastro-passageiro.php" method="POST">
     
     <!-- ====== Card de Informação do Assento ====== -->
@@ -122,11 +155,10 @@ if(empty($row)) {
             </div>
             <!-- === Campo dos Assentos === -->
             <div id="ListaAssentos" style="overflow-y: auto; height: 300px;">
-    
+              
               <!-- Inserção via JS -->
             
             </div>
-            
 
             <div class="row offset-1 mt-1">
               <input type="hidden" id="enviaArray" name="assentos" value=""/>
@@ -136,7 +168,7 @@ if(empty($row)) {
               <button type="button" id="remover" onclick="remove()"  class="btn btn-danger col-5 mx-1">
                 Remover
               </button>
-    
+              
             </div>
           </div>
         </div>
@@ -144,12 +176,27 @@ if(empty($row)) {
     <!-- ====== Fim do Card de Informação do Assento ====== -->
     
     
-    <?php 
+    <?php
+    // Atualiza o título de acordo com o valor de $tipo
+    if($tipo == 'Econômica') {
+      echo '<script>document.getElementById("titulo").innerHTML = "Assentos Econômicos";</script>';
+    } else {
+      echo '<script>document.getElementById("titulo").innerHTML = "Assentos de Primeira Classe";</script>';
+    }
+
+
+    $_SESSION['id_voo'] = filter_input(INPUT_GET,'voo');
+    $id_voo = filter_input(INPUT_GET,'voo');
+
+    // $tipo = filter_input(INPUT_GET,'tipo');
+    // var_dump($tipo);
+    // $tipo = 'Primeira';
+    
     //Obter Quantidade de Assentos
     $comando = 
     "SELECT NUMERO_ASSENTO FROM assentos
-    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO            -- V  variavel a ser trocada, para o voo correspondente
-    INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = '1' AND CLASSE = 'Primeira'
+    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO            
+    INNER JOIN voo ON  voo.FK_AVIAO_IDA = aviao.ID_AVIAO WHERE ID_VOO = '$id_voo' AND CLASSE = '$tipo'
     ";
     $query = mysqli_query($conn,$comando);
     $row_resultado = mysqli_fetch_all($query);
@@ -157,15 +204,15 @@ if(empty($row)) {
     //Obter quais assentos estão Ocupados
     $comando_ocupado = 
     "SELECT NUMERO_ASSENTO FROM assentos
-    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO               -- V  variavel a ser trocada, para o voo correspondente
-    INNER JOIN passagem ON passagem.FK_ASSENTO = ID_ASSENTO WHERE FK_VOO = '1' AND CLASSE = 'Primeira'
+    INNER JOIN aviao ON aviao.ID_AVIAO = assentos.FK_AVIAO               
+    INNER JOIN passagem ON passagem.FK_ASSENTO = ID_ASSENTO WHERE FK_VOO = '$id_voo' AND CLASSE = '$tipo'
     ";
     $query_ocupado = mysqli_query($conn,$comando_ocupado);
     $row_resultado_ocupado = mysqli_fetch_all($query_ocupado);
     
     //Comandos para verificar o funcionamento do vetor
     // print_r($row_resultado);
-    // echo count($row_resultado[0]);
+    // echo count($row_resultado);
     // print_r($row_resultado[0]);
     // print_r($row_resultado[0][0]);
     // print_r(count($row_resultado));
@@ -175,8 +222,30 @@ if(empty($row)) {
 
     $x = 0;
     $y = 0;
-    $z = 0;
-    
+
+
+    if(!empty($row_resultado_ocupado)){
+      $z = $row_resultado_ocupado[0][0]-1;
+    }else{//Evitar que o array de assentos ocupados esteja nulo, fazendo assim o código quebrar
+      $z = 0;
+      // echo $z;
+      $row_resultado_ocupado[0][0] = 0;
+    }
+
+    // echo $x;
+    // echo $z;
+
+    // echo $row_resultado[0][0];
+
+    // if (!empty($row_resultado_ocupado)){
+    //   $z = $row_resultado_ocupado[0][0];
+    //   echo 'tem coisa';
+    // }else{
+    //   $z = 0;
+    //   echo 'nao tem coisa';
+    // }
+
+
     //Listagem de Linhas
     while($x < (count($row_resultado))){ 
       
@@ -190,10 +259,10 @@ if(empty($row)) {
       if($z < (count($row_resultado_ocupado))){
         $z = $z + 1;
       }
-    
-      ?>
-
-<?php
+      
+      
+      
+      
       //Listagem Primeira Poltrona do Lado Esquerdo
       if($y == 1){
         
@@ -207,15 +276,15 @@ if(empty($row)) {
             if ($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
               ?>
             <!-- === Poltrona 01 Caso Ocupada === -->
-            <button type="button" disabled class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png"  style="height: 50px; width: 50px;" alt="">
+            <button type="button" disabled class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+              <img id="img<?php echo $row_resultado[$x-1][0]?>" src="../assets/img/poltrona_vermelha-sembg.png"  style="height: 50px; width: 50px;" alt="">
             </button>
             <?php
             }else{
               ?>
               <!-- === Poltrona 01 Caso Desocupada === -->
-              <button type="button" class="btn" id="poltrona<?php echo $x?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-                <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
+              <button type="button" class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="left" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0]?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+                <img id="img<?php echo $row_resultado[$x-1][0]?>" src="../assets/img/poltrona_verde-sembg.png"  style="height: 50px; width: 50px;" alt="">
               </button>
               <?php
             
@@ -228,16 +297,16 @@ if(empty($row)) {
         if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
           ?>
           <!-- === Poltrona 02 Caso Ocupada === -->
-          <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-            <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+          <button type="button" disabled class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+            <img id="img<?php echo $row_resultado[$x-1][0]?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
           </div> <!-- === Fim Lado Esquerdo === -->
           <?php
         }else{
           ?>
           <!-- === Poltrona 02 Caso Descoupada === -->
-          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-            <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          <button type="button" class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+            <img id="img<?php echo $row_resultado[$x-1][0]?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
           </div> <!-- === Fim Lado Esquerdo === -->
           <?php
@@ -256,15 +325,15 @@ if(empty($row)) {
             if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
             ?>
             <!-- === Poltrona 3 Caso Ocupada === -->
-            <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+            <button type="button" disabled class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+              <img id="img<?php echo $row_resultado[$x-1][0] ?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
         <?php 
         }else{
           ?>
           <!-- === Poltrona 3 Caso Descoupada === -->
-            <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-              <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+            <button type="button" class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="bottom" data-bs-title="<?php echo $row_resultado[$x-1][0]?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+              <img id="img<?php echo $row_resultado[$x-1][0] ?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
             </button>
             <?php
         }
@@ -275,8 +344,8 @@ if(empty($row)) {
         if($row_resultado[$x-1][0] == $row_resultado_ocupado[$z-1][0]){
         ?>
           <!-- === Poltrona 04 Caso Ocupada === -->
-          <button type="button" disabled class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-            <img id="img<?php echo $x?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
+          <button type="button" disabled class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $row_resultado[$x-1][0] ?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0] ?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+            <img id="img<?php echo $row_resultado[$x-1][0] ?>" src="../assets/img/poltrona_vermelha-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
          
           </div> <!-- === Fim Lado Direito ===-->
@@ -286,8 +355,8 @@ if(empty($row)) {
         }else{
           ?>
           <!-- === Poltrona 04 Caso Desocupada === -->
-          <button type="button" class="btn" id="poltrona<?php echo $x ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $x?>" name="ast" onclick="envia(<?php echo $x?>)" value="<?php echo $x ?>">
-            <img id="img<?php echo $x?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
+          <button type="button" class="btn" id="poltrona<?php echo $row_resultado[$x-1][0] ?>" data-bs-toggle="" data-bs-placement="right" data-bs-title="<?php echo $row_resultado[$x-1][0]?>" name="ast" onclick="envia(<?php echo $row_resultado[$x-1][0]?>)" value="<?php echo $row_resultado[$x-1][0] ?>">
+            <img id="img<?php echo $row_resultado[$x-1][0] ?>" src="../assets/img/poltrona_verde-sembg.png" style="height: 50px; width: 50px;" alt="">
           </button>
          
           </div> <!-- === Fim Lado Direito ===-->

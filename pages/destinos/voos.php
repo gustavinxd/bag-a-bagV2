@@ -1,6 +1,6 @@
 <?php 
 session_start(); //iniciando sessão
-include_once("conexao.php"); //incluindo conexão
+include_once("../../back/conexao.php"); //incluindo conexão
 
 ?>
 
@@ -11,7 +11,7 @@ include_once("conexao.php"); //incluindo conexão
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bag-a-Bagₑ</title>
+  <title>Bag-a-Bagₑ - Vôos</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -58,9 +58,9 @@ include_once("conexao.php"); //incluindo conexão
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">HOME</a></li>
+          <li><a class="nav-link scrollto" href="#">HOME</a></li>
           <li><a class="nav-link scrollto" href="#">SOBRE</a></li>
-          <li><a class="nav-link scrollto" href="#">DESTINOS</a></li>
+          <li><a class="nav-link scrollto active" href="">DESTINOS</a></li>
           <li><a class="nav-link scrollto " href="#">OFERTAS</a></li>
           <li><a class="nav-link scrollto" href="#">CONTATO</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -90,7 +90,7 @@ include_once("conexao.php"); //incluindo conexão
           <div class="carousel-item active" style="background-image: url(../../assets/img/destinos/punta-cana.jpg); background-position: center;">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Punta Cana</h2>
+                <h2 class="animate__animated animate__fadeInDown">Todos os Vôos</h2>
               </div>
             </div>
           </div>
@@ -268,7 +268,7 @@ include_once("conexao.php"); //incluindo conexão
     <div style="border: solid 0px blue;" class="">
       
       <!-- ================= Area de Passagens ================= -->
-        <div class="mb-2 container mt-3 shadow" id="form-filtros">
+        <div class="mb-2 container mt-3 shadow rounded" id="form-filtros">
           <!-- ================== Conteúdo ================= -->
           <div class="container text-center">
             <h1 class="mt-3 mb-3">Vôos</h1>
@@ -277,53 +277,114 @@ include_once("conexao.php"); //incluindo conexão
               Filtrar e Ordenar
             </button>
           </div>
-        
-          
-          <!-- ===== Card dos Vôos Existentes ====== -->
-          <a href="../../index.html"> <!-- Enviar para Tela de Assentos -->
-            <div class="card mb-3 shadow" id="cards-bab" style="width: 90%; margin: 0 auto;">
-              <div class="card-body" style="padding: 0;">
 
-                <div class="row">
+          <?php
+          //Descobrir e Listar todos os Vôos Existentes
+          
+          $comando = 
+          "SELECT 
+          voo.ID_VOO,
+          voo.VALOR_PASSAGEM,
+          voo.IDA_HORARIO_PARTIDA,
+          voo.IDA_HORARIO_CHEGADA,
+          voo.VOLTA_HORARIO_PARTIDA,
+          voo.VOLTA_HORARIO_CHEGADA,
+          av1.EMPRESA AS EMPRESA_AVIAO_IDA,
+          av2.EMPRESA AS EMPRESA_AVIAO_VOLTA,
+          -- av1.CODIGO_AVIAO AS CODIGO_AVIAO_IDA, código do aviao dispensavel
+          -- av2.CODIGO_AVIAO AS CODIGO_AVIAO_VOLTA, código do aviao dispensavel
+          origem_ida.NOME_AEROPORTO AS NOME_AEROPORTO_ORIGEM_IDA,
+          destino_ida.NOME_AEROPORTO AS NOME_AEROPORTO_DESTINO_IDA,
+          -- origem_volta.NOME_AEROPORTO AS NOME_AEROPORTO_ORIGEM_VOLTA,
+          -- destino_volta.NOME_AEROPORTO AS NOME_AEROPORTO_DESTINO_VOLTA,
+          aeroporto_ida.NOME_AEROPORTO AS NOME_AEROPORTO_ESCALA_IDA,
+          aeroporto_volta.NOME_AEROPORTO AS NOME_AEROPORTO_ESCALA_VOLTA
+          FROM voo 
+          LEFT JOIN aeroporto AS origem_ida ON voo.FK_ORIGEM_AERO = origem_ida.ID_AEROPORTO
+          LEFT JOIN aeroporto AS destino_ida ON voo.FK_DESTINO_AERO = destino_ida.ID_AEROPORTO
+          -- LEFT JOIN aeroporto AS origem_volta ON voo.FK_ORIGEM_AERO = origem_volta.ID_AEROPORTO
+          -- LEFT JOIN aeroporto AS destino_volta ON voo.FK_DESTINO_AERO = destino_volta.ID_AEROPORTO
+          LEFT JOIN escala AS escala_ida ON voo.FK_ESCALA_IDA = escala_ida.ID_ESCALA
+          LEFT JOIN escala AS escala_volta ON voo.FK_ESCALA_VOLTA = escala_volta.ID_ESCALA
+          LEFT JOIN aeroporto AS aeroporto_ida ON escala_ida.FK_AEROPORTO_ESCALA = aeroporto_ida.ID_AEROPORTO
+          LEFT JOIN aeroporto AS aeroporto_volta ON escala_volta.FK_AEROPORTO_ESCALA = aeroporto_volta.ID_AEROPORTO
+          LEFT JOIN aviao AS av1 ON voo.FK_AVIAO_IDA = av1.ID_AVIAO
+          LEFT JOIN aviao AS av2 ON voo.FK_AVIAO_VOLTA = av2.ID_AVIAO
+          ";
+
+          $query = mysqli_query($conn,$comando);
+          $row_resultado = mysqli_fetch_all($query);
+
+
+          // var_dump($row_resultado[5][0]);
+          
+          $x = 0;
+
+          while ($x < (count($row_resultado))){
+            $x = $x + 1;
+            //Variável que Representa o ID do Voo
+            $id_voo = $row_resultado[$x-1][0];//<- Esse último número representa a coluna a ser obtida as informações, indo de 0(id_voo) até 11(nome_aeroporto_escala_volta) 
+            
+            //obter local de origem ida
+            $local_ida_full = $row_resultado[$x-1][8];
+            $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
+            $locais_ida_origem = preg_replace($pattern,'',$local_ida_full);
+
+            //obter local de origem ida
+            $local_volta_full = $row_resultado[$x-1][9];
+            $pattern = '/^Aeroporto de|^Aeroporto Internacional de|^Aeroporto do|^Aeroporto Internacional do|^Aeroporto da|^Aeroporto Internacional da/';
+            $locais_ida_destino = preg_replace($pattern,'',$local_volta_full);
+
+            //obter valor da cadeira
+            $_SESSION['valor_poltrona'] = $row_resultado[$x-1][1]
+
+
+            ?>
+          <!-- ===== Card dos Vôos Existentes ====== -->
+          <a href="../assentos.php?voo=<?php echo $id_voo?>"> <!-- Enviar para Tela de Assentos -->
+            <div class="card mb-3 shadow" id="cards-bab" style="width: 90%; margin: 0 auto;">
+              <div class="card-body" id="demo" style="padding: 0;">
+                
+              <div class="row">
                   <!-- Informações do Vôo -->
                   <div class="col-9" id="card-voo-left">
                     <div class="card-title row">
-                      <h5 class="col-3" style="color:#3A5C1D;">IDA</h5>
-                      <h5 class="col-9 text-center">Guarulhos ➝ Punta Cana</h5>
+                      <h5 class="col-3" style="color:#3A5C1D;">IDA <?php echo $id_voo ?></h5>
+                      <h5 class="col-9 text-center"><?php echo $locais_ida_origem ?> ➝ <?php echo $locais_ida_destino?></h5>
                     </div>
 
                     <hr>
                     <div class="row card-subtitle mb-2 text-body-secondary">
                       <h6 class="col-3">
                         <i class="bi bi-check-circle" style="color:green;"></i>  
-                        GOL
+                        <?php echo $row_resultado[$x-1][6]?>
                       </h6>
-                      <h6 class="col-9 text-center">12:00 ➝ 20:00</h6>
+                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][2])) ?> ➝ <?php echo date('d/m/y H:m',strtotime($row_resultado[$x-1][3])) ?></h6>
                     </div>
 
                     <hr>
-
+                    
                     <div class="card-title row">
                       <h5 class="col-3" style="color:#3A5C1D;">VOLTA</h5>
-                      <h5 class="col-9 text-center">Punta Cana ➝ Guarulhos</h5>
+                      <h5 class="col-9 text-center">A definir ➝ A definir</h5>
                     </div>
 
                     <hr>
                     <div class="row card-subtitle mb-2 text-body-secondary">
                       <h6 class="col-3">
                         <i class="bi bi-check-circle" style="color:green;"></i> 
-                        Caribair
+                        <?php echo $row_resultado[$x-1][7] ?>
                       </h6>
-                      <h6 class="col-9 text-center">12:00 ➝ 20:00</h6>
+                      <h6 class="col-9 text-center"><?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][4])) ?> ➝ <?php echo date('d/m/Y H:m',strtotime($row_resultado[$x-1][5])) ?></h6>
                     </div>
                     
                   </div>
                   <!-- Valor do Vôo -->
                   <div class="text-center col-3 " id="card-voo-right">
-                    <h4 class="card-title mt-5">R$6000</h4>
+                    <h4 class="card-title mt-5"><?php echo $row_resultado[$x-1][1]; ?></h4>
                     <h6 class="card-subtitle mt-1 text-body-secondary">por adulto, sem taxas</h6>
                     <p class="mt-2" style="margin:-2px;">ou</p>
-                    <p class="mt-1">12x de R$557,99</p>
+                    <p class="mt-1">12x de R$<?php echo number_format($row_resultado[$x-1][1]/12, 2,'.',""); ?></p>
 
                     <!-- <input type="button" class="btn btn-success mt-3" value="Fazer Pedido"> -->
                   </div>
@@ -333,7 +394,10 @@ include_once("conexao.php"); //incluindo conexão
 
             </div> <!-- ==================== Fim Card ===================== -->
           </a>
-        
+        <?php
+        } //Fim While
+        ?>
+
         </div>  <!-- ===== Fim Área de Passsagens ===== -->
           
 
@@ -342,7 +406,7 @@ include_once("conexao.php"); //incluindo conexão
 
     
     
-
+      
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
