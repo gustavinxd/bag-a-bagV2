@@ -196,7 +196,7 @@ if(empty($row1)) {
             <div class="col-md-12">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4>Consulta de RG</h4>
+                        <h4>Consulta de CPF</h4>
                     </div>
                     <div class="card-body">
                     <?php
