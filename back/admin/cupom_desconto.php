@@ -1,5 +1,18 @@
 <?php
 session_start();
+include_once('../conexao.php');
+
+$id = $_SESSION['id_adm'] ;
+  
+$query = "SELECT * FROM admin 
+  WHERE ID_ADM='$id'";
+$query = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($query);
+
+if(empty($row)) {
+  echo "<script>location.href='../../index.php';</script>";
+}
+
 ?>
 
 <!DOCTYPE html>

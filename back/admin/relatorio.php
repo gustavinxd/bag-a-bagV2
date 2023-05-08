@@ -6,6 +6,17 @@ $reservas_canceladas = "SELECT COUNT(*) FROM reserva WHERE STATUS_RESERVA = 'Can
 $resultado_reservas_canceladas = mysqli_query($conn, $reservas_canceladas);
 $num_reservas_canceladas = mysqli_fetch_array($resultado_reservas_canceladas)[0];
 
+$id_adm = $_SESSION['id_adm'] ;
+  
+$query1 = "SELECT * FROM admin 
+  WHERE ID_ADM='$id_adm'";
+$query1 = mysqli_query($conn, $query1);
+$row1 = mysqli_fetch_assoc($query1);
+
+if(empty($row1)) {
+  echo "<script>location.href='../../index.php';</script>";
+}
+
 ?>
 
 <head>
@@ -54,19 +65,7 @@ $num_reservas_canceladas = mysqli_fetch_array($resultado_reservas_canceladas)[0]
                     <li><a class="nav-link scrollto " href="./perfis.php">PERFIS</a></li>
                     <?php
                     // VERIFICANDO SE TEM UM USUARIO LOGADO
-                    if (isset($_SESSION['id_usuario'])) {
-                        $id = $_SESSION['id_usuario'];
-
-                        $query = "SELECT * FROM usuario 
-                        INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
-                        INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
-                        WHERE ID_USUARIO='$id'";
-                        $query = mysqli_query($conn, $query);
-                        $row = mysqli_fetch_assoc($query);
-                        // SE ESTIVER LOGADO APARECERÁ AS SEGUINTES INFORMAÇÕES
-                        echo '<li><a class="getstarted scrollto" href="pages/user.php?id=' . $row["ID_USUARIO"] . '" style="margin-left: 80px;">Ver perfil</a></li>';
-                        echo '<li><a class="nav-link scrollto" href="back/controller/controller_logoff.php">LOGOFF</a></li>';
-                    }
+                    echo '<li><a class="nav-link scrollto" href="../controller/controller_logoff_admin.php" >LOGOFF</a></li>';
                     ?>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

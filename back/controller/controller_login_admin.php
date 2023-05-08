@@ -15,8 +15,9 @@ $row_usuario = mysqli_fetch_assoc($result_usuario);
 $senha_banco = $row_usuario['SENHA_ADM'];
 
 $id = $row_usuario['ID_ADM'];
+$_SESSION['id_adm'] = $id;
 
-if ($senha_md5 == $senha_banco) {
+if ($senha == $senha_banco) {
     echo "<script>location.href='../admin/admin.php';</script>";
 } else {
     $_SESSION["msg"] = "<p style='color: red;'>Nome de usuário ou senha incorretos.</p>";
