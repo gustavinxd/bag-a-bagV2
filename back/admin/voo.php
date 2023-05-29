@@ -76,7 +76,7 @@ $total_voos = mysqli_num_rows($consulta);
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
 
-            <h1 class="logo"><a href="index.php">BAG-A-BAGₑ</a></h1>
+            <h1 class="logo"><a href="../../index.php">BAG-A-BAGₑ</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -155,9 +155,13 @@ $total_voos = mysqli_num_rows($consulta);
                                 <?php
                                 echo
                                 "<a href='./editar_voo.php?id=" . $voo['ID_VOO'] .  "'>
-                                <button type='button' class='btn btn-outline-primary' style='margin-right: 5px;''>Editar</button>
+                                <button type='button' class='btn btn-outline-primary'>Editar</button>
                                 </a>"
                                 ?>
+                                <?php echo
+                                "<a href='./detalhes_voo_pet.php?id=" . $voo['ID_VOO'] . "'>
+                                    <button type='button' class='btn btn-outline-dark'>Detalhes</button>
+                                    </a>" ?>
                                 <?php echo
                                 "<a href='../controller/controller_deletar_voo.php?id=" . $voo['ID_VOO'] . "'>
                                     <button type='submit' class='btn btn-outline-danger'>Excluir</button>
