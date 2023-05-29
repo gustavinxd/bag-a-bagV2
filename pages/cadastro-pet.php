@@ -1,21 +1,14 @@
 <?php
 session_start();
-include_once("../back/funcoes.php");
+include_once("../back/funcoes_pet.php");
+include_once("../back/conexao.php");
 
 $id_usuario = $_SESSION['id_usuario'];
 $id_voo = $_SESSION['id_voo'];
+$qt_passageiros = $_SESSION['qt_passageiros'];
 
-$str_assentos = filter_input(INPUT_POST, "assentos");
-
-if (!empty($str_assentos)) {
-  $assentos = explode(",", $str_assentos);
-  $_SESSION['assentos'] = $assentos;
-} else {
-  $assentos = $_SESSION['assentos'];
-}
-
-$total_passageiros = count($assentos);
-$_SESSION['qt_passageiros'] = $total_passageiros;
+$num_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_VOO = $id_voo");
+$qt_pets = mysqli_fetch_assoc($num_pets);
 
 ?>
 
@@ -144,7 +137,7 @@ $_SESSION['qt_passageiros'] = $total_passageiros;
   </header><!-- End Header -->
 
     <main class = "main-container mb-4">
-      <h1>Cadastro de Passageiro</h1>
+      <h1>Cadastro do Pet</h1>
       <div class='row'>
         <div class='half-box'>
           <?php
@@ -157,8 +150,19 @@ $_SESSION['qt_passageiros'] = $total_passageiros;
       </div>
       
       <!-- ======= Cadastro ======= -->
-      <form action ="../back/controller/controller_passageiro.php" method="post">
-        <?php echo criarFormulario($total_passageiros); ?>        
+      <form action ="../back/controller/controller_pet.php" method="post" enctype="multipart/form-data">
+        <?php for ($i=1; $i <= $qt_passageiros; $i++) { 
+          if ($qt_pets['qt_animais'] < 3) {
+            echo criarFormularioo($i);
+            $qt_pets['qt_animais']++;
+          }
+        }
+         ?> 
+         <div class='row'>
+            <div class='full-box'>
+                <button type='submit' id='cadastrar' class='btn btn-success'>Cadastrar</button>
+            </div>
+        </div>       
       </form>
     </main>
     <!---Fim do cadastro -->
@@ -248,6 +252,9 @@ $_SESSION['qt_passageiros'] = $total_passageiros;
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- script formulario -->
+  <script src="assets/js/cad_pet.js"></script>
 
 </body>
 

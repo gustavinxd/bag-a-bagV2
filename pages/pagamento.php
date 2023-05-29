@@ -3,6 +3,7 @@
   include_once('../back/conexao.php');
 
   $id = $_SESSION['id_usuario'];
+  $id_voo = $_SESSION['id_voo'];
 
   $query = "SELECT * FROM usuario 
     INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
@@ -18,11 +19,10 @@
 
    
     
+    //pegando o valor total do pagamento vindo da reserva
+    $valorTotal = $_SESSION['valor_total'];
     
-  
- //pegando o valor total do pagamento vindo da reserva
- $valorTotal = $_SESSION['valor_total'];
-  
+     
   $parcelas = array();
 
 //Faz a divisão do valor total de 1 a 12 e armazena em um array para apresenta-lo posteriormente
@@ -32,6 +32,9 @@ for ($i = 1; $i <= 12; $i++) {
   $valorParcelaFormatado = number_format($valorParcela, 2, ',', '.'); // formata o valor com duas casas decimais
   array_push($parcelas, $valorParcelaFormatado); //Armazena a parcela no array de parcelas
 }
+
+$num_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_VOO = $id_voo");
+$qt_pets = mysqli_fetch_assoc($num_pets);
 
 ?>
 
@@ -118,6 +121,12 @@ for ($i = 1; $i <= 12; $i++) {
         <form action="" method="post">
             <div class="row">
                 <h3 class="h-faturamento">Detalhes do faturamento</h3>
+                <?php
+                  if (isset($_SESSION["msg"])) {   // isset() verifica se a variavel existe;
+                      echo $_SESSION["msg"];
+                      unset($_SESSION["msg"]);    // unset() destrói a variável passada como argumento, melhor utilizada em escopo global
+                  }
+                ?>
                 <div id="caixa-detalhes" class="col-8 offset-2 shadow">
                 <div class="row">
                     <div class="half-box">
@@ -152,19 +161,67 @@ for ($i = 1; $i <= 12; $i++) {
                           <label for = "tel" class="required" style = "color: #5c9f24">Telefone</label>
                           <input type = "tel" value = "<?php echo $row['DDD'] . ' ' . $row['NUMERO_TELEFONE']?>" name = "telefone" id = "telefone" placeholder = "(DDD)XXXXX-XXXX" maxlength="15" class="form-control required" onkeypress="tel(this)" style = "background-color: #FFF; border-color: black" disabled>
                         <br>
-                    </div>
+                  </div>
 
+                <div class="" style="padding-bottom: 10px; font-weight: bold;" <?php if ($qt_pets['qt_animais'] == 3) {
+                  echo("hidden");
+                } ?>>
+                  <label><a href="cadastro-pet.php" style=" font-size: 20px;">Deseja cadastrar um pet?</a></label>
+                    <!-- <div class="">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cadastrar_pet" id="cadastrar_pet_sim" value="sim">
+                            <label class="form-check-label" for="cadastrar_pet_sim">Sim</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cadastrar_pet" id="cadastrar_pet_nao" value="nao" checked>
+                            <label class="form-check-label" for="cadastrar_pet_nao">Não</label>
+                        </div>
+                    </div> -->
+                    <!-- <a href="./cadastro-pet.php" id="btn-submit" style="max-width: 130px; margin: initial" class="btn btn-primary mb-3">
+                        Cadastrar Pet
+                    </a> -->
                 </div>
+
+            <script>
+                // Obtém o campo de seleção de rádio
+                var cadastrarPetRadio = document.querySelectorAll('input[name="cadastrar_pet"]');
+
+                // Obtém o botão de cadastrar
+                var cadastrarPetButton = document.getElementById('btn-submit');
+
+                // Adiciona o evento de mudança aos campos de seleção de rádio
+                cadastrarPetRadio.forEach(function(radio) {
+                    radio.addEventListener('change', function() {
+                        // Verifica se a opção "Não" foi selecionada
+                        if (this.value === 'nao') {
+                            // Oculta o botão de cadastrar
+                            cadastrarPetButton.style.display = 'none';
+                        } else {
+                            // Mostra o botão de cadastrar
+                            cadastrarPetButton.style.display = 'block';
+                        }
+                    });
+                });
+
+                // Verifica o estado inicial do campo de seleção de rádio
+                if (document.getElementById('cadastrar_pet_nao').checked) {
+                    // Oculta o botão de cadastrar inicialmente
+                    cadastrarPetButton.style.display = 'none';
+                }
+            </script>
             </div>
          </div>
      </form>
+    
+     
 
         
         <form action="../back/controller/controller_verificar_pagamento.php" method="post">
           <div class="row">
             <h3 class="h-forma">Formas de pagamento</h3>
             <div id="caixa-pagamento" class="col-8 offset-2 shadow">
-
                 <input type="radio" id="termos" name="pagamento"  value="credito"> <label for="">Cartão de crédito</label> 
                 <div id="termoConteudo">
 
