@@ -2,18 +2,25 @@
 
 
 function criarFormularioo($i) {
+    date_default_timezone_set('America/Sao_Paulo');
+    date_default_timezone_get();
+
+    
+
+    $newDate = date('Y-m-d', strtotime(' - 4 months'));
     $form_content = "";
 
     $form_content .= "
         <div class='row'>
             <div class='half-box'>
-                <label for='peso" . $i . "' class='required' style='color: #5c9f24'>Peso máximo do Pet: <span id='peso-maximo'>9 kg</span></label>
-                <input type='number' name='peso" . $i . "' class='form-control required' style='background-color: #FFF; border-color: black' id='peso' max='9'>
+                <label for='peso<?php echo $i ?>' class='required' style='color: #5c9f24'>Peso máximo do Pet: <span id='peso-maximo'>9 kg</span></label>
+                <input type='number' name='peso<?php echo $i ?>' max='9' class='form-control required' style='background-color: #FFF; border-color: black' id='peso'>
                 <p>(1 kg incluído no transporte)</p>
             </div>
+    
             <div class='half-box'>
                 <label for='data_nasc_pet" . $i . "' class='required' style='color: #5c9f24'>Data de Nascimento</label>
-                <input type='date' name='data_nasc_pet" . $i . "' id='data_nasc_pet' class='form-control' style='background-color: #FFF; border-color: black'>
+                <input type='date' name='data_nasc_pet" . $i . "' id='data_nasc_pet' class='form-control' max='$newDate' style='background-color: #FFF; border-color: black'>
             </div>
         </div>
         <div class='row'>
@@ -23,7 +30,11 @@ function criarFormularioo($i) {
                     <input type='file' maxlength='2' name='img" . $i . "' id='img' style='background-color: #FFF; border-color: black'>
                 </div>
             </div>
-        </div>";
+        </div>;
+        
+        ";
+        
+
 
     // $form_content .= "
     //     <div class='row'>
