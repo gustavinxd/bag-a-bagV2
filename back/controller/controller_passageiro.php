@@ -166,6 +166,19 @@ for ($i=0, $passageiro=0; $passageiro < $total_passageiros; $passageiro++) {
 
     if (mysqli_insert_id($conn)) {
         $passagens_criadas++;
+        
+        // adicionado posteriormente - pega id da passagem em session array para cadastro do pet, caso haja
+        $query_id = "SELECT * FROM passagem WHERE FK_ASSENTO = $assentos_pks[$passageiro] AND FK_PASSAGEIRO = $id_passageiro AND FK_VOO = $id_voo AND FK_RESERVA = $id_reserva";
+        $consulta_id = mysqli_query($conn, $query_id);
+        $resultado_id = mysqli_fetch_assoc($consulta_id);
+        // caso exista a session, adiciona no array. Caso contrário, cria ela;
+        if (isset($_SESSION['idpassagem'])) {
+            array_push($_SESSION['idpassagem'], $resultado_id['ID_PASSAGEM']);
+        }
+        else {
+            $_SESSION['idpassagem'] = array();
+            array_push($_SESSION['idpassagem'], $resultado_id['ID_PASSAGEM']);
+        }
     } else {
         $_SESSION['msg'] = "<p class='text-center' style='color:red;'>Erro. Não foi possível realizar o cadastro. Tente novamente.</p>";
         header("Location: ../../pages/cadastro-passageiro.php");
