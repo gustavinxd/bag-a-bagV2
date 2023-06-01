@@ -7,6 +7,10 @@ $id_voo = $_SESSION['id_voo'];
 
 $str_assentos = filter_input(INPUT_POST, "assentos");
 
+if (isset($_SESSION['idpassagem'])) {
+  unset($_SESSION['idpassagem']);
+}
+
 if (!empty($str_assentos)) {
   $assentos = explode(",", $str_assentos);
   $_SESSION['assentos'] = $assentos;

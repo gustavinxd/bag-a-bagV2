@@ -7,6 +7,18 @@ $id_usuario = $_SESSION['id_usuario'];
 $id_voo = $_SESSION['id_voo'];
 $qt_passageiros = $_SESSION['qt_passageiros'];
 
+$query = "SELECT * FROM usuario 
+    INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
+    INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
+    INNER JOIN rg ON FK_RG = ID_RG
+    WHERE ID_USUARIO='$id_usuario'";
+    $query = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($query);
+    
+    if(empty($row)) {
+      header('Location: ../index.php');
+    }
+
 $num_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_VOO = $id_voo");
 $qt_pets = mysqli_fetch_assoc($num_pets);
 
