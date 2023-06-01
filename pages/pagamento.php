@@ -13,14 +13,21 @@
     $query = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($query);
     
-    if(empty($row)) {
+    if(empty($row) || !isset($_SESSION['idpassagem'])) { // verificar se tem o id da passagem
       header('Location: ../index.php');
-    }
+    }   
+    $valorTotal = $_SESSION['valor_total']; //busca o valor total
 
-   
-    
-    //pegando o valor total do pagamento vindo da reserva
-    $valorTotal = $_SESSION['valor_total'];
+    for ($i=0; $i < count($_SESSION['idpassagem']); $i++) {  //contar quantas passagem tem
+      $id_passagem = $_SESSION['idpassagem'][$i];
+
+      $nume_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_PASSAGEM = $id_passagem");
+     
+      $qtd_pets = mysqli_fetch_assoc($nume_pets);
+      if ($qtd_pets['qt_animais'] > 0) { // no caso aqui vai cobrar 150 de cada passagem
+        $valorTotal += 150; 
+      }
+    }
     
      
   $parcelas = array();
@@ -163,7 +170,7 @@ $qt_pets = mysqli_fetch_assoc($num_pets);
                         <br>
                   </div>
 
-                <div class="" style="padding-bottom: 10px; font-weight: bold;" <?php if ($qt_pets['qt_animais'] == 3) {
+                <div class="" style="padding-bottom: 10px; font-weight: bold;" <?php if ($qt_pets['qt_animais'] >= 3) {
                   echo("hidden");
                 } ?>>
                   <label><a href="cadastro-pet.php" style=" font-size: 20px;">Deseja cadastrar um pet?</a></label>
