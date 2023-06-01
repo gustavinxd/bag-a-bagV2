@@ -7,6 +7,9 @@ $id_usuario = $_SESSION['id_usuario'];
 $id_voo = $_SESSION['id_voo'];
 $qt_passageiros = $_SESSION['qt_passageiros'];
 
+$num_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_VOO = $id_voo");
+$qt_pets = mysqli_fetch_assoc($num_pets);
+
 $query = "SELECT * FROM usuario 
     INNER JOIN telefone ON FK_TELEFONE = ID_TELEFONE 
     INNER JOIN cadastro ON FK_CADASTRO = ID_CADASTRO
@@ -14,13 +17,12 @@ $query = "SELECT * FROM usuario
     WHERE ID_USUARIO='$id_usuario'";
     $query = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($query);
-    
+
+ 
+
     if(empty($row)) {
       header('Location: ../index.php');
     }
-
-$num_pets = mysqli_query($conn, "SELECT COUNT(ID_PET) AS qt_animais FROM animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM WHERE FK_VOO = $id_voo");
-$qt_pets = mysqli_fetch_assoc($num_pets);
 
 ?>
 
@@ -263,10 +265,10 @@ $qt_pets = mysqli_fetch_assoc($num_pets);
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="../assets/js/main.js"></script>
 
   <!-- script formulario -->
-  <script src="assets/js/cad_pet.js"></script>
+  <script src="../assets/js/cad_pet.js"></script>
 
 </body>
 
