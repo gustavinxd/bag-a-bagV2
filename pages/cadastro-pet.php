@@ -55,6 +55,7 @@ $query = "SELECT * FROM usuario
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/cadastro/cadastro.css" rel="stylesheet">
+  <link href="../assets/css/cadastro/cadastro_pet.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Groovin
@@ -178,6 +179,7 @@ $query = "SELECT * FROM usuario
             </div>
         </div>       
       </form>
+      
     </main>
     <!---Fim do cadastro -->
 
