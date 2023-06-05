@@ -13,8 +13,8 @@ function criarFormularioo($i) {
     $form_content .= "
         <div class='row'>
             <div class='col-6'>
-                <label for='peso<?php echo $i ?>' class='required' style='color: #5c9f24'>Peso máximo do Pet: <span id='peso-maximo'>9 kg</span></label>
-                <input type='number' name='peso<?php echo $i ?>' max='9' class='form-control required' style='background-color: #FFF; border-color: black' id='peso'>
+                <label for='peso". $i ."' class='required' style='color: #5c9f24'>Peso máximo do Pet: <span id='peso-maximo'>9 kg</span></label>
+                <input type='number' name='peso". $i ."' max='9' class='form-control required' style='background-color: #FFF; border-color: black' id='peso'>
                 <p>(1 kg incluído no transporte)</p>
             </div>
     
@@ -26,7 +26,7 @@ function criarFormularioo($i) {
         <div class='row'>
             <div class='col-6'>
                 <label for='img" . $i . "' class='required' style='color: #5c9f24'>Carterinha de Vacinação</label>
-                <input type='file' class='form-control' maxlength='2' name='image" . $i . "' id='image' style='background-color: #FFF; border-color: black'>
+                <input type='file' class='form-control' maxlength='2' name='img" . $i . "' id='img' style='background-color: #FFF; border-color: black'>
             </div>
             <div class='col-1'>
                 <img class='img-fluid' src='' alt='' id='preview-image'>
