@@ -9,6 +9,10 @@ include_once('../conexao.php');
  $id_reserva = $_SESSION['id_reserva']; // Obter o ID_RESERVA da variável de sessão
  $id_usuario = $_SESSION['id_usuario']; // Obter o ID_USUARIO da variável de sessão
 
+ // desfaz a session idpassagem, caso exista
+if (isset($_SESSION['idpassagem'])) {
+    unset($_SESSION['idpassagem']);
+}
   
 
  function atualizar_status_reserva($conn, $id_reserva) {

@@ -17,11 +17,6 @@ $qt_pets = mysqli_fetch_assoc($num_pets);
 // pega os ids da passagem
 $idpassagens = $_SESSION['idpassagem'];
 
-// desfaz a session idpassagem, caso exista
-if (isset($_SESSION['idpassagem'])) {
-    unset($_SESSION['idpassagem']);
-}
-
 if ($qt_pets['qt_animais'] < 3){
 
     for ($i=1; $i <= $qt_passageiros; $i++) {
@@ -62,11 +57,11 @@ if ($qt_pets['qt_animais'] < 3){
                     $_SESSION['msg'] = "<center><span style='color:red;'>Pet não cadastrado. Tamanho de imagem não aceita. Máx 2MB.</span></center>";
                     header('Location: ../../pages/cadastro-pet.php');
                 } 
-                else {
-                    $_SESSION['msg'] = "<center><span style='color:red;'>Pet não cadastrado. Nenhuma imagem foi adicionada.</span></center>";         
-                    header('Location: ../../pages/cadastro-pet.php');
-                }
             }
+        }
+        else {
+            $_SESSION['msg'] = "<center><span style='color:red;'>Pet não cadastrado. Nenhuma imagem foi adicionada.</span></center>";         
+            header('Location: ../../pages/cadastro-pet.php');
         }
 
     }
