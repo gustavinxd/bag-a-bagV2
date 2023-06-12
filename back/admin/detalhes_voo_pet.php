@@ -4,56 +4,6 @@ include_once('../conexao.php');
 
 $id = $_GET['id'];
 
-$query_consulta = "SELECT * FROM voo WHERE ID_VOO = '$id'";
-$consulta = mysqli_query($conn, $query_consulta);
-
-if (mysqli_num_rows($consulta) == 1) {
-    $row_consulta = mysqli_fetch_assoc($consulta);
-} else {
-    // Se não encontrou nenhum registro, redireciona para a página de visualização de voos
-    // $_SESSION["msg"] = "<p class='text-center' style='color: red;'>Erro ao encontrar voo para edição</p>";
-    echo "<script>location.href='../admin/voo.php';</script>";
-    exit();
-}
-
-$query = "SELECT * FROM aviao";
-$consulta_aviao = mysqli_query($conn, $query);
-$total_aviao = mysqli_num_rows($consulta_aviao);
-
-$query = "SELECT * FROM aeroporto";
-$consulta_aeroporto = mysqli_query($conn, $query);
-$total_aeroporto = mysqli_num_rows($consulta_aeroporto);
-
-// Consultas para obter dados de exibição dos inputs
-$query = "SELECT * FROM aviao WHERE ID_AVIAO=$row_consulta[FK_AVIAO_IDA]";
-$consulta = mysqli_query($conn, $query);
-$row1 = mysqli_fetch_assoc($consulta);
-
-if (!empty($row_consulta['FK_AVIAO_VOLTA'])) {
-    $query = "SELECT * FROM aviao WHERE ID_AVIAO=$row_consulta[FK_AVIAO_VOLTA]";
-    $consulta = mysqli_query($conn, $query);
-    $row2 = mysqli_fetch_assoc($consulta);
-}
-
-$query = "SELECT * FROM aeroporto WHERE ID_AEROPORTO=$row_consulta[FK_ORIGEM_AERO]";
-$consulta = mysqli_query($conn, $query);
-$row3 = mysqli_fetch_assoc($consulta);
-
-$query = "SELECT * FROM aeroporto WHERE ID_AEROPORTO=$row_consulta[FK_DESTINO_AERO]";
-$consulta = mysqli_query($conn, $query);
-$row4 = mysqli_fetch_assoc($consulta);
-
-if (!empty($row_consulta['FK_ESCALA_IDA'])) {
-    $query = "SELECT * FROM aeroporto INNER JOIN escala ON aeroporto.ID_AEROPORTO = escala.FK_AEROPORTO_ESCALA WHERE ID_ESCALA=$row_consulta[FK_ESCALA_IDA]";
-    $consulta = mysqli_query($conn, $query);
-    $row5 = mysqli_fetch_assoc($consulta);
-}
-
-if (!empty($row_consulta['FK_ESCALA_VOLTA'])) {
-    $query = "SELECT * FROM aeroporto INNER JOIN escala ON aeroporto.ID_AEROPORTO = escala.FK_AEROPORTO_ESCALA WHERE ID_ESCALA=$row_consulta[FK_ESCALA_VOLTA]";
-    $consulta = mysqli_query($conn, $query);
-    $row6 = mysqli_fetch_assoc($consulta);
-}
 
 ?>
 
@@ -129,82 +79,89 @@ if (!empty($row_consulta['FK_ESCALA_VOLTA'])) {
             <h1 class="text-center">Detalhes do Voo</h1>
         </div>
 
-        <div class="card-body d-flex flex-row gap-5 justify-content-center align-items-center row mx-1">
-
-            <div class="card col-md-3 align-self-stretch" style="width: 20rem;">
-                <div class="card-body mx-2">
-                    <h5 class="card-title">Proprietário do animal:</h5>
-                    <p class="card-text"> Seu pai de calcinha</p>
-
-                    <h5 class="card-title">Idade do animal:</h5>
-                    <p class="card-text"> 4 meses</p>
-
-                    <h5 class="card-title">Peso:</h5>
-                    <p class="card-text"> 10.00 Kg</p>
-
-                    <h5 class="card-title">Carteira de vacinação:</h5>
-                    <!-- <div class="my-4"> -->
-                        <img src="../../assets/img/destinos/natal.jpg" alt="" class="img-fluid my-4">
-                    <!-- </div> -->
-
-                    <a href="./voo.php">
-                        <button type="button" class="btn btn-outline-success">Confirmar</button>
-                    </a>
-                    <a href="./voo.php">
-                        <button type="button" href="" class="btn btn-outline-danger">Cancelar</button>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card col-md-3 align-self-stretch" style="width: 20rem;">
-                <div class="card-body mx-2">
-                    <h5 class="card-title">Proprietário do animal:</h5>
-                    <p class="card-text"> Teukumiadora</p>
-
-                    <h5 class="card-title">Idade do animal:</h5>
-                    <p class="card-text"> 4 meses</p>
-
-                    <h5 class="card-title">Peso:</h5>
-                    <p class="card-text"> 10.00 Kg</p>
-
-                    <h5 class="card-title">Carteira de vacinação:</h5>
-                    <!-- <div class="d-flex justify-content-center align-items-center my-4"> -->
-                        <img src="../../assets/img/destino/img3.webp" alt="" class="img-fluid my-4">
-                    <!-- </div> -->
+        <div class="card-body d-flex flex-row gap-5 justify-content-center align-items-center row mx-1" id="divCards">
                     
-                    <a href="./voo.php">
-                        <button type="button" class="btn btn-outline-success">Confirmar</button>
-                    </a>
-                    <a href="./voo.php">
-                        <button type="button" class="btn btn-outline-danger">Cancelar</button>
-                    </a>
-                </div>
-            </div>
+        <?php
 
-            <div class="card col-md-3 align-self-stretch" style="width: 20rem;">
-                <div class="card-body mx-2">
-                    <h5 class="card-title">Proprietário do animal:</h5>
-                    <p class="card-text"> Giuzepi Cadura</p>
+           
+            $queryAnimal = "SELECT * from animal INNER JOIN passagem ON FK_PASSAGEM = ID_PASSAGEM INNER JOIN passageiro on FK_PASSAGEIRO = ID_PASSAGEIRO INNER JOIN reserva on FK_RESERVA = ID_RESERVA WHERE FK_VOO = $id"; 
+            $consultaAnimal = mysqli_query($conn, $queryAnimal);
+            
+            // Mostar Todos os pet Cadastrados
+            while($result = mysqli_fetch_assoc($consultaAnimal)){
 
-                    <h5 class="card-title">Idade do animal:</h5>
-                    <p class="card-text"> 4 meses</p>
+                // Calcular idade 
+                $dataN = $result['DATA_NASC_PET'];
+                
+                list($ano, $mes, $dia) = explode('-', $dataN);
 
-                    <h5 class="card-title">Peso:</h5>
-                    <p class="card-text"> 10.00 Kg</p>
+                // data atual
+                $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+                // Descobre a unix timestamp da data de nascimento do fulano
+                $nascimento = mktime( 0, 0, 0, $mes, $dia, $ano);
 
-                    <h5 class="card-title">Carteira de vacinação:</h5>
-                    <!-- <div class="d-flex justify-content-center align-items-center my-4"> -->
-                        <img src="../../assets/img/destinos/cancun.jpg" alt="" class="img-fluid my-4">
-                    <!-- </div> -->
+                // cálculo
+                $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
 
-                    <a href="./voo.php">
-                        <button type="button" class="btn btn-outline-success">Confirmar</button>
-                    </a>
-                    <a href="./voo.php">
-                        <button type="button" href="" class="btn btn-outline-danger">Cancelar</button>
-                    </a>
-                </div>
-            </div>
+                if($idade > 1){
+                    $idadeAnos = $idade.' Anos';
+                } else {
+                    $idadeAnos = $idade.' Ano';
+                }
+
+
+                // Cards com Informaçoes do Pet e Dono
+                echo ('
+                    <div class="card col-md-3 align-self-stretch" style="width: 20rem;">
+                        <div class="card-body mx-2">
+                            <h5 class="card-title">Proprietário do animal:</h5>
+                            <p class="card-text" value=" ">'. $result['NOME_PASSAGEIRO'] .'</p>
+                
+                            <h5 class="card-title">Idade do animal:</h5>
+                            <p class="card-text"  value=" ">'. $idadeAnos .'</p>
+                
+                            <h5 class="card-title">Peso:</h5>
+                            <p class="card-text" value=" ">'. $result['PESO'] .' Kg</p>
+                
+                            <h5 class="card-title">Carteira de vacinação:</h5>
+                                <div class="d-flex justify-content-center align-items-center my-4">
+                                    <img src="'. $result['DIR_CARTEIRINHA'] .' " alt="" class="img-fluid my-4">
+                                </div> ');
+
+                            
+                            
+                            if($result['STATUS_RESERVA'] == "Pendente"){
+                                    $_SESSION['id_voo'] = $id;
+                                    echo '
+                                        <form action="../controller/controller_status_reserva.php" method="POST">
+                                            <button type="submit" name="status" value="Confirmada" class="btn btn-outline-success">Confirmar</button>
+                                    
+                                            <button type="submit" name="status" value="Cancelada" class="btn btn-outline-danger">Cancelar</button>
+                                        </form>
+                                        </div> 
+                                        </div>
+                                    ';
+                                    $_SESSION['id_reserva'] = $result['ID_RESERVA'];
+
+                            } elseif ($result['STATUS_RESERVA'] == "Confirmada"){
+                                echo '
+                                    <h5>Confirmada</h5>
+                                    </div> 
+                                    </div>
+                                ';
+
+                            } elseif ($result['STATUS_RESERVA'] == "Cancelada"){
+                                echo '
+                                    <h5>Cancelada</h5>
+                                    </div> 
+                                    </div>
+                                ';
+                            };
+                                    
+                                
+                };
+
+            ?>
 
         </div>
     </div>
